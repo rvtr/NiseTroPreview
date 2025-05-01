@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: cthread.win.cpp ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>cthread.win.cpp</h1><a href="../../d6/d98/cthread_8win_8cpp.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// 日本語</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &quot;<a class="code" href="../../dc/dee/cthread_8h.html">cthread.h</a>&quot;</span>
+<a name="l00003"></a>00003 
+<a name="l00004"></a><a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aa5b09a0672e6d7c4e3217023491e913a">00004</a> <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aa5b09a0672e6d7c4e3217023491e913a" title="コンストラクタ">CTHREAD_WIN::CTHREAD_WIN</a>()
+<a name="l00005"></a>00005 {
+<a name="l00006"></a>00006     printf( <span class="stringliteral">&quot;thread windows Constructor¥n&quot;</span> );
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a> = NULL;
+<a name="l00009"></a>00009     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#ac2b2cee990423b94865008f81c231e4b" title="ループ用フラグ">m_bWork</a> = <span class="keyword">false</span>;
+<a name="l00010"></a>00010     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a7110b1749de9cbd0f0477a7da05ed70e" title="待機時間（ms）">m_iWait</a> = <a class="code" href="../../dc/dee/cthread_8h.html#a12a0415a9eec644c8ac147df84277e4c">__cthread_waittime</a>;
+<a name="l00011"></a>00011     <span class="comment">//</span>
+<a name="l00012"></a>00012 }
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aa832475aee2c8f95bece08f06dd38692">00014</a> <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aa832475aee2c8f95bece08f06dd38692" title="デストラクタ">CTHREAD_WIN::‾CTHREAD_WIN</a>()
+<a name="l00015"></a>00015 {
+<a name="l00016"></a>00016     printf( <span class="stringliteral">&quot;thread windows Destructor¥n&quot;</span> );
+<a name="l00017"></a>00017     <span class="keywordflow">if</span>(<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a94049454be99a532f59446ab477686a7" title="現在の状態を取得">IsWork</a>())
+<a name="l00018"></a>00018         <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a4879353acb6f20db634a9628c2a0fc36" title="スレッド停止">stopThread</a>();
+<a name="l00019"></a>00019     <span class="comment">//</span>
+<a name="l00020"></a>00020 }
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="../../dd/d85/classCTHREAD__WIN.html#adf5e5fdd91670778afb726d5de2a8a79">00023</a> <span class="keywordtype">void</span> <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#adf5e5fdd91670778afb726d5de2a8a79" title="スレッド起動">CTHREAD_WIN::startThread</a>( <span class="keywordtype">void</span> )
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025     printf( <span class="stringliteral">&quot;thread windows start¥n&quot;</span> );
+<a name="l00026"></a>00026     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a> = (HANDLE)_beginthreadex(NULL, 0, this-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#af83499657851fc10b1401de6ee729eb2" title="スレッドループ用関数">thread_func</a>, (<span class="keywordtype">void</span>*)<span class="keyword">this</span>, 0, NULL);
+<a name="l00027"></a>00027     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#ac2b2cee990423b94865008f81c231e4b" title="ループ用フラグ">m_bWork</a> = <span class="keyword">true</span>;
+<a name="l00028"></a>00028 }
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a4879353acb6f20db634a9628c2a0fc36">00030</a> <span class="keywordtype">void</span> <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a4879353acb6f20db634a9628c2a0fc36" title="スレッド停止">CTHREAD_WIN::stopThread</a>( <span class="keywordtype">void</span> )
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     printf( <span class="stringliteral">&quot;thread windows stop¥n&quot;</span> );
+<a name="l00033"></a>00033     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#ac2b2cee990423b94865008f81c231e4b" title="ループ用フラグ">m_bWork</a> = <span class="keyword">false</span>;
+<a name="l00034"></a>00034     WaitForSingleObject(<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a>, INFINITE);
+<a name="l00035"></a>00035     <span class="keywordflow">if</span>( <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a> )
+<a name="l00036"></a>00036     {
+<a name="l00037"></a>00037         CloseHandle( <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a> );
+<a name="l00038"></a>00038         <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#aff1f2f71c12cb5cf13c74ab3b923e7d3" title="ハンドル">m_hThread</a> = NULL;
+<a name="l00039"></a>00039     }
+<a name="l00040"></a>00040 }
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="comment">// スレッド用関数</span>
+<a name="l00043"></a><a class="code" href="../../dd/d85/classCTHREAD__WIN.html#af83499657851fc10b1401de6ee729eb2">00043</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> __stdcall <a class="code" href="../../dd/d85/classCTHREAD__WIN.html#af83499657851fc10b1401de6ee729eb2" title="スレッドループ用関数">CTHREAD_WIN::thread_func</a>( <span class="keywordtype">void</span>* pData )
+<a name="l00044"></a>00044 {
+<a name="l00045"></a>00045     <a class="code" href="../../dd/d85/classCTHREAD__WIN.html" title="スレッド用クラス(Windows用)">CTHREAD_WIN</a>* pThread = (<a class="code" href="../../dd/d85/classCTHREAD__WIN.html" title="スレッド用クラス(Windows用)">CTHREAD_WIN</a>*)pData;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="keywordflow">while</span>( pThread-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a94049454be99a532f59446ab477686a7" title="現在の状態を取得">IsWork</a>() )
+<a name="l00048"></a>00048     {
+<a name="l00049"></a>00049         pThread-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a6349929c6f597bce81ef4c38a0b5da94" title="継承用関数">ThreadFunction</a>();
+<a name="l00050"></a>00050         Sleep(pThread-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a162bb383a16fbee2837b81f5436d5d49" title="スレッドループの待機時間を取得(ms)">getSleepTime</a>());
+<a name="l00051"></a>00051     }
+<a name="l00052"></a>00052     printf( <span class="stringliteral">&quot;thread windows _endthread(%d)¥n&quot;</span> , (<span class="keywordtype">int</span>)pThread );
+<a name="l00053"></a>00053     _endthread();
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     <span class="keywordflow">return</span> 0;
+<a name="l00056"></a>00056 }
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: configio.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>configio.cpp</h1><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;tchar.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../d3/d19/configio_8h_source.html">configio.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../d2/d00/__tprintd_8h_source.html">_tprintd.h</a>&quot;</code><br/>
+<code>#import &quot;msxml4.dll&quot;</code><br/>
+
+<p><a href="../../d6/d91/configio_8cpp_source.html">ソースコードを見る。</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>関数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/configio_8cpp.html#a962fdd65101a3ca33b88aa1e8617080a">GetClientSizeForAppconfig</a> (<a class="el" href="../../d1/dff/structSAPPCONFIG.html">LPAPPCONFIG</a> pAppConfig, RECT *pRC)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">設定からクライアントサイズを取得する  <a href="#a962fdd65101a3ca33b88aa1e8617080a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/configio_8cpp.html#ac2fed7147ffe265032ebedc34a21833b">ShowAppConfig</a> (<a class="el" href="../../d1/dff/structSAPPCONFIG.html">LPAPPCONFIG</a> pAppConfig)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">デバック表示用関数  <a href="#ac2fed7147ffe265032ebedc34a21833b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/configio_8cpp.html#a1e9bc99003602f81a6ddd1a824d777e8">ConfigIOSave</a> (<a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a> pConfig, wchar_t *pFilename)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">設定をファイル(xml)に書き出す  <a href="#a1e9bc99003602f81a6ddd1a824d777e8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/configio_8cpp.html#ae0aca425fbe31e12ebb38a9b6086885f">ConfigIOLoad</a> (<a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a> pConfig, wchar_t *pFilename)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">設定ファイル(xml)から設定を読む  <a href="#ae0aca425fbe31e12ebb38a9b6086885f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d91/configio_8cpp.html#ab6f6b115d2305e8eda741a7e8df089bf">ConfigIOCheckCmdLine</a> (<a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a> pConfig, LPTSTR lpszCmdLine)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">WinMainからのコマンドラインから設定情報を取得する。.  <a href="#ab6f6b115d2305e8eda741a7e8df089bf"></a><br/></td></tr>
+</table>
+<hr/><h2>関数</h2>
+<a class="anchor" id="ab6f6b115d2305e8eda741a7e8df089bf"></a><!-- doxytag: member="configio.cpp::ConfigIOCheckCmdLine" ref="ab6f6b115d2305e8eda741a7e8df089bf" args="(PAPPCONFIG pConfig, LPTSTR lpszCmdLine)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ConfigIOCheckCmdLine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a>&nbsp;</td>
+          <td class="paramname"> <em>pConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LPTSTR&nbsp;</td>
+          <td class="paramname"> <em>lpszCmdLine</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>WinMainからのコマンドラインから設定情報を取得する。. </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pConfig</em>&nbsp;</td><td>[out] 設定変数へのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>lpszCmdLine</em>&nbsp;</td><td>[in] コマンドライン文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../d6/d91/configio_8cpp_source.html">configio.cpp</a> の <a class="el" href="../../d6/d91/configio_8cpp_source.html#l00349">349</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae0aca425fbe31e12ebb38a9b6086885f"></a><!-- doxytag: member="configio.cpp::ConfigIOLoad" ref="ae0aca425fbe31e12ebb38a9b6086885f" args="(PAPPCONFIG pConfig, wchar_t *pFilename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ConfigIOLoad </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a>&nbsp;</td>
+          <td class="paramname"> <em>pConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wchar_t *&nbsp;</td>
+          <td class="paramname"> <em>pFilename</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>設定ファイル(xml)から設定を読む </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pConfig</em>&nbsp;</td><td>[out] 設定変数へのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pFilename</em>&nbsp;</td><td>[in] ファイル名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../d6/d91/configio_8cpp_source.html">configio.cpp</a> の <a class="el" href="../../d6/d91/configio_8cpp_source.html#l00234">234</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1e9bc99003602f81a6ddd1a824d777e8"></a><!-- doxytag: member="configio.cpp::ConfigIOSave" ref="a1e9bc99003602f81a6ddd1a824d777e8" args="(PAPPCONFIG pConfig, wchar_t *pFilename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ConfigIOSave </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/dff/structSAPPCONFIG.html">PAPPCONFIG</a>&nbsp;</td>
+          <td class="paramname"> <em>pConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wchar_t *&nbsp;</td>
+          <td class="paramname"> <em>pFilename</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>設定をファイル(xml)に書き出す </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pConfig</em>&nbsp;</td><td>[in] 設定変数へのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pFilename</em>&nbsp;</td><td>[in] ファイル名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../d6/d91/configio_8cpp_source.html">configio.cpp</a> の <a class="el" href="../../d6/d91/configio_8cpp_source.html#l00066">66</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a962fdd65101a3ca33b88aa1e8617080a"></a><!-- doxytag: member="configio.cpp::GetClientSizeForAppconfig" ref="a962fdd65101a3ca33b88aa1e8617080a" args="(LPAPPCONFIG pAppConfig, RECT *pRC)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GetClientSizeForAppconfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/dff/structSAPPCONFIG.html">LPAPPCONFIG</a>&nbsp;</td>
+          <td class="paramname"> <em>pAppConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RECT *&nbsp;</td>
+          <td class="paramname"> <em>pRC</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>設定からクライアントサイズを取得する </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pAppConfig</em>&nbsp;</td><td>[in] 設定変数へのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pRC</em>&nbsp;</td><td>[out] クライアントサイズ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../d6/d91/configio_8cpp_source.html">configio.cpp</a> の <a class="el" href="../../d6/d91/configio_8cpp_source.html#l00020">20</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac2fed7147ffe265032ebedc34a21833b"></a><!-- doxytag: member="configio.cpp::ShowAppConfig" ref="ac2fed7147ffe265032ebedc34a21833b" args="(LPAPPCONFIG pAppConfig)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShowAppConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d1/dff/structSAPPCONFIG.html">LPAPPCONFIG</a>&nbsp;</td>
+          <td class="paramname"> <em>pAppConfig</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>デバック表示用関数 </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pAppConfig</em>&nbsp;</td><td>[in] 表示する設定変数へのポインタ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="note"><dt><b>覚え書き:</b></dt><dd>表示方法は_printdに依存する。 </dd></dl>
+
+<p> <a class="el" href="../../d6/d91/configio_8cpp_source.html">configio.cpp</a> の <a class="el" href="../../d6/d91/configio_8cpp_source.html#l00045">45</a> 行で定義されています。</p>
+
+</div>
+</div>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

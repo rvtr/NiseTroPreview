@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: クラス cusb2</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li class="current"><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../annotated.html"><span>構成</span></a></li>
+      <li><a href="../../hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="../../functions.html"><span>構成メンバ</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>クラス cusb2</h1><!-- doxytag: class="cusb2" -->
+<p><code>#include &lt;<a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a>&gt;</code></p>
+
+<p><a href="../../d9/d12/classcusb2-members.html">すべてのメンバ一覧</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Public メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#abdff54e7436149c35a858f0eb31686b3">cusb2</a> (HANDLE h)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a45a789b4163de6ef43d578c455ec259a">‾cusb2</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a5c872c37114d7becf4dbffe7f73c81cd">fwload</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> id, <a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *fw, <a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *string1)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a82912504c372ec6db974e4a85b8912dc">get_endpoint</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> addr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a77f428befb5aa8c2eaed70066da4826d">xfer</a> (<a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *ep, PUCHAR buf, LONG &amp;len)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">cusb2_tcb *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#aa3b52f7feaffa74d56f994fd6cbd3b4c">start_thread</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> epaddr, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> xfer, <a class="el" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> ques, bool(*cb_func)(<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>, <a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a217db1b8cc28ece4655e0216bd84a528">delete_thread</a> (cusb2_tcb *tcb)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a00ae5789e62966c680f6b12c7e38696f">PnpEvent</a> (WPARAM wParam, LPARAM lParam)</td></tr>
+<tr><td colspan="2"><h2>Public 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a></td></tr>
+<tr><td colspan="2"><h2>Private メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">check_fx2</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> id)</td></tr>
+<tr><td colspan="2"><h2>Private 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>説明</h2>
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00037">37</a> 行で定義されています。</p>
+<hr/><h2>コンストラクタとデストラクタ</h2>
+<a class="anchor" id="abdff54e7436149c35a858f0eb31686b3"></a><!-- doxytag: member="cusb2::cusb2" ref="abdff54e7436149c35a858f0eb31686b3" args="(HANDLE h)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cusb2::cusb2 </td>
+          <td>(</td>
+          <td class="paramtype">HANDLE&nbsp;</td>
+          <td class="paramname"> <em>h</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00015">15</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>関数</h2>
+<a class="anchor" id="a83408ec4111cbd05be3e87c4e440b6fc"></a><!-- doxytag: member="cusb2::check_fx2" ref="a83408ec4111cbd05be3e87c4e440b6fc" args="(u8 id)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> cusb2::check_fx2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td>
+          <td class="paramname"> <em>id</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00333">333</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a217db1b8cc28ece4655e0216bd84a528"></a><!-- doxytag: member="cusb2::delete_thread" ref="a217db1b8cc28ece4655e0216bd84a528" args="(cusb2_tcb *tcb)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cusb2::delete_thread </td>
+          <td>(</td>
+          <td class="paramtype">cusb2_tcb *&nbsp;</td>
+          <td class="paramname"> <em>tcb</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00327">327</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5c872c37114d7becf4dbffe7f73c81cd"></a><!-- doxytag: member="cusb2::fwload" ref="a5c872c37114d7becf4dbffe7f73c81cd" args="(u8 id, u8 *fw, u8 *string1)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cusb2::fwload </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td>
+          <td class="paramname"> <em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *&nbsp;</td>
+          <td class="paramname"> <em>fw</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *&nbsp;</td>
+          <td class="paramname"> <em>string1</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00041">41</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a82912504c372ec6db974e4a85b8912dc"></a><!-- doxytag: member="cusb2::get_endpoint" ref="a82912504c372ec6db974e4a85b8912dc" args="(u8 addr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> * cusb2::get_endpoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td>
+          <td class="paramname"> <em>addr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00154">154</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a00ae5789e62966c680f6b12c7e38696f"></a><!-- doxytag: member="cusb2::PnpEvent" ref="a00ae5789e62966c680f6b12c7e38696f" args="(WPARAM wParam, LPARAM lParam)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cusb2::PnpEvent </td>
+          <td>(</td>
+          <td class="paramtype">WPARAM&nbsp;</td>
+          <td class="paramname"> <em>wParam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LPARAM&nbsp;</td>
+          <td class="paramname"> <em>lParam</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00352">352</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa3b52f7feaffa74d56f994fd6cbd3b4c"></a><!-- doxytag: member="cusb2::start_thread" ref="aa3b52f7feaffa74d56f994fd6cbd3b4c" args="(u8 epaddr, u32 xfer, s32 ques, bool(*cb_func)(u8 *, u32, _cusb2_tcb *))" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cusb2_tcb * cusb2::start_thread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td>
+          <td class="paramname"> <em>epaddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>&nbsp;</td>
+          <td class="paramname"> <em>xfer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a>&nbsp;</td>
+          <td class="paramname"> <em>ques</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool(*)(<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>, <a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *)&nbsp;</td>
+          <td class="paramname"> <em>cb_func</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00312">312</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a77f428befb5aa8c2eaed70066da4826d"></a><!-- doxytag: member="cusb2::xfer" ref="a77f428befb5aa8c2eaed70066da4826d" args="(CCyUSBEndPoint *ep, PUCHAR buf, LONG &amp;len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cusb2::xfer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *&nbsp;</td>
+          <td class="paramname"> <em>ep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PUCHAR&nbsp;</td>
+          <td class="paramname"> <em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LONG &amp;&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00168">168</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a45a789b4163de6ef43d578c455ec259a"></a><!-- doxytag: member="cusb2::‾cusb2" ref="a45a789b4163de6ef43d578c455ec259a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cusb2::‾cusb2 </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a> の <a class="el" href="../../dc/dc9/cusb2_8cpp_source.html#l00034">34</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>変数</h2>
+<a class="anchor" id="a49c0b899c1a2dd2162477326e7b03ffd"></a><!-- doxytag: member="cusb2::_id" ref="a49c0b899c1a2dd2162477326e7b03ffd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <a class="el" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">cusb2::_id</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00043">43</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="abbf9793121fdfe56c8371a97c7fb840e"></a><!-- doxytag: member="cusb2::_USBDevice" ref="abbf9793121fdfe56c8371a97c7fb840e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a>* <a class="el" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">cusb2::_USBDevice</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00038">38</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a6cfda61b4cd930bc5eaedbba5743c805"></a><!-- doxytag: member="cusb2::bArrived" ref="a6cfda61b4cd930bc5eaedbba5743c805" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">cusb2::bArrived</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00040">40</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8bddd3bb55751cd6dca2ee25f3d8052a"></a><!-- doxytag: member="cusb2::bDevNodeChange" ref="a8bddd3bb55751cd6dca2ee25f3d8052a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">cusb2::bDevNodeChange</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00039">39</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adfdcde08cb69eda7769216a84c4e2f9c"></a><!-- doxytag: member="cusb2::cons_mode" ref="adfdcde08cb69eda7769216a84c4e2f9c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cusb2::cons_mode</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00042">42</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a074449ea54ff43a13825fc2a7658ac1b"></a><!-- doxytag: member="cusb2::loading" ref="a074449ea54ff43a13825fc2a7658ac1b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">cusb2::loading</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00041">41</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c7feab39db19fcb8605e6652409b7f6"></a><!-- doxytag: member="cusb2::USBDevice" ref="a8c7feab39db19fcb8605e6652409b7f6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a>* <a class="el" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">cusb2::USBDevice</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a> の <a class="el" href="../../d9/d8e/cusb2_8h_source.html#l00046">46</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="../../d9/d8e/cusb2_8h_source.html">cusb2.h</a></li>
+<li><a class="el" href="../../dc/dc9/cusb2_8cpp_source.html">cusb2.cpp</a></li>
+</ul>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:41 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

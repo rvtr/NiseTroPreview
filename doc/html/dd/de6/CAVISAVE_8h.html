@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: CAVISAVE.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>CAVISAVE.h</h1><code>#include &lt;libavutil/avutil.h&gt;</code><br/>
+<code>#include &lt;libavcodec/avcodec.h&gt;</code><br/>
+<code>#include &lt;libavcodec/audioconvert.h&gt;</code><br/>
+<code>#include &lt;libavformat/avformat.h&gt;</code><br/>
+<code>#include &lt;libswscale/swscale.h&gt;</code><br/>
+<code>#include &lt;libavutil/fifo.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="../../d2/d00/__tprintd_8h_source.html">_tprintd.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../dc/dee/cthread_8h_source.html">cthread.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../db/dc4/cmutex_8h_source.html">cmutex.h</a>&quot;</code><br/>
+
+<p><a href="../../dd/de6/CAVISAVE_8h_source.html">ソースコードを見る。</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>構成</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html">_ffmpeg_struct::m_audio</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d1c/classCAVISAVECORE.html">CAVISAVECORE</a></td></tr>
+<tr><td colspan="2"><h2>関数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a73a902e0b7b1fec385e045b0f56cb499">ffmpeginit</a> (<a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *pffm, char *pFilename, CodecID vcodec_id, long width, long height, double fps=15, int bitrate_scale=64, CodecID acodec_id=CODEC_ID_NONE, int sample_rate=44100, int channels=2, int audio_bit_rate=64000)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#ae9d1da9673451b8a7746f1b2cff0fd61">ffmpegquit</a> (<a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *pffm)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a1b0ac21e5b4d8331b3c02c5005504e7c">ffmpeg_addVFrame</a> (<a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *pffm, unsigned char *pBuf, long width, long height)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a5b4624b6cc54538e3b4a889347eea06f">ffmpeg_addAFrame</a> (<a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *pffm, unsigned char *pBuf, size_t bufsize)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">AVStream *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#ac4ad1d87b5ed402ce65b2c04795027df">ffmpeg_addVStream</a> (AVFormatContext *oc, CodecID codec_id, int w, int h, int bitrate, double fps, int pixel_format)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ビデオストリームを追加する  <a href="#ac4ad1d87b5ed402ce65b2c04795027df"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">AVStream *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a21c438c125ebd3b29a218ab1c3e93817">ffmpeg_addAStream</a> (AVFormatContext *oc, int codec_id, int sample_rate=44100, int channels=2, int bit_rate=64000)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">オーディオストリームを追加する  <a href="#a21c438c125ebd3b29a218ab1c3e93817"></a><br/></td></tr>
+<tr><td colspan="2"><h2>変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a> = 2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/de6/CAVISAVE_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">_CWS_BUFFERTIME</a> = 1</td></tr>
+</table>
+<hr/><h2>関数</h2>
+<a class="anchor" id="a5b4624b6cc54538e3b4a889347eea06f"></a><!-- doxytag: member="CAVISAVE.h::ffmpeg_addAFrame" ref="a5b4624b6cc54538e3b4a889347eea06f" args="(_ffmpeg_struct *pffm, unsigned char *pBuf, size_t bufsize)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ffmpeg_addAFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *&nbsp;</td>
+          <td class="paramname"> <em>pffm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>pBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>bufsize</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00753">753</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a21c438c125ebd3b29a218ab1c3e93817"></a><!-- doxytag: member="CAVISAVE.h::ffmpeg_addAStream" ref="a21c438c125ebd3b29a218ab1c3e93817" args="(AVFormatContext *oc, int codec_id, int sample_rate=44100, int channels=2, int bit_rate=64000)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVStream* ffmpeg_addAStream </td>
+          <td>(</td>
+          <td class="paramtype">AVFormatContext *&nbsp;</td>
+          <td class="paramname"> <em>oc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>codec_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>sample_rate</em> = <code>44100</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>channels</em> = <code>2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>bit_rate</em> = <code>64000</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>オーディオストリームを追加する </p>
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00286">286</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1b0ac21e5b4d8331b3c02c5005504e7c"></a><!-- doxytag: member="CAVISAVE.h::ffmpeg_addVFrame" ref="a1b0ac21e5b4d8331b3c02c5005504e7c" args="(_ffmpeg_struct *pffm, unsigned char *pBuf, long width, long height)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ffmpeg_addVFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *&nbsp;</td>
+          <td class="paramname"> <em>pffm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>pBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&nbsp;</td>
+          <td class="paramname"> <em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&nbsp;</td>
+          <td class="paramname"> <em>height</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00699">699</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4ad1d87b5ed402ce65b2c04795027df"></a><!-- doxytag: member="CAVISAVE.h::ffmpeg_addVStream" ref="ac4ad1d87b5ed402ce65b2c04795027df" args="(AVFormatContext *oc, CodecID codec_id, int w, int h, int bitrate, double fps, int pixel_format)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AVStream* ffmpeg_addVStream </td>
+          <td>(</td>
+          <td class="paramtype">AVFormatContext *&nbsp;</td>
+          <td class="paramname"> <em>oc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CodecID&nbsp;</td>
+          <td class="paramname"> <em>codec_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>bitrate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>fps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>pixel_format</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ビデオストリームを追加する </p>
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00182">182</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a73a902e0b7b1fec385e045b0f56cb499"></a><!-- doxytag: member="CAVISAVE.h::ffmpeginit" ref="a73a902e0b7b1fec385e045b0f56cb499" args="(_ffmpeg_struct *pffm, char *pFilename, CodecID vcodec_id, long width, long height, double fps=15, int bitrate_scale=64, CodecID acodec_id=CODEC_ID_NONE, int sample_rate=44100, int channels=2, int audio_bit_rate=64000)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ffmpeginit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *&nbsp;</td>
+          <td class="paramname"> <em>pffm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>pFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CodecID&nbsp;</td>
+          <td class="paramname"> <em>vcodec_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&nbsp;</td>
+          <td class="paramname"> <em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&nbsp;</td>
+          <td class="paramname"> <em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>fps</em> = <code>15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>bitrate_scale</em> = <code>64</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CodecID&nbsp;</td>
+          <td class="paramname"> <em>acodec_id</em> = <code>CODEC_ID_NONE</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>sample_rate</em> = <code>44100</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>channels</em> = <code>2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>audio_bit_rate</em> = <code>64000</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00395">395</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae9d1da9673451b8a7746f1b2cff0fd61"></a><!-- doxytag: member="CAVISAVE.h::ffmpegquit" ref="ae9d1da9673451b8a7746f1b2cff0fd61" args="(_ffmpeg_struct *pffm)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ffmpegquit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a> *&nbsp;</td>
+          <td class="paramname"> <em>pffm</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html">CAVISAVE.cpp</a> の <a class="el" href="../../d1/d06/CAVISAVE_8cpp_source.html#l00597">597</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>変数</h2>
+<a class="anchor" id="a83bc22f56dd6baed46089cc94b814e4b"></a><!-- doxytag: member="CAVISAVE.h::_CWS_BUFFERCOUNT" ref="a83bc22f56dd6baed46089cc94b814e4b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="../../de/dae/cwavesave_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a> = 2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dd/de6/CAVISAVE_8h_source.html">CAVISAVE.h</a> の <a class="el" href="../../dd/de6/CAVISAVE_8h_source.html#l00073">73</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3a346c98185aeef38f47d06ba4d5ac96"></a><!-- doxytag: member="CAVISAVE.h::_CWS_BUFFERTIME" ref="a3a346c98185aeef38f47d06ba4d5ac96" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="../../de/dae/cwavesave_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">_CWS_BUFFERTIME</a> = 1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../dd/de6/CAVISAVE_8h_source.html">CAVISAVE.h</a> の <a class="el" href="../../dd/de6/CAVISAVE_8h_source.html#l00074">74</a> 行で定義されています。</p>
+
+</div>
+</div>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: CAVISAVE.h ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>CAVISAVE.h</h1><a href="../../dd/de6/CAVISAVE_8h.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> { <span class="comment">// これ重要</span>
+<a name="l00003"></a>00003     <span class="comment">//#define inline _inline</span>
+<a name="l00004"></a>00004 <span class="preprocessor">    #include &lt;libavutil/avutil.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">    #include &lt;libavcodec/avcodec.h&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">    #include &lt;libavcodec/audioconvert.h&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">    #include &lt;libavformat/avformat.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">    #include &lt;libswscale/swscale.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">    #include &lt;libavutil/fifo.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="preprocessor">    #include &quot;<a class="code" href="../../d2/d00/__tprintd_8h.html">_tprintd.h</a>&quot;</span>
+<a name="l00012"></a>00012 }
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="../../dc/dee/cthread_8h.html">cthread.h</a>&quot;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="../../db/dc4/cmutex_8h.html">cmutex.h</a>&quot;</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <span class="preprocessor">#ifndef __CAVISAVE_H__</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#define __CAVISAVE_H__</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">00021</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>{
+<a name="l00022"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">00022</a>     AVOutputFormat*     <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>;
+<a name="l00023"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">00023</a>     AVFormatContext*    <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>;
+<a name="l00024"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">00024</a>     AVStream*           <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>;
+<a name="l00025"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">00025</a>     AVStream*           <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a>;
+<a name="l00026"></a>00026     
+<a name="l00027"></a>00027     <span class="keyword">struct </span>{
+<a name="l00028"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">00028</a>         uint8_t*            <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a>;
+<a name="l00029"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">00029</a>         uint32_t            <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">m_OutBufSize</a>;
+<a name="l00030"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">00030</a>         AVFrame*            <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>;
+<a name="l00031"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">00031</a>         AVFrame*            <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>;
+<a name="l00032"></a><a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">00032</a>         <span class="keyword">struct </span>SwsContext *<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a>;
+<a name="l00033"></a>00033     } <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>;
+<a name="l00034"></a>00034     
+<a name="l00035"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html">00035</a>     <span class="keyword">struct </span><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html">m_audio</a> {
+<a name="l00036"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">00036</a>         AVCodecContext  *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>;
+<a name="l00037"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">00037</a>         AVCodecContext  *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>;
+<a name="l00038"></a>00038         
+<a name="l00039"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">00039</a>         AVFifoBuffer *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a>;
+<a name="l00040"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">00040</a>         ReSampleContext *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">m_rs</a>;
+<a name="l00041"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">00041</a>         AVPacket <a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>;
+<a name="l00042"></a>00042         
+<a name="l00043"></a>00043         <span class="keyword">struct </span>{
+<a name="l00044"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">00044</a>             uint8_t *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a>;
+<a name="l00045"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">00045</a>             uint8_t *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a>;
+<a name="l00046"></a><a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">00046</a>             uint8_t *<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">buffer_resample</a>;
+<a name="l00047"></a>00047         } <a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>;
+<a name="l00048"></a>00048     } <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>;
+<a name="l00049"></a>00049     
+<a name="l00050"></a>00050 }<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>;
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#aa3cab4f0b3a43eac282abcbeb99c0dd9">ffmpeginit</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">char</span>* pFilename , 
+<a name="l00053"></a>00053                CodecID vcodec_id , 
+<a name="l00054"></a>00054                <span class="keywordtype">long</span> width , <span class="keywordtype">long</span> height , <span class="keywordtype">double</span> fps = 15 ,  <span class="keywordtype">int</span> bitrate_scale = 64, 
+<a name="l00055"></a>00055                CodecID acodec_id = CODEC_ID_NONE , 
+<a name="l00056"></a>00056                <span class="keywordtype">int</span> sample_rate = 44100 , <span class="keywordtype">int</span> channels = 2 , <span class="keywordtype">int</span> audio_bit_rate = 64000 );
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="keywordtype">void</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ae9d1da9673451b8a7746f1b2cff0fd61">ffmpegquit</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm );
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a1b0ac21e5b4d8331b3c02c5005504e7c">ffmpeg_addVFrame</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *pBuf , <span class="keywordtype">long</span> width , <span class="keywordtype">long</span> height );
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5b4624b6cc54538e3b4a889347eea06f">ffmpeg_addAFrame</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *pBuf , <span class="keywordtype">size_t</span> bufsize );
+<a name="l00063"></a>00063 
+<a name="l00065"></a>00065 AVStream *<a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ac4ad1d87b5ed402ce65b2c04795027df" title="ビデオストリームを追加する">ffmpeg_addVStream</a>( AVFormatContext *oc,
+<a name="l00066"></a>00066                                              CodecID codec_id ,
+<a name="l00067"></a>00067                                              <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> bitrate,
+<a name="l00068"></a>00068                                              <span class="keywordtype">double</span> fps, <span class="keywordtype">int</span> pixel_format);
+<a name="l00069"></a>00069 
+<a name="l00071"></a>00071 AVStream* <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a045f2ac67e758bccf044a9d49d404c6c" title="オーディオストリームを追加する">ffmpeg_addAStream</a>(AVFormatContext *oc, <span class="keywordtype">int</span> codec_id, <span class="keywordtype">int</span> sample_rate = 44100 , <span class="keywordtype">int</span> channels = 2 , <span class="keywordtype">int</span> bit_rate = 64000 );
+<a name="l00072"></a>00072 
+<a name="l00073"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">00073</a> <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a> = 2;
+<a name="l00074"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">00074</a> <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">_CWS_BUFFERTIME</a> = 1;  <span class="comment">// sec</span>
+<a name="l00075"></a>00075 
+<a name="l00076"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html">00076</a> <span class="keyword">class </span><a class="code" href="../../d0/d1c/classCAVISAVECORE.html">CAVISAVECORE</a> : <span class="keyword">public</span> <a class="code" href="../../dd/d85/classCTHREAD__WIN.html" title="スレッド用クラス(Windows用)">CTHREAD</a> {
+<a name="l00077"></a>00077 <span class="keyword">protected</span>:
+<a name="l00078"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">00078</a>     <span class="keywordtype">bool</span>            <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a>;
+<a name="l00079"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">00079</a>     <span class="keywordtype">bool</span>            <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a>;
+<a name="l00080"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">00080</a>     <a class="code" href="../../dd/d4d/classCMUTEX__WIN.html" title="ミューテクス用クラス(Windows用)">CMUTEX</a>          <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">m_Mutex</a>;
+<a name="l00081"></a>00081     
+<a name="l00082"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade571d4bd37bda848660c88d3b45b246">00082</a>     DWORD           <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade571d4bd37bda848660c88d3b45b246">m_dwWaitTime_Max</a>;
+<a name="l00083"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">00083</a>     HWAVEIN         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>;
+<a name="l00084"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">00084</a>     WAVEFORMATEX    <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>;
+<a name="l00085"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">00085</a>     WAVEHDR         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[<a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a>];
+<a name="l00086"></a>00086     
+<a name="l00087"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">00087</a>     <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>  <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">m_ffm</a>;
+<a name="l00088"></a>00088     
+<a name="l00089"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae05597efe3d8a4e7752489d07d816a9b">00089</a>     <span class="keyword">static</span> <span class="keywordtype">int</span> CALLBACK <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae05597efe3d8a4e7752489d07d816a9b">_waveinCallback</a>( HWAVEIN hwi , UINT uMsg , DWORD_PTR dwInstance , DWORD_PTR dwParam1 , DWORD_PTR dwParam2 ){
+<a name="l00090"></a>00090         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html">CAVISAVECORE</a>* pThis = (<a class="code" href="../../d0/d1c/classCAVISAVECORE.html">CAVISAVECORE</a>*)dwInstance;
+<a name="l00091"></a>00091         <span class="keywordflow">switch</span>( uMsg ){
+<a name="l00092"></a>00092             <span class="keywordflow">case</span> WIM_OPEN:
+<a name="l00093"></a>00093                 {
+<a name="l00094"></a>00094                     _tprintf( TEXT(<span class="stringliteral">&quot;WIM_OPEN¥n&quot;</span>) );
+<a name="l00095"></a>00095                 }
+<a name="l00096"></a>00096                 <span class="keywordflow">break</span>;
+<a name="l00097"></a>00097             
+<a name="l00098"></a>00098             <span class="keywordflow">case</span> WIM_CLOSE:
+<a name="l00099"></a>00099                 {
+<a name="l00100"></a>00100                     <span class="keywordtype">int</span> rc = 0;
+<a name="l00101"></a>00101                     _tprintf( TEXT(<span class="stringliteral">&quot;WIM_CLOSE¥n&quot;</span>) );
+<a name="l00102"></a>00102                 }
+<a name="l00103"></a>00103                 <span class="keywordflow">break</span>;
+<a name="l00104"></a>00104             
+<a name="l00105"></a>00105             <span class="keywordflow">case</span> WIM_DATA:
+<a name="l00106"></a>00106                 {
+<a name="l00107"></a>00107                     <span class="keywordtype">int</span> rc = 0;
+<a name="l00108"></a>00108                     LPWAVEHDR pWHdr = (LPWAVEHDR) dwParam1;
+<a name="l00109"></a>00109                     <span class="keywordflow">if</span>( pThis-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> == <span class="keyword">false</span> ) <span class="keywordflow">break</span>;
+<a name="l00110"></a>00110                     
+<a name="l00111"></a>00111                     _tprintf( TEXT(<span class="stringliteral">&quot;WIM_DATA¥n&quot;</span>) );
+<a name="l00112"></a>00112                     <span class="keywordflow">if</span>( (pWHdr-&gt;dwFlags &amp; WHDR_DONE) != WHDR_DONE )
+<a name="l00113"></a>00113                         <span class="keywordflow">break</span>;
+<a name="l00114"></a>00114                     
+<a name="l00115"></a>00115                     <span class="keywordflow">if</span>( pThis-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">m_Mutex</a>.<a class="code" href="../../dd/d4d/classCMUTEX__WIN.html#aa278ce4f9a4393ff8d993de61b10450f" title="ロックの取得">lock</a>(INFINITE) == false ){
+<a name="l00116"></a>00116                         <span class="keywordflow">if</span>( pWHdr-&gt;lpData ){
+<a name="l00117"></a>00117                         <span class="comment">// write data</span>
+<a name="l00118"></a>00118                             <span class="keywordflow">if</span>( <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5b4624b6cc54538e3b4a889347eea06f">ffmpeg_addAFrame</a>( &amp;pThis-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">m_ffm</a> , (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*)pWHdr-&gt;lpData , pWHdr-&gt;dwBytesRecorded ) ){
+<a name="l00119"></a>00119                                 <a class="code" href="../../d2/d00/__tprintd_8h.html#aab39a106e262abd037a501ef807a65e5">_tprintd</a>( TEXT(<span class="stringliteral">&quot;ffmpeg_addAFrame¥n&quot;</span>) );
+<a name="l00120"></a>00120                             }
+<a name="l00121"></a>00121                         }
+<a name="l00122"></a>00122                         pThis-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">m_Mutex</a>.<a class="code" href="../../dd/d4d/classCMUTEX__WIN.html#a67f3c347e8bfb4c0fce5a2954ced624c" title="ロックの解放">unlock</a>();
+<a name="l00123"></a>00123                     }
+<a name="l00124"></a>00124                     
+<a name="l00125"></a>00125                     <span class="keywordflow">if</span>( pThis-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a> ){
+<a name="l00126"></a>00126                         _tprintf( TEXT(<span class="stringliteral">&quot;waveInUnprepareHeader¥n&quot;</span>) );
+<a name="l00127"></a>00127                         rc = waveInUnprepareHeader(hwi, pWHdr , <span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00128"></a>00128                         
+<a name="l00129"></a>00129                         pWHdr-&gt;dwFlags = 0;
+<a name="l00130"></a>00130                         
+<a name="l00131"></a>00131                         _tprintf( TEXT(<span class="stringliteral">&quot;waveInPrepareHeader¥n&quot;</span>) );
+<a name="l00132"></a>00132                         rc = waveInPrepareHeader(hwi, pWHdr, <span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00133"></a>00133                         
+<a name="l00134"></a>00134                         _tprintf( TEXT(<span class="stringliteral">&quot;waveInAddBuffer¥n&quot;</span>) );
+<a name="l00135"></a>00135                         rc = waveInAddBuffer(hwi, pWHdr, <span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00136"></a>00136                     }
+<a name="l00137"></a>00137                 }
+<a name="l00138"></a>00138                 <span class="keywordflow">break</span>;
+<a name="l00139"></a>00139             
+<a name="l00140"></a>00140             <span class="keywordflow">default</span>:
+<a name="l00141"></a>00141                 _tprintf( TEXT(<span class="stringliteral">&quot;default¥n&quot;</span>) );
+<a name="l00142"></a>00142                 <span class="keywordflow">break</span>;
+<a name="l00143"></a>00143         }
+<a name="l00144"></a>00144         
+<a name="l00145"></a>00145         <span class="keywordflow">return</span> 0;
+<a name="l00146"></a>00146     }
+<a name="l00147"></a>00147     <span class="comment">//</span>
+<a name="l00148"></a>00148 <span class="keyword">public</span>:
+<a name="l00149"></a>00149     
+<a name="l00150"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#aac06f6bb1fcf1fcbb47822bd4f754280">00150</a>     <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#aac06f6bb1fcf1fcbb47822bd4f754280">CAVISAVECORE</a>(){
+<a name="l00151"></a>00151         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> = <span class="keyword">false</span>;
+<a name="l00152"></a>00152         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a> = <span class="keyword">false</span>;
+<a name="l00153"></a>00153         memset( &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a> , 0 , <span class="keyword">sizeof</span>(WAVEFORMATEX) );
+<a name="l00154"></a>00154         memset( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a> , 0 , <span class="keyword">sizeof</span>(WAVEHDR) * <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a> );
+<a name="l00155"></a>00155         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">m_Mutex</a>.<a class="code" href="../../dd/d4d/classCMUTEX__WIN.html#ae86f2b138e087b6154fd73c3ba10cbad" title="ミューテクスの作成">create</a>();
+<a name="l00156"></a>00156     }
+<a name="l00157"></a>00157     
+<a name="l00158"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#afd7d4fe9d9286bab14e1c302c4516d23">00158</a>     <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#afd7d4fe9d9286bab14e1c302c4516d23">‾CAVISAVECORE</a>(){
+<a name="l00159"></a>00159         this-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af7b16a034a6c173979d4c47a2cc8eb39">Stop</a>();
+<a name="l00160"></a>00160         this-&gt;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ab1437c28fb96974e3165c6bb6a1503f1">Quit</a>();
+<a name="l00161"></a>00161         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a32a7e60a392fb36f282e61b20cffb5ef">m_Mutex</a>.<a class="code" href="../../dd/d4d/classCMUTEX__WIN.html#add4111ee128da94718154d0046fb72da" title="ミューテクスの解放">destroy</a>();
+<a name="l00162"></a>00162     }
+<a name="l00163"></a>00163     
+<a name="l00164"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4bb19db93ec0f8061ca168e08b9373ce">00164</a>     <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4bb19db93ec0f8061ca168e08b9373ce">GetFFMpeg</a>( <span class="keywordtype">void</span> ){ <span class="keywordflow">return</span> &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">m_ffm</a>; }
+<a name="l00165"></a>00165     
+<a name="l00166"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a3fea94e8d85fa92e60f0db673464ebfd">00166</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a3fea94e8d85fa92e60f0db673464ebfd">IsRec</a>( <span class="keywordtype">void</span> ){ <span class="keywordflow">return</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a>; }
+<a name="l00167"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a9f6fe1218270cdfa07fb0d6a1b92d845">00167</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a9f6fe1218270cdfa07fb0d6a1b92d845">IsInit</a>( <span class="keywordtype">void</span> ){ <span class="keywordflow">return</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a>; }
+<a name="l00168"></a>00168     
+<a name="l00169"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a37af8bfddee0a72f3eeffc5ed5d26910">00169</a>     <span class="keywordtype">int</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a37af8bfddee0a72f3eeffc5ed5d26910">Init</a>( TCHAR* pFilename , CodecID vcodec_id , <span class="keywordtype">int</span> width , <span class="keywordtype">int</span> height , <span class="keywordtype">double</span> fps = 15 , <span class="keywordtype">int</span> iVBitRate = 6 * 1024 * 1024 , UINT ID = WAVE_MAPPER , CodecID acodec_id = CODEC_ID_NONE ,<span class="keywordtype">int</span> iChannels = 2 , <span class="keywordtype">int</span> iSamplesPerSec = 44100 , <span class="keywordtype">int</span> iABitRate = 64000 ){
+<a name="l00170"></a>00170         <span class="keywordtype">int</span> rc = 0;
+<a name="l00171"></a>00171         <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> ) <span class="keywordflow">return</span> 0;
+<a name="l00172"></a>00172         
+<a name="l00173"></a>00173         _tprintf( TEXT(<span class="stringliteral">&quot;Init¥n&quot;</span>) );
+<a name="l00174"></a>00174         memset( &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a> , 0 , <span class="keyword">sizeof</span>(WAVEFORMATEX) );
+<a name="l00175"></a>00175         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.wFormatTag       = WAVE_FORMAT_PCM;
+<a name="l00176"></a>00176         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nChannels        = iChannels;
+<a name="l00177"></a>00177         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nSamplesPerSec   = iSamplesPerSec;
+<a name="l00178"></a>00178         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.wBitsPerSample   = 16;
+<a name="l00179"></a>00179         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nBlockAlign      = <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nChannels * <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.wBitsPerSample / 8;
+<a name="l00180"></a>00180         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nAvgBytesPerSec  = <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nSamplesPerSec * <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nBlockAlign;
+<a name="l00181"></a>00181         
+<a name="l00182"></a>00182         <span class="keywordtype">int</span> blocksize = <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nSamplesPerSec * <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nBlockAlign * <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">_CWS_BUFFERTIME</a>;
+<a name="l00183"></a>00183         
+<a name="l00184"></a>00184         _tprintf( TEXT(<span class="stringliteral">&quot;waveInOpen¥n&quot;</span>) );
+<a name="l00185"></a>00185         rc = waveInOpen( &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a> ,ID, &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a> , (DWORD_PTR)<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae05597efe3d8a4e7752489d07d816a9b">_waveinCallback</a> , (DWORD_PTR)<span class="keyword">this</span> , CALLBACK_FUNCTION );
+<a name="l00186"></a>00186         <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00187"></a>00187             TCHAR msg[255];
+<a name="l00188"></a>00188             waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00189"></a>00189             _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00190"></a>00190             <span class="keywordflow">return</span> rc;
+<a name="l00191"></a>00191         }
+<a name="l00192"></a>00192         
+<a name="l00193"></a>00193         <span class="keywordflow">for</span>( <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a>; i++ ){
+<a name="l00194"></a>00194             memset( &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i] , 0 , <span class="keyword">sizeof</span>(WAVEHDR) );
+<a name="l00195"></a>00195             <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i].lpData = <span class="keyword">new</span> <span class="keywordtype">char</span>[blocksize];
+<a name="l00196"></a>00196             <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i].dwBufferLength = blocksize;
+<a name="l00197"></a>00197             _tprintf( TEXT(<span class="stringliteral">&quot;waveInPrepareHeader¥n&quot;</span>) );
+<a name="l00198"></a>00198             rc = waveInPrepareHeader( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>,&amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i],<span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00199"></a>00199             <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00200"></a>00200                 TCHAR msg[255];
+<a name="l00201"></a>00201                 waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00202"></a>00202                 _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00203"></a>00203                 <span class="keywordflow">return</span> rc;
+<a name="l00204"></a>00204             }
+<a name="l00205"></a>00205             
+<a name="l00206"></a>00206             _tprintf( TEXT(<span class="stringliteral">&quot;waveInAddBuffer¥n&quot;</span>) );
+<a name="l00207"></a>00207             rc = waveInAddBuffer(<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>,&amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i],<span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00208"></a>00208             <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00209"></a>00209                 TCHAR msg[255];
+<a name="l00210"></a>00210                 waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00211"></a>00211                 _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00212"></a>00212                 <span class="keywordflow">return</span> rc;
+<a name="l00213"></a>00213             }
+<a name="l00214"></a>00214         }
+<a name="l00215"></a>00215         
+<a name="l00216"></a>00216         <span class="keywordtype">char</span> strFilename[ MAX_PATH ];
+<a name="l00217"></a>00217     
+<a name="l00218"></a>00218 <span class="preprocessor">#if defined(_UNICODE)</span>
+<a name="l00219"></a>00219 <span class="preprocessor"></span><span class="preprocessor">    #if _MSC_VER &gt;= 1400</span>
+<a name="l00220"></a>00220 <span class="preprocessor"></span>        wcstombs_s( NULL , strFilename , MAX_PATH , pFilename , MAX_PATH );
+<a name="l00221"></a>00221 <span class="preprocessor">    #else</span>
+<a name="l00222"></a>00222 <span class="preprocessor"></span>        wcstombs( strFilename , pFilename , <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * MAX_PATH );
+<a name="l00223"></a>00223 <span class="preprocessor">    #endif</span>
+<a name="l00224"></a>00224 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span><span class="preprocessor">    #if _MSC_VER &gt;= 1400</span>
+<a name="l00226"></a>00226 <span class="preprocessor"></span>        strcpy_s( strFilename , MAX_PATH , pFilename );
+<a name="l00227"></a>00227 <span class="preprocessor">    #else</span>
+<a name="l00228"></a>00228 <span class="preprocessor"></span>        strcpy( strFilename , pFilename );
+<a name="l00229"></a>00229 <span class="preprocessor">    #endif</span>
+<a name="l00230"></a>00230 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00231"></a>00231 <span class="preprocessor"></span>        <span class="keywordflow">if</span>( <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#aa3cab4f0b3a43eac282abcbeb99c0dd9">ffmpeginit</a>( &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">m_ffm</a> , strFilename , vcodec_id , width , height , fps , iVBitRate , acodec_id , <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nSamplesPerSec , <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade05b53d5aa30ea9a781ae081c5b783a">m_WFmt</a>.nChannels , iABitRate )){
+<a name="l00232"></a>00232             <a class="code" href="../../d2/d00/__tprintd_8h.html#aab39a106e262abd037a501ef807a65e5">_tprintd</a>( TEXT(<span class="stringliteral">&quot;ffmpeginit¥n&quot;</span>) );
+<a name="l00233"></a>00233             <span class="keywordflow">return</span> -1;
+<a name="l00234"></a>00234         }
+<a name="l00235"></a>00235     
+<a name="l00236"></a>00236         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade571d4bd37bda848660c88d3b45b246">m_dwWaitTime_Max</a> = (int)(1000 / fps);
+<a name="l00237"></a>00237         this-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#ab18239fa79fac1d1a6d4442910ce16ba" title="スレッドループの待機時間を設定(ms)">setSleepTime</a>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ade571d4bd37bda848660c88d3b45b246">m_dwWaitTime_Max</a> );
+<a name="l00238"></a>00238         
+<a name="l00239"></a>00239         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> = <span class="keyword">true</span>;
+<a name="l00240"></a>00240         
+<a name="l00241"></a>00241         <span class="keywordflow">return</span> 0;
+<a name="l00242"></a>00242     }
+<a name="l00243"></a>00243     
+<a name="l00244"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ab1437c28fb96974e3165c6bb6a1503f1">00244</a>     <span class="keywordtype">void</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ab1437c28fb96974e3165c6bb6a1503f1">Quit</a>( <span class="keywordtype">void</span> ){
+<a name="l00245"></a>00245         <span class="keywordtype">int</span> rc = 0;
+<a name="l00246"></a>00246         <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> == <span class="keyword">false</span> )
+<a name="l00247"></a>00247             <span class="keywordflow">return</span>;
+<a name="l00248"></a>00248         
+<a name="l00249"></a>00249         _tprintf( TEXT(<span class="stringliteral">&quot;Quit¥n&quot;</span>) );
+<a name="l00250"></a>00250         
+<a name="l00251"></a>00251         _tprintf( TEXT(<span class="stringliteral">&quot;waveInReset¥n&quot;</span>) );
+<a name="l00252"></a>00252         rc = waveInReset(<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>);
+<a name="l00253"></a>00253         <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00254"></a>00254             TCHAR msg[255];
+<a name="l00255"></a>00255             waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00256"></a>00256             _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00257"></a>00257         }
+<a name="l00258"></a>00258         
+<a name="l00259"></a>00259         <span class="keywordflow">for</span>( <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="../../dd/de6/CAVISAVE_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a>; i++ ){
+<a name="l00260"></a>00260             <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i].lpData ){
+<a name="l00261"></a>00261                 _tprintf( TEXT(<span class="stringliteral">&quot;waveInUnprepareHeader¥n&quot;</span>) );
+<a name="l00262"></a>00262                 rc = waveInUnprepareHeader( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>,&amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i],<span class="keyword">sizeof</span>(WAVEHDR));
+<a name="l00263"></a>00263                 <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00264"></a>00264                     TCHAR msg[255];
+<a name="l00265"></a>00265                     waveInGetErrorText(rc,msg,255);
+<a name="l00266"></a>00266                     _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00267"></a>00267                 }<span class="keywordflow">else</span>{
+<a name="l00268"></a>00268                     <span class="keyword">delete</span> [] <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i].lpData;
+<a name="l00269"></a>00269                     <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a61886a07f49558e409fbfb54a36b6a61">m_WHdr</a>[i].lpData = NULL;
+<a name="l00270"></a>00270                 
+<a name="l00271"></a>00271                 }
+<a name="l00272"></a>00272             }
+<a name="l00273"></a>00273         }
+<a name="l00274"></a>00274         
+<a name="l00275"></a>00275         <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a> ){
+<a name="l00276"></a>00276             _tprintf( TEXT(<span class="stringliteral">&quot;waveInClose¥n&quot;</span>) );
+<a name="l00277"></a>00277             rc = waveInClose( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a> );
+<a name="l00278"></a>00278             <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a> = NULL;
+<a name="l00279"></a>00279             <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00280"></a>00280                 TCHAR msg[255];
+<a name="l00281"></a>00281                 waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00282"></a>00282                 _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00283"></a>00283             }
+<a name="l00284"></a>00284         }
+<a name="l00285"></a>00285         
+<a name="l00286"></a>00286         <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ae9d1da9673451b8a7746f1b2cff0fd61">ffmpegquit</a>(  &amp;<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a75761b4ace7ea295abac55c1787363c0">m_ffm</a>  );
+<a name="l00287"></a>00287         
+<a name="l00288"></a>00288         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> = <span class="keyword">false</span>;
+<a name="l00289"></a>00289     }
+<a name="l00290"></a>00290     
+<a name="l00291"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#aabfd862f5db3aef954a2c04678593602">00291</a>     <span class="keywordtype">int</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#aabfd862f5db3aef954a2c04678593602">Start</a>( <span class="keywordtype">void</span> ){
+<a name="l00292"></a>00292         <span class="keywordtype">int</span> rc = 0;
+<a name="l00293"></a>00293         <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af845308b0f095cf1761b3749334bc1c4">m_bInit</a> == <span class="keyword">false</span> ) <span class="keywordflow">return</span> -1;
+<a name="l00294"></a>00294         
+<a name="l00295"></a>00295         _tprintf( TEXT(<span class="stringliteral">&quot;Start¥n&quot;</span>) );
+<a name="l00296"></a>00296         
+<a name="l00297"></a>00297         _tprintf( TEXT(<span class="stringliteral">&quot;waveInStart¥n&quot;</span>) );
+<a name="l00298"></a>00298         rc = waveInStart(<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>);
+<a name="l00299"></a>00299         <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00300"></a>00300             TCHAR msg[255];
+<a name="l00301"></a>00301             waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00302"></a>00302             _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00303"></a>00303             <span class="keywordflow">return</span> rc;
+<a name="l00304"></a>00304         }
+<a name="l00305"></a>00305         
+<a name="l00306"></a>00306         this-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#adf5e5fdd91670778afb726d5de2a8a79" title="スレッド起動">startThread</a>();
+<a name="l00307"></a>00307         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a> = <span class="keyword">true</span>;
+<a name="l00308"></a>00308         
+<a name="l00309"></a>00309         <span class="keywordflow">return</span> 0;
+<a name="l00310"></a>00310     }
+<a name="l00311"></a>00311     
+<a name="l00312"></a><a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af7b16a034a6c173979d4c47a2cc8eb39">00312</a>     <span class="keywordtype">int</span> <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#af7b16a034a6c173979d4c47a2cc8eb39">Stop</a>( <span class="keywordtype">void</span> ){
+<a name="l00313"></a>00313         <span class="keywordtype">int</span> rc = 0;
+<a name="l00314"></a>00314         
+<a name="l00315"></a>00315         <span class="keywordflow">if</span>( <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a> == <span class="keyword">false</span> )
+<a name="l00316"></a>00316             <span class="keywordflow">return</span> -1;
+<a name="l00317"></a>00317         
+<a name="l00318"></a>00318         _tprintf( TEXT(<span class="stringliteral">&quot;Stop¥n&quot;</span>) );
+<a name="l00319"></a>00319         
+<a name="l00320"></a>00320         _tprintf( TEXT(<span class="stringliteral">&quot;waveInStop¥n&quot;</span>) );
+<a name="l00321"></a>00321         rc = waveInStop(<a class="code" href="../../d0/d1c/classCAVISAVECORE.html#ae2de254e741a3aa7d63137b960a43207">m_hWavein</a>);
+<a name="l00322"></a>00322         <span class="keywordflow">if</span>(rc!= MMSYSERR_NOERROR){
+<a name="l00323"></a>00323             TCHAR msg[255];
+<a name="l00324"></a>00324             waveInGetErrorText(rc,msg,<span class="keyword">sizeof</span>(msg));
+<a name="l00325"></a>00325             _tprintf( TEXT(<span class="stringliteral">&quot;Errer %s¥n&quot;</span>) , msg );
+<a name="l00326"></a>00326             <span class="keywordflow">return</span> rc;
+<a name="l00327"></a>00327         }
+<a name="l00328"></a>00328         
+<a name="l00329"></a>00329         this-&gt;<a class="code" href="../../dd/d85/classCTHREAD__WIN.html#a4879353acb6f20db634a9628c2a0fc36" title="スレッド停止">stopThread</a>();
+<a name="l00330"></a>00330         Sleep(1000*<a class="code" href="../../dd/de6/CAVISAVE_8h.html#a3a346c98185aeef38f47d06ba4d5ac96">_CWS_BUFFERTIME</a>*2);
+<a name="l00331"></a>00331         
+<a name="l00332"></a>00332         
+<a name="l00333"></a>00333         <a class="code" href="../../d0/d1c/classCAVISAVECORE.html#a4c742a46897e9af7634ed27aeaa2be5f">m_bRecord</a> = <span class="keyword">false</span>;
+<a name="l00334"></a>00334         <span class="keywordflow">return</span> 0;
+<a name="l00335"></a>00335     }
+<a name="l00336"></a>00336     <span class="comment">//</span>
+<a name="l00337"></a>00337 };
+<a name="l00338"></a>00338 
+<a name="l00339"></a>00339 <span class="preprocessor">#endif</span>
+<a name="l00340"></a>00340 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: cusb2.h ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>cusb2.h</h1><a href="../../d9/d8e/cusb2_8h.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//</span>
+<a name="l00002"></a>00002 <span class="comment">//Chameleon USB FX2 API Ver1.00 By OPTIMIZE</span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="comment">//#include &lt;afxwin.h&gt;         // MFC core and standard components</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;dbt.h&quot;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="../../d6/d34/cyapi_8h.html">cyapi.h</a>&quot;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#ifndef __CUSB2_H__</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#define __CUSB2_H__</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>
+<a name="l00012"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">00012</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>;
+<a name="l00013"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a151f780fb455885061d3b77ec1c90c03">00013</a> <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">char</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#a151f780fb455885061d3b77ec1c90c03">s8</a>;
+<a name="l00014"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#aa0b167025ed1eead1300bc4dbdfb230e">00014</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <span class="keywordtype">int</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#aa0b167025ed1eead1300bc4dbdfb230e">u16</a>;
+<a name="l00015"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a4cb19f4a3324cfe0938ddfbfabaa825b">00015</a> <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">short</span> <span class="keywordtype">int</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#a4cb19f4a3324cfe0938ddfbfabaa825b">s16</a>;
+<a name="l00016"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">00016</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>;
+<a name="l00017"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">00017</a> <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">int</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a>;
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a79d537e29df3701af9ad2755aadffb57">00019</a> <span class="preprocessor">#define CUSB_DEBUG   0</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span>
+<a name="l00021"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html">00021</a> <span class="keyword">struct </span><a class="code" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a>
+<a name="l00022"></a>00022 {
+<a name="l00023"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a59a471b123e08f16d89adec9f757021d">00023</a>     HANDLE <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a59a471b123e08f16d89adec9f757021d">th</a>;
+<a name="l00024"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#ac455f553198f7d92ef4f5e2b67e08791">00024</a>     <a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *<a class="code" href="../../d0/db2/struct__cusb2__tcb.html#ac455f553198f7d92ef4f5e2b67e08791">ep</a>;
+<a name="l00025"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a38607a4538aa4d1b8062dd065fe44925">00025</a>     <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>  <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a38607a4538aa4d1b8062dd065fe44925">epaddr</a>;
+<a name="l00026"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a694d6c8a37f22527857b824e7eb47183">00026</a>     LONG <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a694d6c8a37f22527857b824e7eb47183">xfer</a>;
+<a name="l00027"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#ac64ace4fcedb07d80b87e4a6659349e7">00027</a>     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#ac64ace4fcedb07d80b87e4a6659349e7">ques</a>;
+<a name="l00028"></a>00028     bool (*<a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a1f155e89acc79f6c95a878f2ed044c05">cb_func</a>)(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> , <a class="code" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a>*);
+<a name="l00029"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a727519b85571ef4a2dc48a2de42a03a4">00029</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a727519b85571ef4a2dc48a2de42a03a4">looping</a>;
+<a name="l00030"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a1f6d9faa49dd6fef4fde329fb179df75">00030</a>     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a1f6d9faa49dd6fef4fde329fb179df75">nsuccess</a>;
+<a name="l00031"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a360dada00fe7f9a97a2679c8fefcf346">00031</a>     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#a360dada00fe7f9a97a2679c8fefcf346">nfailure</a>;
+<a name="l00032"></a><a class="code" href="../../d0/db2/struct__cusb2__tcb.html#af9f8ea48990bdc91457bcc8ca42abc76">00032</a>     <span class="keywordtype">void</span>* <a class="code" href="../../d0/db2/struct__cusb2__tcb.html#af9f8ea48990bdc91457bcc8ca42abc76">userpointer</a>;
+<a name="l00033"></a>00033 };
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="../../d9/d8e/cusb2_8h.html#a952aa7220a7f90c316eeee50b6832769">00035</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> cusb2_tcb;
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="../../d4/dba/classcusb2.html">00037</a> <span class="keyword">class </span><a class="code" href="../../d4/dba/classcusb2.html">cusb2</a>{
+<a name="l00038"></a><a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">00038</a>     <a class="code" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a> *<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>;
+<a name="l00039"></a><a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">00039</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a>;
+<a name="l00040"></a><a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">00040</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a>;
+<a name="l00041"></a><a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">00041</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a>;
+<a name="l00042"></a><a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">00042</a>     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a>;
+<a name="l00043"></a><a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">00043</a>     <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a>;
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 <span class="keyword">public</span>:
+<a name="l00046"></a><a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">00046</a>     <a class="code" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a> *<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>;
+<a name="l00047"></a>00047     <a class="code" href="../../d4/dba/classcusb2.html#abdff54e7436149c35a858f0eb31686b3">cusb2</a>(HANDLE h);
+<a name="l00048"></a>00048     <a class="code" href="../../d4/dba/classcusb2.html#a45a789b4163de6ef43d578c455ec259a">‾cusb2</a>();
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a5c872c37114d7becf4dbffe7f73c81cd">fwload</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <span class="keywordtype">id</span>, <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *fw, <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *string1);
+<a name="l00051"></a>00051     <a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>* <a class="code" href="../../d4/dba/classcusb2.html#a82912504c372ec6db974e4a85b8912dc">get_endpoint</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> addr);
+<a name="l00052"></a>00052     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a77f428befb5aa8c2eaed70066da4826d">xfer</a>(<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *ep, PUCHAR buf, LONG &amp;len);
+<a name="l00053"></a>00053     cusb2_tcb *<a class="code" href="../../d4/dba/classcusb2.html#aa3b52f7feaffa74d56f994fd6cbd3b4c">start_thread</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> epaddr, <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> <a class="code" href="../../d4/dba/classcusb2.html#a77f428befb5aa8c2eaed70066da4826d">xfer</a>, <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> ques, <span class="keywordtype">bool</span> (*cb_func)(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> , <a class="code" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a>*));
+<a name="l00054"></a>00054     <span class="keywordtype">void</span> <a class="code" href="../../d4/dba/classcusb2.html#a217db1b8cc28ece4655e0216bd84a528">delete_thread</a>(cusb2_tcb *tcb);
+<a name="l00055"></a>00055     <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a00ae5789e62966c680f6b12c7e38696f">PnpEvent</a>(WPARAM wParam, LPARAM lParam);
+<a name="l00056"></a>00056     
+<a name="l00057"></a>00057 <span class="keyword">private</span>:
+<a name="l00058"></a>00058     <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> <a class="code" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">check_fx2</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <span class="keywordtype">id</span>);
+<a name="l00059"></a>00059 };
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="preprocessor">#endif</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span>
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

@@ -1,4 +1,9 @@
 
+/*!
+	@file
+	@bug	2台同時取り込みで画像が乱れる(2010/02/21)
+*/
+
 #include <windows.h>
 #include <commctrl.h>
 #include <locale.h>
@@ -540,30 +545,30 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 					g_AppConfig.m_bTopWindow = false;
 					SendMessage( hwnd , WM_COMMAND , MAKEWPARAM(ID_MENU_TOPWINDOW,0) , 0 );
 				}
-//				SetTimer( hwnd , 1421356 , (1000 / 2) , NULL );
+				SetTimer( hwnd , 1421356 , (1000 / 2) , NULL );
 				//
 			}
 			break;
 		
 		case WM_DESTROY:
 			{
-//				KillTimer( hwnd, 1421356 );
+				KillTimer( hwnd, 1421356 );
 			}
 			break;
 		
-/*		case WM_TIMER:
+		case WM_TIMER:
 			{
 				TCHAR strBuf[256];
 				TCHAR strTitle[256];
 				LoadString( (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE) , IDS_STRING_TITLE , strTitle , 256 );
 #if _MSC_VER >= 1400
-				_stprintf_s( strBuf , 256 , TEXT("%s(FPS %2.1f) - (Data %2.1f) - ErrorFrame:%d") , strTitle , g_thRender.m_dFPS , g_nise.GetFps() , g_nise.GetErrorFrameCount() );
+				_stprintf_s( strBuf , 256 , TEXT("%s ID:%d") , strTitle , g_AppConfig.m_iCUSB2_ID );
 #else
-				_stprintf( strBuf , TEXT("%s(FPS %2.1f) - (Data %2.1f) - ErrorFrame:%d") , strTitle , g_thRender.m_dFPS , g_nise.GetFps() , g_nise.GetErrorFrameCount() );
+				_stprintf( strBuf , TEXT("%s ID:%d") , strTitle , g_AppConfig.m_iCUSB2_ID );
 #endif
 				SetWindowText( g_hWnd , strBuf );
 			}
-			break;*/
+			break;
 		
 		case WM_CLOSE:
 #if defined(HAVE_FFMPEG)
@@ -587,6 +592,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 		// デバイスロスト等
 		case WM_DEVICECHANGE:
 			{
+				HMENU hMenu;
 				_tprintd( TEXT("WM_DEVICECHANGE\n") );
 				
 				
@@ -606,17 +612,21 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 				if( wParam == DBT_USERDEFINED )				_tprintd( TEXT(" DBT_USERDEFINED\n") );
 				
 				cusb2* pUsb = g_nise.GetCUSB2();
-				if( pUsb ){
+				if( g_nise.IsInit() ){
+					if( pUsb )
 					if( pUsb->PnpEvent( wParam , lParam) ){
 						_tprintd( TEXT("PnpEvent\n") );
 						
-						HMENU hMenu;
+						
 						hMenu = GetMenu( hwnd );
 						for( int i = 0; i < 4; i++ ){
 							if( hMenu )EnableMenuItem( hMenu , (ID_MENU_CUSB2_ID0+i) , MF_GRAYED );
 						}
 						g_nise.NisetroQuit();
-						g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , hwnd );
+						if( g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , hwnd ) ){
+							// error
+							g_nise.NisetroQuit();
+						}
 						
 						hMenu = GetMenu( hwnd );
 						for( int i = 0; i < 4; i++ ){
@@ -624,6 +634,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 						}
 						
 					}
+				}else{
+						g_nise.NisetroQuit();
+						if( g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , hwnd ) ){
+							g_nise.NisetroQuit();
+						}
+						
+						hMenu = GetMenu( hwnd );
+						for( int i = 0; i < 4; i++ ){
+							if( hMenu )EnableMenuItem( hMenu , (ID_MENU_CUSB2_ID0+i) , MF_ENABLED );
+						}
+						
 				}
 			}
 			break;

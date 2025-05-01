@@ -3,10 +3,12 @@
 
 #include <d3dx9.h>
 #include <dxerr.h>
-
-#include "_tprintd.h"
-
 #include "configio.h"
+
+
+extern "C" {
+#include "_tprintd.h"
+};
 
 #ifndef __DX9RENDER_H__
 #define __DX9RENDER_H__

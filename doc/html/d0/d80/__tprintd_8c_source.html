@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: _tprintd.c ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>_tprintd.c</h1><a href="../../d0/d80/__tprintd_8c.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;windows.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="../../d2/d00/__tprintd_8h.html">_tprintd.h</a>&quot;</span>
+<a name="l00006"></a>00006 
+<a name="l00011"></a><a class="code" href="../../d2/d00/__tprintd_8h.html#a58b3e69d4ffa8a9979ee195db1b6cf47">00011</a> <span class="keywordtype">void</span> <a class="code" href="../../d0/d80/__tprintd_8c.html#a58b3e69d4ffa8a9979ee195db1b6cf47" title="エラー表示用関数(マルチバイト文字列用)">printd</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> * _Format, ... ){
+<a name="l00012"></a>00012 <span class="preprocessor">#if defined(_DEBUG)</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span>    va_list arglist;
+<a name="l00014"></a>00014     <span class="keywordtype">char</span>    *buffer = NULL;
+<a name="l00015"></a>00015     <span class="keywordtype">size_t</span>  len;
+<a name="l00016"></a>00016     <span class="keywordtype">size_t</span>  fmt_len;
+<a name="l00017"></a>00017     
+<a name="l00018"></a>00018     va_start(arglist, _Format);
+<a name="l00019"></a>00019     fmt_len = (int)strlen(_Format) + 1;
+<a name="l00020"></a>00020     <span class="keywordflow">if</span>( fmt_len == 0 )
+<a name="l00021"></a>00021         <span class="keywordflow">return</span>;
+<a name="l00022"></a>00022     
+<a name="l00023"></a>00023     len = (size_t)_vscprintf( _Format, arglist )+1;
+<a name="l00024"></a>00024     <span class="keywordflow">if</span>( len &lt; fmt_len ){
+<a name="l00025"></a>00025         len = fmt_len;
+<a name="l00026"></a>00026     }
+<a name="l00027"></a>00027     buffer = malloc( <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * len );
+<a name="l00028"></a>00028     <span class="keywordflow">if</span>( buffer ){
+<a name="l00029"></a>00029 <span class="preprocessor">#if _MSC_VER &gt;= 1400</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span>        vsprintf_s ( buffer , len , _Format, arglist);
+<a name="l00031"></a>00031 <span class="preprocessor">#else</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span>        vsprintf( buffer , _Format, arglist);
+<a name="l00033"></a>00033 <span class="preprocessor">#endif</span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span>    }
+<a name="l00035"></a>00035     <span class="keywordflow">if</span>( buffer ){
+<a name="l00036"></a>00036 <span class="preprocessor">#if defined(_CONSOLE)</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>        printf( buffer );
+<a name="l00038"></a>00038 <span class="preprocessor">#else</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>        OutputDebugStringA(buffer);
+<a name="l00040"></a>00040 <span class="preprocessor">#endif</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>    }
+<a name="l00042"></a>00042     <span class="keywordflow">if</span>( buffer ){free(buffer); buffer = NULL; }
+<a name="l00043"></a>00043     va_end(arglist);
+<a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>}
+<a name="l00046"></a>00046 
+<a name="l00051"></a><a class="code" href="../../d2/d00/__tprintd_8h.html#a3ab3527fb966bc0d791254fdc2182aca">00051</a> <span class="keywordtype">void</span> <a class="code" href="../../d0/d80/__tprintd_8c.html#a3ab3527fb966bc0d791254fdc2182aca" title="エラー表示用関数(ワイドバイト文字列用)">wprintd</a>( <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * _Format, ... ){
+<a name="l00052"></a>00052 <span class="preprocessor">#if defined(_DEBUG)</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span>    va_list arglist;
+<a name="l00054"></a>00054     <span class="keywordtype">wchar_t</span> *buffer = NULL;
+<a name="l00055"></a>00055     <span class="keywordtype">size_t</span>  len;
+<a name="l00056"></a>00056     <span class="keywordtype">size_t</span>  fmt_len;
+<a name="l00057"></a>00057     
+<a name="l00058"></a>00058     va_start(arglist, _Format);
+<a name="l00059"></a>00059     fmt_len = wcslen(_Format) + 1;
+<a name="l00060"></a>00060     <span class="keywordflow">if</span>( fmt_len == 0 )
+<a name="l00061"></a>00061         <span class="keywordflow">return</span>;
+<a name="l00062"></a>00062     
+<a name="l00063"></a>00063     len = (size_t)_vscwprintf( _Format, arglist )+1;
+<a name="l00064"></a>00064     <span class="keywordflow">if</span>( len &lt; fmt_len ){
+<a name="l00065"></a>00065         len = fmt_len;
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067     buffer = malloc( <span class="keyword">sizeof</span>(<span class="keywordtype">wchar_t</span>) * len );
+<a name="l00068"></a>00068     <span class="keywordflow">if</span>( buffer ){
+<a name="l00069"></a>00069 <span class="preprocessor">#if _MSC_VER &gt;= 1400</span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span>        vswprintf_s ( buffer , len , _Format, arglist);
+<a name="l00071"></a>00071 <span class="preprocessor">#else</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>        vswprintf( buffer , _Format, arglist);
+<a name="l00073"></a>00073 <span class="preprocessor">#endif</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>    }
+<a name="l00075"></a>00075     <span class="keywordflow">if</span>( buffer ){
+<a name="l00076"></a>00076 <span class="preprocessor">#if defined(_CONSOLE)</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span>        printf( buffer );
+<a name="l00078"></a>00078 <span class="preprocessor">#else</span>
+<a name="l00079"></a>00079 <span class="preprocessor"></span>        OutputDebugStringW(buffer);
+<a name="l00080"></a>00080 <span class="preprocessor">#endif</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>    }
+<a name="l00082"></a>00082     <span class="keywordflow">if</span>( buffer ){free(buffer); buffer = NULL; }
+<a name="l00083"></a>00083     va_end(arglist);
+<a name="l00084"></a>00084 <span class="preprocessor">#endif</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>}
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:38 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

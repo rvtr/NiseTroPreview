@@ -1,0 +1,827 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: CAVISAVE.cpp ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>CAVISAVE.cpp</h1><a href="../../d1/d06/CAVISAVE_8cpp.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;tchar.h&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="../../dd/de6/CAVISAVE_8h.html">CAVISAVE.h</a>&quot;</span>
+<a name="l00007"></a>00007 <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="../../d2/d00/__tprintd_8h.html">_tprintd.h</a>&quot;</span>
+<a name="l00009"></a>00009 };
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="preprocessor">#pragma comment(lib,&quot;avutil-50.lib&quot;)</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#pragma comment(lib,&quot;avformat-52.lib&quot;)</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#pragma comment(lib,&quot;avcodec-52.lib&quot;)</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#pragma comment(lib,&quot;swscale-0.lib&quot;)</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span>
+<a name="l00016"></a>00016 <span class="preprocessor">#pragma comment(lib,&quot;winmm.lib&quot;)</span>
+<a name="l00017"></a>00017 <span class="preprocessor"></span>
+<a name="l00018"></a><a class="code" href="../../dc/d32/structAVCodecTag.html">00018</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../dc/d32/structAVCodecTag.html">AVCodecTag</a> {
+<a name="l00019"></a><a class="code" href="../../dc/d32/structAVCodecTag.html#ac4aa1f6786037bcf85838cad7770586e">00019</a>     <span class="keywordtype">int</span> <a class="code" href="../../dc/d32/structAVCodecTag.html#ac4aa1f6786037bcf85838cad7770586e">id</a>;
+<a name="l00020"></a><a class="code" href="../../dc/d32/structAVCodecTag.html#ac3c7db3b0a20647687b74af8b9fb3afd">00020</a>     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="../../dc/d32/structAVCodecTag.html#ac3c7db3b0a20647687b74af8b9fb3afd">tag</a>;
+<a name="l00021"></a>00021 } <a class="code" href="../../dc/d32/structAVCodecTag.html">AVCodecTag</a>;
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a1a4e765d73edb95d02fbd3ffd07aa2e3">00023</a> <span class="keyword">const</span> <a class="code" href="../../dc/d32/structAVCodecTag.html">AVCodecTag</a> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a1a4e765d73edb95d02fbd3ffd07aa2e3">codec_bmp_tags</a>[] = {
+<a name="l00024"></a>00024     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00025"></a>00025     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;h&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00026"></a>00026     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00027"></a>00027     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;x&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00028"></a>00028     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;a&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;c&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00029"></a>00029     { CODEC_ID_H264, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;H&apos;</span>) },
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031     { CODEC_ID_H263, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00032"></a>00032     { CODEC_ID_H263P, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00033"></a>00033     { CODEC_ID_H263I, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) }, <span class="comment">/* intel h263 */</span>
+<a name="l00034"></a>00034     { CODEC_ID_H261, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     <span class="comment">/* added based on MPlayer */</span>
+<a name="l00037"></a>00037     { CODEC_ID_H263P, MKTAG(<span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00038"></a>00038     { CODEC_ID_H263P, MKTAG(<span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;i&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00041"></a>00041     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;X&apos;</span>) },
+<a name="l00042"></a>00042     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;5&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00043"></a>00043     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;D&apos;</span>) },
+<a name="l00044"></a>00044     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;S&apos;</span>) },
+<a name="l00045"></a>00045     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00046"></a>00046     { CODEC_ID_MPEG4, MKTAG(0x04, 0, 0, 0) }, <span class="comment">/* some broken avi use this */</span>
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     <span class="comment">/* added based on MPlayer */</span>
+<a name="l00049"></a>00049     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00050"></a>00050     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;B&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;Z&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00051"></a>00051     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;p&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;v&apos;</span>) },
+<a name="l00052"></a>00052     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00053"></a>00053     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>, <span class="charliteral">&apos;F&apos;</span>) },
+<a name="l00054"></a>00054     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;E&apos;</span>, <span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056     { CODEC_ID_MPEG4, MKTAG(<span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) }, <span class="comment">/* default signature when using MSMPEG4 */</span>
+<a name="l00059"></a>00059     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061     <span class="comment">/* added based on MPlayer */</span>
+<a name="l00062"></a>00062     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00063"></a>00063     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;5&apos;</span>) },
+<a name="l00064"></a>00064     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;6&apos;</span>) },
+<a name="l00065"></a>00065     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00066"></a>00066     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00067"></a>00067     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;O&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00068"></a>00068     { CODEC_ID_MSMPEG4V3, MKTAG(<span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;O&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     { CODEC_ID_MSMPEG4V2, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     <span class="comment">/* added based on MPlayer */</span>
+<a name="l00073"></a>00073     { CODEC_ID_MSMPEG4V2, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     { CODEC_ID_MSMPEG4V1, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>, <span class="charliteral">&apos;4&apos;</span>) },
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     { CODEC_ID_WMV1, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079     <span class="comment">/* added based on MPlayer */</span>
+<a name="l00080"></a>00080     { CODEC_ID_WMV2, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00081"></a>00081     { CODEC_ID_DVVIDEO, MKTAG(<span class="charliteral">&apos;d&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;s&apos;</span>, <span class="charliteral">&apos;d&apos;</span>) },
+<a name="l00082"></a>00082     { CODEC_ID_DVVIDEO, MKTAG(<span class="charliteral">&apos;d&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;h&apos;</span>, <span class="charliteral">&apos;d&apos;</span>) },
+<a name="l00083"></a>00083     { CODEC_ID_DVVIDEO, MKTAG(<span class="charliteral">&apos;d&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;s&apos;</span>, <span class="charliteral">&apos;l&apos;</span>) },
+<a name="l00084"></a>00084     { CODEC_ID_DVVIDEO, MKTAG(<span class="charliteral">&apos;d&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;5&apos;</span>) },
+<a name="l00085"></a>00085     { CODEC_ID_MPEG1VIDEO, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;p&apos;</span>, <span class="charliteral">&apos;g&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00086"></a>00086     { CODEC_ID_MPEG1VIDEO, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;p&apos;</span>, <span class="charliteral">&apos;g&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00087"></a>00087     { CODEC_ID_MPEG2VIDEO, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;p&apos;</span>, <span class="charliteral">&apos;g&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00088"></a>00088     { CODEC_ID_MPEG2VIDEO, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;E&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00089"></a>00089     { CODEC_ID_MPEG1VIDEO, MKTAG(<span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00090"></a>00090     { CODEC_ID_MPEG1VIDEO, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00091"></a>00091     { CODEC_ID_MPEG1VIDEO, 0x10000001 },
+<a name="l00092"></a>00092     { CODEC_ID_MPEG2VIDEO, 0x10000002 },
+<a name="l00093"></a>00093     { CODEC_ID_MPEG2VIDEO, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos; &apos;</span>) },
+<a name="l00094"></a>00094     { CODEC_ID_MPEG2VIDEO, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;E&apos;</span>, <span class="charliteral">&apos;S&apos;</span>) },
+<a name="l00095"></a>00095     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00096"></a>00096     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00097"></a>00097     { CODEC_ID_LJPEG, MKTAG(<span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00098"></a>00098     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>, <span class="charliteral">&apos;L&apos;</span>) }, <span class="comment">/* Pegasus lossless JPEG */</span>
+<a name="l00099"></a>00099     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;S&apos;</span>) }, <span class="comment">/* JPEG-LS custom FOURCC for avi - decoder */</span>
+<a name="l00100"></a>00100     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;j&apos;</span>, <span class="charliteral">&apos;p&apos;</span>, <span class="charliteral">&apos;e&apos;</span>, <span class="charliteral">&apos;g&apos;</span>) },
+<a name="l00101"></a>00101     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00102"></a>00102     { CODEC_ID_MJPEG, MKTAG(<span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;n&apos;</span>) },
+<a name="l00103"></a>00103     { CODEC_ID_HUFFYUV, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;U&apos;</span>) },
+<a name="l00104"></a>00104     { CODEC_ID_FFVHUFF, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;H&apos;</span>) },
+<a name="l00105"></a>00105     { CODEC_ID_CYUV, MKTAG(<span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;V&apos;</span>) },
+<a name="l00106"></a>00106     { CODEC_ID_RAWVIDEO, 0 },
+<a name="l00107"></a>00107     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00108"></a>00108     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00109"></a>00109     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00110"></a>00110     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00111"></a>00111     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>) },
+<a name="l00112"></a>00112     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;V&apos;</span>) },
+<a name="l00113"></a>00113     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;8&apos;</span>, <span class="charliteral">&apos;0&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00114"></a>00114     { CODEC_ID_RAWVIDEO, MKTAG(<span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;Y&apos;</span>, <span class="charliteral">&apos;C&apos;</span>) },
+<a name="l00115"></a>00115     { CODEC_ID_INDEO3, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;3&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00116"></a>00116     { CODEC_ID_INDEO3, MKTAG(<span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;3&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00117"></a>00117     { CODEC_ID_VP3, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;3&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00118"></a>00118     { CODEC_ID_VP3, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;3&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00119"></a>00119     { CODEC_ID_ASV1, MKTAG(<span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00120"></a>00120     { CODEC_ID_ASV2, MKTAG(<span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00121"></a>00121     { CODEC_ID_VCR1, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00122"></a>00122     { CODEC_ID_FFV1, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00123"></a>00123     { CODEC_ID_XAN_WC4, MKTAG(<span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;x&apos;</span>, <span class="charliteral">&apos;a&apos;</span>, <span class="charliteral">&apos;n&apos;</span>) },
+<a name="l00124"></a>00124     { CODEC_ID_MSRLE, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;r&apos;</span>, <span class="charliteral">&apos;l&apos;</span>, <span class="charliteral">&apos;e&apos;</span>) },
+<a name="l00125"></a>00125     { CODEC_ID_MSRLE, MKTAG(0x1, 0x0, 0x0, 0x0) },
+<a name="l00126"></a>00126     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;C&apos;</span>) },
+<a name="l00127"></a>00127     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;m&apos;</span>, <span class="charliteral">&apos;s&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;c&apos;</span>) },
+<a name="l00128"></a>00128     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;M&apos;</span>) },
+<a name="l00129"></a>00129     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;c&apos;</span>, <span class="charliteral">&apos;r&apos;</span>, <span class="charliteral">&apos;a&apos;</span>, <span class="charliteral">&apos;m&apos;</span>) },
+<a name="l00130"></a>00130     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;H&apos;</span>, <span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;M&apos;</span>) },
+<a name="l00131"></a>00131     { CODEC_ID_MSVIDEO1, MKTAG(<span class="charliteral">&apos;w&apos;</span>, <span class="charliteral">&apos;h&apos;</span>, <span class="charliteral">&apos;a&apos;</span>, <span class="charliteral">&apos;m&apos;</span>) },
+<a name="l00132"></a>00132     { CODEC_ID_CINEPAK, MKTAG(<span class="charliteral">&apos;c&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;i&apos;</span>, <span class="charliteral">&apos;d&apos;</span>) },
+<a name="l00133"></a>00133     { CODEC_ID_TRUEMOTION1, MKTAG(<span class="charliteral">&apos;D&apos;</span>, <span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;K&apos;</span>) },
+<a name="l00134"></a>00134     { CODEC_ID_MSZH, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;Z&apos;</span>, <span class="charliteral">&apos;H&apos;</span>) },
+<a name="l00135"></a>00135     { CODEC_ID_ZLIB, MKTAG(<span class="charliteral">&apos;Z&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;B&apos;</span>) },
+<a name="l00136"></a>00136     { CODEC_ID_SNOW, MKTAG(<span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;N&apos;</span>, <span class="charliteral">&apos;O&apos;</span>, <span class="charliteral">&apos;W&apos;</span>) },
+<a name="l00137"></a>00137     { CODEC_ID_4XM, MKTAG(<span class="charliteral">&apos;4&apos;</span>, <span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>) },
+<a name="l00138"></a>00138     { CODEC_ID_FLV1, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00139"></a>00139     { CODEC_ID_SVQ1, MKTAG(<span class="charliteral">&apos;s&apos;</span>, <span class="charliteral">&apos;v&apos;</span>, <span class="charliteral">&apos;q&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00140"></a>00140     { CODEC_ID_TSCC, MKTAG(<span class="charliteral">&apos;t&apos;</span>, <span class="charliteral">&apos;s&apos;</span>, <span class="charliteral">&apos;c&apos;</span>, <span class="charliteral">&apos;c&apos;</span>) },
+<a name="l00141"></a>00141     { CODEC_ID_ULTI, MKTAG(<span class="charliteral">&apos;U&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;T&apos;</span>, <span class="charliteral">&apos;I&apos;</span>) },
+<a name="l00142"></a>00142     { CODEC_ID_VIXL, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;I&apos;</span>, <span class="charliteral">&apos;X&apos;</span>, <span class="charliteral">&apos;L&apos;</span>) },
+<a name="l00143"></a>00143     { CODEC_ID_QPEG, MKTAG(<span class="charliteral">&apos;Q&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;E&apos;</span>, <span class="charliteral">&apos;G&apos;</span>) },
+<a name="l00144"></a>00144     { CODEC_ID_QPEG, MKTAG(<span class="charliteral">&apos;Q&apos;</span>, <span class="charliteral">&apos;1&apos;</span>, <span class="charliteral">&apos;.&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00145"></a>00145     { CODEC_ID_QPEG, MKTAG(<span class="charliteral">&apos;Q&apos;</span>, <span class="charliteral">&apos;1&apos;</span>, <span class="charliteral">&apos;.&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00146"></a>00146     { CODEC_ID_WMV3, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;3&apos;</span>) },
+<a name="l00147"></a>00147     { CODEC_ID_LOCO, MKTAG(<span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;O&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;O&apos;</span>) },
+<a name="l00148"></a>00148     { CODEC_ID_THEORA, MKTAG(<span class="charliteral">&apos;t&apos;</span>, <span class="charliteral">&apos;h&apos;</span>, <span class="charliteral">&apos;e&apos;</span>, <span class="charliteral">&apos;o&apos;</span>) },
+<a name="l00149"></a>00149 <span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;0x000409</span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span>    { CODEC_ID_WNV1, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;N&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00151"></a>00151     { CODEC_ID_AASC, MKTAG(<span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;A&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;C&apos;</span>) },
+<a name="l00152"></a>00152     { CODEC_ID_INDEO2, MKTAG(<span class="charliteral">&apos;R&apos;</span>, <span class="charliteral">&apos;T&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00153"></a>00153     { CODEC_ID_FRAPS, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00154"></a>00154     { CODEC_ID_TRUEMOTION2, MKTAG(<span class="charliteral">&apos;T&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00155"></a>00155 <span class="preprocessor">#endif</span>
+<a name="l00156"></a>00156 <span class="preprocessor"></span><span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;((50&lt;&lt;16)+(1&lt;&lt;8)+0)</span>
+<a name="l00157"></a>00157 <span class="preprocessor"></span>    { CODEC_ID_FLASHSV, MKTAG(<span class="charliteral">&apos;F&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00158"></a>00158     { CODEC_ID_JPEGLS,MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;L&apos;</span>, <span class="charliteral">&apos;S&apos;</span>) }, <span class="comment">/* JPEG-LS custom FOURCC for avi - encoder */</span>
+<a name="l00159"></a>00159     { CODEC_ID_VC1, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00160"></a>00160     { CODEC_ID_VC1, MKTAG(<span class="charliteral">&apos;W&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;A&apos;</span>) },
+<a name="l00161"></a>00161     { CODEC_ID_CSCD, MKTAG(<span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;S&apos;</span>, <span class="charliteral">&apos;C&apos;</span>, <span class="charliteral">&apos;D&apos;</span>) },
+<a name="l00162"></a>00162     { CODEC_ID_ZMBV, MKTAG(<span class="charliteral">&apos;Z&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;B&apos;</span>, <span class="charliteral">&apos;V&apos;</span>) },
+<a name="l00163"></a>00163     { CODEC_ID_KMVC, MKTAG(<span class="charliteral">&apos;K&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;C&apos;</span>) },
+<a name="l00164"></a>00164 <span class="preprocessor">#endif</span>
+<a name="l00165"></a>00165 <span class="preprocessor"></span><span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;((51&lt;&lt;16)+(11&lt;&lt;8)+0)</span>
+<a name="l00166"></a>00166 <span class="preprocessor"></span>    { CODEC_ID_VP5, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;5&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00167"></a>00167     { CODEC_ID_VP6, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;0&apos;</span>) },
+<a name="l00168"></a>00168     { CODEC_ID_VP6, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;1&apos;</span>) },
+<a name="l00169"></a>00169     { CODEC_ID_VP6, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;2&apos;</span>) },
+<a name="l00170"></a>00170     { CODEC_ID_VP6F, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;P&apos;</span>, <span class="charliteral">&apos;6&apos;</span>, <span class="charliteral">&apos;F&apos;</span>) },
+<a name="l00171"></a>00171     { CODEC_ID_JPEG2000, MKTAG(<span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;J&apos;</span>, <span class="charliteral">&apos;2&apos;</span>, <span class="charliteral">&apos;C&apos;</span>) },
+<a name="l00172"></a>00172     { CODEC_ID_VMNC, MKTAG(<span class="charliteral">&apos;V&apos;</span>, <span class="charliteral">&apos;M&apos;</span>, <span class="charliteral">&apos;n&apos;</span>, <span class="charliteral">&apos;c&apos;</span>) },
+<a name="l00173"></a>00173 <span class="preprocessor">#endif</span>
+<a name="l00174"></a>00174 <span class="preprocessor"></span><span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;=((51&lt;&lt;16)+(49&lt;&lt;8)+0)</span>
+<a name="l00175"></a>00175 <span class="preprocessor"></span><span class="comment">// this tag seems not to exist in older versions of FFMPEG</span>
+<a name="l00176"></a>00176     { CODEC_ID_TARGA, MKTAG(<span class="charliteral">&apos;t&apos;</span>, <span class="charliteral">&apos;g&apos;</span>, <span class="charliteral">&apos;a&apos;</span>, <span class="charliteral">&apos; &apos;</span>) },
+<a name="l00177"></a>00177 <span class="preprocessor">#endif</span>
+<a name="l00178"></a>00178 <span class="preprocessor"></span>    { CODEC_ID_NONE, 0 },
+<a name="l00179"></a>00179 };
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181 <span class="comment">// ビデオストリームを追加する</span>
+<a name="l00182"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#ac4ad1d87b5ed402ce65b2c04795027df">00182</a> AVStream *<a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ac4ad1d87b5ed402ce65b2c04795027df" title="ビデオストリームを追加する">ffmpeg_addVStream</a>( AVFormatContext *oc,
+<a name="l00183"></a>00183                                              CodecID codec_id ,
+<a name="l00184"></a>00184                                              <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> bitrate,
+<a name="l00185"></a>00185                                              <span class="keywordtype">double</span> fps, <span class="keywordtype">int</span> pixel_format)
+<a name="l00186"></a>00186 {
+<a name="l00187"></a>00187     AVCodecContext *c;
+<a name="l00188"></a>00188     AVStream *st;
+<a name="l00189"></a>00189     <span class="keywordtype">int</span> frame_rate, frame_rate_base;
+<a name="l00190"></a>00190     AVCodec *codec;
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193     st = av_new_stream(oc, oc-&gt;nb_streams);
+<a name="l00194"></a>00194     <span class="keywordflow">if</span> (!st) {
+<a name="l00195"></a>00195         <span class="keywordflow">return</span> NULL;
+<a name="l00196"></a>00196     }
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00199"></a>00199 <span class="preprocessor"></span>    c = st-&gt;codec;
+<a name="l00200"></a>00200 <span class="preprocessor">#else</span>
+<a name="l00201"></a>00201 <span class="preprocessor"></span>    c = &amp;(st-&gt;codec);
+<a name="l00202"></a>00202 <span class="preprocessor">#endif</span>
+<a name="l00203"></a>00203 <span class="preprocessor"></span>
+<a name="l00204"></a>00204 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4621</span>
+<a name="l00205"></a>00205 <span class="preprocessor"></span>    c-&gt;codec_id = av_guess_codec(oc-&gt;oformat, NULL, oc-&gt;filename, NULL, CODEC_TYPE_VIDEO);
+<a name="l00206"></a>00206 <span class="preprocessor">#else</span>
+<a name="l00207"></a>00207 <span class="preprocessor"></span>    c-&gt;codec_id = oc-&gt;oformat-&gt;video_codec;
+<a name="l00208"></a>00208 <span class="preprocessor">#endif</span>
+<a name="l00209"></a>00209 <span class="preprocessor"></span>
+<a name="l00210"></a>00210     <span class="keywordflow">if</span>(codec_id != CODEC_ID_NONE){
+<a name="l00211"></a>00211         c-&gt;codec_id = codec_id;
+<a name="l00212"></a>00212     }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214     <span class="comment">//if(codec_tag) c-&gt;codec_tag=codec_tag;</span>
+<a name="l00215"></a>00215     codec = avcodec_find_encoder(c-&gt;codec_id);
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217     c-&gt;codec_type = CODEC_TYPE_VIDEO;
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219     <span class="comment">/* put sample parameters */</span>
+<a name="l00220"></a>00220     c-&gt;bit_rate = bitrate;
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222     <span class="comment">/* resolution must be a multiple of two */</span>
+<a name="l00223"></a>00223     c-&gt;width = w;
+<a name="l00224"></a>00224     c-&gt;height = h;
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226     <span class="comment">/* time base: this is the fundamental unit of time (in seconds) in terms</span>
+<a name="l00227"></a>00227 <span class="comment">       of which frame timestamps are represented. for fixed-fps content,</span>
+<a name="l00228"></a>00228 <span class="comment">       timebase should be 1/framerate and timestamp increments should be</span>
+<a name="l00229"></a>00229 <span class="comment">       identically 1. */</span>
+<a name="l00230"></a>00230     frame_rate=(int)fps;
+<a name="l00231"></a>00231     frame_rate_base=1;
+<a name="l00232"></a>00232     <span class="keywordflow">while</span> (fabs((<span class="keywordtype">double</span>)frame_rate/frame_rate_base) - fps &gt; 0.001){
+<a name="l00233"></a>00233         frame_rate_base*=10;
+<a name="l00234"></a>00234         frame_rate=(int)(fps*frame_rate_base);
+<a name="l00235"></a>00235     }
+<a name="l00236"></a>00236 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4752</span>
+<a name="l00237"></a>00237 <span class="preprocessor"></span>    c-&gt;time_base.den = frame_rate;
+<a name="l00238"></a>00238     c-&gt;time_base.num = frame_rate_base;
+<a name="l00239"></a>00239     <span class="comment">/* adjust time base for supported framerates */</span>
+<a name="l00240"></a>00240     <span class="keywordflow">if</span>(codec &amp;&amp; codec-&gt;supported_framerates){
+<a name="l00241"></a>00241         <span class="keyword">const</span> AVRational *p= codec-&gt;supported_framerates;
+<a name="l00242"></a>00242         AVRational req = {frame_rate, frame_rate_base};
+<a name="l00243"></a>00243         <span class="keyword">const</span> AVRational *best=NULL;
+<a name="l00244"></a>00244         AVRational best_error= {INT_MAX, 1};
+<a name="l00245"></a>00245         <span class="keywordflow">for</span>(; p-&gt;den!=0; p++){
+<a name="l00246"></a>00246             AVRational error= av_sub_q(req, *p);
+<a name="l00247"></a>00247             <span class="keywordflow">if</span>(error.num &lt;0) error.num *= -1;
+<a name="l00248"></a>00248             <span class="keywordflow">if</span>(av_cmp_q(error, best_error) &lt; 0){
+<a name="l00249"></a>00249                 best_error= error;
+<a name="l00250"></a>00250                 best= p;
+<a name="l00251"></a>00251             }
+<a name="l00252"></a>00252         }
+<a name="l00253"></a>00253         c-&gt;time_base.den= best-&gt;num;
+<a name="l00254"></a>00254         c-&gt;time_base.num= best-&gt;den;
+<a name="l00255"></a>00255     }
+<a name="l00256"></a>00256 <span class="preprocessor">#else</span>
+<a name="l00257"></a>00257 <span class="preprocessor"></span>    c-&gt;frame_rate = frame_rate;
+<a name="l00258"></a>00258     c-&gt;frame_rate_base = frame_rate_base;
+<a name="l00259"></a>00259 <span class="preprocessor">#endif</span>
+<a name="l00260"></a>00260 <span class="preprocessor"></span>
+<a name="l00261"></a>00261     c-&gt;gop_size = 12; <span class="comment">/* emit one intra frame every twelve frames at most */</span>
+<a name="l00262"></a>00262     c-&gt;pix_fmt = (PixelFormat) pixel_format;
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264     <span class="keywordflow">if</span> (c-&gt;codec_id == CODEC_ID_MPEG2VIDEO) {
+<a name="l00265"></a>00265         c-&gt;max_b_frames = 2;
+<a name="l00266"></a>00266     }
+<a name="l00267"></a>00267     <span class="keywordflow">if</span> (c-&gt;codec_id == CODEC_ID_MPEG1VIDEO || c-&gt;codec_id == CODEC_ID_MSMPEG4V3){
+<a name="l00268"></a>00268         <span class="comment">/* needed to avoid using macroblocks in which some coeffs overflow</span>
+<a name="l00269"></a>00269 <span class="comment">           this doesnt happen with normal video, it just happens here as the</span>
+<a name="l00270"></a>00270 <span class="comment">           motion of the chroma plane doesnt match the luma plane */</span>
+<a name="l00271"></a>00271         <span class="comment">/* avoid FFMPEG warning &apos;clipping 1 dct coefficients...&apos; */</span>
+<a name="l00272"></a>00272         c-&gt;mb_decision=2;
+<a name="l00273"></a>00273     }
+<a name="l00274"></a>00274 <span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;0x000409</span>
+<a name="l00275"></a>00275 <span class="preprocessor"></span>    <span class="comment">// some formats want stream headers to be seperate</span>
+<a name="l00276"></a>00276     <span class="keywordflow">if</span>(oc-&gt;oformat-&gt;flags &amp; AVFMT_GLOBALHEADER)
+<a name="l00277"></a>00277     {
+<a name="l00278"></a>00278         c-&gt;flags |= CODEC_FLAG_GLOBAL_HEADER;
+<a name="l00279"></a>00279     }
+<a name="l00280"></a>00280 <span class="preprocessor">#endif</span>
+<a name="l00281"></a>00281 <span class="preprocessor"></span>
+<a name="l00282"></a>00282     <span class="keywordflow">return</span> st;
+<a name="l00283"></a>00283 }
+<a name="l00284"></a>00284 
+<a name="l00285"></a>00285 <span class="comment">// オーディオストリームを追加する</span>
+<a name="l00286"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a21c438c125ebd3b29a218ab1c3e93817">00286</a> AVStream* <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a045f2ac67e758bccf044a9d49d404c6c" title="オーディオストリームを追加する">ffmpeg_addAStream</a>(AVFormatContext *oc, <span class="keywordtype">int</span> codec_id, <span class="keywordtype">int</span> sample_rate , <span class="keywordtype">int</span> channels , <span class="keywordtype">int</span> bit_rate ){
+<a name="l00287"></a>00287     AVCodecContext *c;
+<a name="l00288"></a>00288     AVStream *st;
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290     st = av_new_stream(oc, oc-&gt;nb_streams);
+<a name="l00291"></a>00291     <span class="keywordflow">if</span> (!st) {
+<a name="l00292"></a>00292         fprintf(stderr, <span class="stringliteral">&quot;Could not alloc stream¥n&quot;</span>);
+<a name="l00293"></a>00293         <span class="keywordflow">return</span> NULL;
+<a name="l00294"></a>00294     }
+<a name="l00295"></a>00295     c = st-&gt;codec;
+<a name="l00296"></a>00296     c-&gt;codec_id = (CodecID)codec_id;
+<a name="l00297"></a>00297     c-&gt;codec_type = CODEC_TYPE_AUDIO;
+<a name="l00298"></a>00298     c-&gt;bit_rate = bit_rate;
+<a name="l00299"></a>00299 
+<a name="l00300"></a>00300     <span class="comment">/*put sample parameters*/</span>
+<a name="l00301"></a>00301    <span class="keywordflow">if</span>(c-&gt;codec_id == CODEC_ID_AMR_NB) {
+<a name="l00302"></a>00302       c-&gt;sample_rate = 8000;
+<a name="l00303"></a>00303       c-&gt;channels = 1;
+<a name="l00304"></a>00304    }<span class="keywordflow">else</span> {
+<a name="l00305"></a>00305       c-&gt;sample_rate = sample_rate;
+<a name="l00306"></a>00306       c-&gt;channels = channels;
+<a name="l00307"></a>00307    }
+<a name="l00308"></a>00308     <span class="keywordflow">return</span> st;
+<a name="l00309"></a>00309 }
+<a name="l00310"></a>00310 
+<a name="l00315"></a><a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ad79ef63c255bb6c0757d579a54e3fe5f">00315</a> <span class="keyword">static</span> AVFrame * <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ad79ef63c255bb6c0757d579a54e3fe5f">icv_alloc_picture_FFMPEG</a>(<span class="keywordtype">int</span> pix_fmt, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">bool</span> alloc)
+<a name="l00316"></a>00316 {
+<a name="l00317"></a>00317     AVFrame * picture;
+<a name="l00318"></a>00318     uint8_t * picture_buf;
+<a name="l00319"></a>00319     <span class="keywordtype">int</span> size;
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321     picture = avcodec_alloc_frame();
+<a name="l00322"></a>00322     <span class="keywordflow">if</span> (!picture)
+<a name="l00323"></a>00323         <span class="keywordflow">return</span> NULL;
+<a name="l00324"></a>00324     size = avpicture_get_size( (PixelFormat) pix_fmt, width, height);
+<a name="l00325"></a>00325     <span class="keywordflow">if</span>(alloc){
+<a name="l00326"></a>00326         picture_buf = (uint8_t *) <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>[size];
+<a name="l00327"></a>00327         <span class="keywordflow">if</span> (!picture_buf)
+<a name="l00328"></a>00328         {
+<a name="l00329"></a>00329             av_free(picture);
+<a name="l00330"></a>00330             <span class="keywordflow">return</span> NULL;
+<a name="l00331"></a>00331         }
+<a name="l00332"></a>00332         avpicture_fill((AVPicture *)picture, picture_buf,
+<a name="l00333"></a>00333                 (PixelFormat) pix_fmt, width, height);
+<a name="l00334"></a>00334     } <span class="keywordflow">else</span> {
+<a name="l00335"></a>00335     }
+<a name="l00336"></a>00336     <span class="keywordflow">return</span> picture;
+<a name="l00337"></a>00337 }
+<a name="l00338"></a>00338 
+<a name="l00339"></a><a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a05689e2c1016c964561820c1e7e4d680">00339</a> <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a05689e2c1016c964561820c1e7e4d680">icv_av_write_frame_FFMPEG</a>( AVFormatContext * oc, AVStream * video_st, uint8_t * outbuf, uint32_t outbuf_size, AVFrame * picture ){
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00342"></a>00342 <span class="preprocessor"></span>    AVCodecContext * c = video_st-&gt;codec;
+<a name="l00343"></a>00343 <span class="preprocessor">#else</span>
+<a name="l00344"></a>00344 <span class="preprocessor"></span>    AVCodecContext * c = &amp;(video_st-&gt;codec);
+<a name="l00345"></a>00345 <span class="preprocessor">#endif</span>
+<a name="l00346"></a>00346 <span class="preprocessor"></span>    <span class="keywordtype">int</span> out_size;
+<a name="l00347"></a>00347     <span class="keywordtype">int</span> ret;
+<a name="l00348"></a>00348 
+<a name="l00349"></a>00349     <span class="keywordflow">if</span> (oc-&gt;oformat-&gt;flags &amp; AVFMT_RAWPICTURE) {
+<a name="l00350"></a>00350         <span class="comment">/* raw video case. The API will change slightly in the near</span>
+<a name="l00351"></a>00351 <span class="comment">           futur for that */</span>
+<a name="l00352"></a>00352         AVPacket pkt;
+<a name="l00353"></a>00353         av_init_packet(&amp;pkt);
+<a name="l00354"></a>00354 
+<a name="l00355"></a>00355         pkt.flags |= PKT_FLAG_KEY;
+<a name="l00356"></a>00356         pkt.stream_index= video_st-&gt;index;
+<a name="l00357"></a>00357         pkt.data= (uint8_t *)picture;
+<a name="l00358"></a>00358         pkt.size= <span class="keyword">sizeof</span>(AVPicture);
+<a name="l00359"></a>00359 
+<a name="l00360"></a>00360         ret = av_write_frame(oc, &amp;pkt);
+<a name="l00361"></a>00361     } <span class="keywordflow">else</span> {
+<a name="l00362"></a>00362         <span class="comment">/* encode the image */</span>
+<a name="l00363"></a>00363         out_size = avcodec_encode_video(c, outbuf, outbuf_size, picture);
+<a name="l00364"></a>00364         <span class="comment">/* if zero size, it means the image was buffered */</span>
+<a name="l00365"></a>00365         <span class="keywordflow">if</span> (out_size &gt; 0) {
+<a name="l00366"></a>00366             AVPacket pkt;
+<a name="l00367"></a>00367             av_init_packet(&amp;pkt);
+<a name="l00368"></a>00368 
+<a name="l00369"></a>00369 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4752</span>
+<a name="l00370"></a>00370 <span class="preprocessor"></span>            pkt.pts = av_rescale_q(c-&gt;coded_frame-&gt;pts, c-&gt;time_base, video_st-&gt;time_base);
+<a name="l00371"></a>00371 <span class="preprocessor">#else</span>
+<a name="l00372"></a>00372 <span class="preprocessor"></span>            pkt.pts = c-&gt;coded_frame-&gt;pts;
+<a name="l00373"></a>00373 <span class="preprocessor">#endif</span>
+<a name="l00374"></a>00374 <span class="preprocessor"></span>            <span class="keywordflow">if</span>(c-&gt;coded_frame-&gt;key_frame)
+<a name="l00375"></a>00375                 pkt.flags |= PKT_FLAG_KEY;
+<a name="l00376"></a>00376             pkt.stream_index= video_st-&gt;index;
+<a name="l00377"></a>00377             pkt.data= outbuf;
+<a name="l00378"></a>00378             pkt.size= out_size;
+<a name="l00379"></a>00379 
+<a name="l00380"></a>00380             <span class="comment">/* write the compressed frame in the media file */</span>
+<a name="l00381"></a>00381             ret = av_write_frame(oc, &amp;pkt);
+<a name="l00382"></a>00382         } <span class="keywordflow">else</span> {
+<a name="l00383"></a>00383             ret = 0;
+<a name="l00384"></a>00384         }
+<a name="l00385"></a>00385     }
+<a name="l00386"></a>00386     <span class="keywordflow">if</span> (ret != 0) {
+<a name="l00387"></a>00387         <span class="comment">// error</span>
+<a name="l00388"></a>00388         <span class="keywordflow">return</span> -1;
+<a name="l00389"></a>00389     }
+<a name="l00390"></a>00390 
+<a name="l00391"></a>00391     <span class="keywordflow">return</span> 0;
+<a name="l00392"></a>00392 }
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394 
+<a name="l00395"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a73a902e0b7b1fec385e045b0f56cb499">00395</a> <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#aa3cab4f0b3a43eac282abcbeb99c0dd9">ffmpeginit</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">char</span>* pFilename , CodecID vcodec_id , <span class="keywordtype">long</span> width , <span class="keywordtype">long</span> height , <span class="keywordtype">double</span> fps , <span class="keywordtype">int</span> vbitrate, CodecID acodec_id , <span class="keywordtype">int</span> sample_rate , <span class="keywordtype">int</span> channels , <span class="keywordtype">int</span> audio_bit_rate ){
+<a name="l00396"></a>00396     <span class="keywordflow">if</span>( !(pffm &amp;&amp; pFilename) ) <span class="keywordflow">return</span> -1;
+<a name="l00397"></a>00397 <span class="comment">//  unsigned int codec_tag = MKTAG(&apos;X&apos;, &apos;V&apos;, &apos;I&apos;, &apos;D&apos;);</span>
+<a name="l00398"></a>00398 <span class="comment">//  unsigned int codec_tag = MKTAG(&apos;D&apos;, &apos;X&apos;, &apos;5&apos;, &apos;0&apos;);</span>
+<a name="l00399"></a>00399     
+<a name="l00400"></a>00400     <span class="keywordtype">int</span> err, codec_pix_fmt;
+<a name="l00401"></a>00401     AVCodec         *pACodec;
+<a name="l00402"></a>00402 
+<a name="l00403"></a>00403     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a> = guess_format(NULL, pFilename, NULL);
+<a name="l00404"></a>00404     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a> == NULL )
+<a name="l00405"></a>00405         <span class="keywordflow">return</span> -1;
+<a name="l00406"></a>00406     printf( <span class="stringliteral">&quot;Name       :%s¥n&quot;</span> , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;name );
+<a name="l00407"></a>00407     printf( <span class="stringliteral">&quot;LongName   :%s¥n&quot;</span> , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;long_name );
+<a name="l00408"></a>00408     printf( <span class="stringliteral">&quot;MimeType   :%s¥n&quot;</span> , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;mime_type );
+<a name="l00409"></a>00409     printf( <span class="stringliteral">&quot;extensions :%s¥n&quot;</span> , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;extensions );
+<a name="l00410"></a>00410     
+<a name="l00411"></a>00411     <span class="keywordtype">int</span> input_pix_fmt = PIX_FMT_BGR24;
+<a name="l00412"></a>00412     
+<a name="l00413"></a>00413     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> = av_alloc_format_context();
+<a name="l00414"></a>00414     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;oformat = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>;
+<a name="l00415"></a>00415 <span class="preprocessor">#if _MSC_VER &gt;= 1400</span>
+<a name="l00416"></a>00416 <span class="preprocessor"></span>    sprintf_s(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;filename, <span class="keyword">sizeof</span>(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;filename), <span class="stringliteral">&quot;%s&quot;</span>, pFilename);
+<a name="l00417"></a>00417 <span class="preprocessor">#else</span>
+<a name="l00418"></a>00418 <span class="preprocessor"></span>    sprintf( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;filename, <span class="stringliteral">&quot;%s&quot;</span>, pFilename);
+<a name="l00419"></a>00419 <span class="preprocessor">#endif</span>
+<a name="l00420"></a>00420 <span class="preprocessor"></span>    
+<a name="l00421"></a>00421     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;max_delay = (int)(0.7*AV_TIME_BASE);
+<a name="l00422"></a>00422     
+<a name="l00423"></a>00423     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a> = avcodec_alloc_context();
+<a name="l00424"></a>00424     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a> == NULL ){
+<a name="l00425"></a>00425         <span class="keywordflow">return</span> -1;
+<a name="l00426"></a>00426     }
+<a name="l00427"></a>00427     
+<a name="l00428"></a>00428     pACodec = avcodec_find_encoder( CODEC_ID_PCM_S16LE );
+<a name="l00429"></a>00429     <span class="keywordflow">if</span>(pACodec == NULL)
+<a name="l00430"></a>00430         <span class="keywordflow">return</span> -1; <span class="comment">// Codec not found</span>
+<a name="l00431"></a>00431     
+<a name="l00432"></a>00432     <span class="comment">// コーディックを開く</span>
+<a name="l00433"></a>00433     <span class="keywordflow">if</span>(avcodec_open(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>, pACodec)&lt;0)
+<a name="l00434"></a>00434         <span class="keywordflow">return</span> -1; <span class="comment">// Could not open codec</span>
+<a name="l00435"></a>00435     
+<a name="l00436"></a>00436     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;sample_rate = sample_rate;
+<a name="l00437"></a>00437     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;channels    = channels;
+<a name="l00438"></a>00438     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;sample_fmt  = SAMPLE_FMT_S16;
+<a name="l00439"></a>00439     
+<a name="l00440"></a>00440     <span class="comment">// コーディックを取得する</span>
+<a name="l00441"></a>00441     <span class="keywordflow">if</span>( acodec_id != CODEC_ID_NONE )
+<a name="l00442"></a>00442         pACodec = avcodec_find_encoder( (CodecID)acodec_id );
+<a name="l00443"></a>00443     <span class="keywordflow">else</span>
+<a name="l00444"></a>00444         pACodec = avcodec_find_encoder( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;audio_codec );
+<a name="l00445"></a>00445     <span class="keywordflow">if</span>(pACodec == NULL)
+<a name="l00446"></a>00446         <span class="keywordflow">return</span> -1; <span class="comment">// Codec not found</span>
+<a name="l00447"></a>00447     
+<a name="l00448"></a>00448     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a> = <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a045f2ac67e758bccf044a9d49d404c6c" title="オーディオストリームを追加する">ffmpeg_addAStream</a>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;audio_codec , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;sample_rate  , pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;channels , audio_bit_rate );
+<a name="l00449"></a>00449     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a> = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a>-&gt;codec;
+<a name="l00450"></a>00450     <span class="comment">// コーディックを開く</span>
+<a name="l00451"></a>00451     <span class="keywordflow">if</span>(avcodec_open(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>, pACodec)&lt;0)
+<a name="l00452"></a>00452         <span class="keywordflow">return</span> -1; <span class="comment">// Could not open codec</span>
+<a name="l00453"></a>00453     
+<a name="l00454"></a>00454     
+<a name="l00455"></a>00455     <span class="comment">/* Lookup codec_id for given fourcc */</span>
+<a name="l00456"></a>00456     <span class="comment">/*</span>
+<a name="l00457"></a>00457 <span class="comment">#if LIBAVCODEC_VERSION_INT&lt;((51&lt;&lt;16)+(49&lt;&lt;8)+0)</span>
+<a name="l00458"></a>00458 <span class="comment">        if( (vcodec_id = codec_get_bmp_id( codec_tag )) == CODEC_ID_NONE ){</span>
+<a name="l00459"></a>00459 <span class="comment">            // error</span>
+<a name="l00460"></a>00460 <span class="comment">            pffm = pffm;</span>
+<a name="l00461"></a>00461 <span class="comment">            return -1;</span>
+<a name="l00462"></a>00462 <span class="comment">        }</span>
+<a name="l00463"></a>00463 <span class="comment">#else</span>
+<a name="l00464"></a>00464 <span class="comment">    {</span>
+<a name="l00465"></a>00465 <span class="comment">    const struct AVCodecTag * tags[] = { codec_bmp_tags, NULL};</span>
+<a name="l00466"></a>00466 <span class="comment">        if( (vcodec_id = av_codec_get_id(tags, codec_tag )) == CODEC_ID_NONE ){</span>
+<a name="l00467"></a>00467 <span class="comment">            // error</span>
+<a name="l00468"></a>00468 <span class="comment">            pffm = pffm;</span>
+<a name="l00469"></a>00469 <span class="comment">            return -1;</span>
+<a name="l00470"></a>00470 <span class="comment">        }</span>
+<a name="l00471"></a>00471 <span class="comment">    }</span>
+<a name="l00472"></a>00472 <span class="comment">#endif*/</span>
+<a name="l00473"></a>00473     <span class="keywordflow">if</span>( vcodec_id == CODEC_ID_NONE )
+<a name="l00474"></a>00474         vcodec_id = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;video_codec;
+<a name="l00475"></a>00475     
+<a name="l00476"></a>00476     <span class="keywordflow">switch</span> (vcodec_id) {
+<a name="l00477"></a>00477 <span class="preprocessor">#if LIBAVCODEC_VERSION_INT&gt;((50&lt;&lt;16)+(1&lt;&lt;8)+0)</span>
+<a name="l00478"></a>00478 <span class="preprocessor"></span>    <span class="keywordflow">case</span> CODEC_ID_JPEGLS:
+<a name="l00479"></a>00479         <span class="comment">// BGR24 or GRAY8 depending on is_color...</span>
+<a name="l00480"></a>00480         codec_pix_fmt = input_pix_fmt;
+<a name="l00481"></a>00481         <span class="keywordflow">break</span>;
+<a name="l00482"></a>00482 <span class="preprocessor">#endif</span>
+<a name="l00483"></a>00483 <span class="preprocessor"></span>    <span class="keywordflow">case</span> CODEC_ID_HUFFYUV:
+<a name="l00484"></a>00484         codec_pix_fmt = PIX_FMT_YUV422P;
+<a name="l00485"></a>00485         <span class="keywordflow">break</span>;
+<a name="l00486"></a>00486     <span class="keywordflow">case</span> CODEC_ID_MJPEG:
+<a name="l00487"></a>00487     <span class="keywordflow">case</span> CODEC_ID_LJPEG:
+<a name="l00488"></a>00488       codec_pix_fmt = PIX_FMT_YUVJ420P;
+<a name="l00489"></a>00489       vbitrate *= 2;
+<a name="l00490"></a>00490       <span class="keywordflow">break</span>;
+<a name="l00491"></a>00491     <span class="keywordflow">case</span> CODEC_ID_RAWVIDEO:
+<a name="l00492"></a>00492     <span class="keywordflow">default</span>:
+<a name="l00493"></a>00493         <span class="comment">// good for lossy formats, MPEG, etc.</span>
+<a name="l00494"></a>00494         codec_pix_fmt = PIX_FMT_YUV420P;
+<a name="l00495"></a>00495         <span class="keywordflow">break</span>;
+<a name="l00496"></a>00496     }
+<a name="l00497"></a>00497     
+<a name="l00498"></a>00498     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a> = <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ac4ad1d87b5ed402ce65b2c04795027df" title="ビデオストリームを追加する">ffmpeg_addVStream</a>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> , vcodec_id , width , height , vbitrate , fps , codec_pix_fmt );
+<a name="l00499"></a>00499     
+<a name="l00500"></a>00500     <span class="keywordflow">if</span> (av_set_parameters(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>, NULL) &lt; 0) {
+<a name="l00501"></a>00501         <span class="comment">// error</span>
+<a name="l00502"></a>00502         <span class="keywordflow">return</span> -1;
+<a name="l00503"></a>00503     }
+<a name="l00504"></a>00504     
+<a name="l00505"></a>00505     dump_format(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>, 0, pFilename, 1);
+<a name="l00506"></a>00506     
+<a name="l00507"></a>00507     <span class="keywordflow">if</span> (!pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>){
+<a name="l00508"></a>00508         <span class="comment">// error</span>
+<a name="l00509"></a>00509         <span class="keywordflow">return</span> -1;
+<a name="l00510"></a>00510     }
+<a name="l00511"></a>00511     
+<a name="l00512"></a>00512     AVCodec *vcodec;
+<a name="l00513"></a>00513     AVCodecContext *vc;
+<a name="l00514"></a>00514 
+<a name="l00515"></a>00515 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00516"></a>00516 <span class="preprocessor"></span>    vc = (pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec);
+<a name="l00517"></a>00517 <span class="preprocessor">#else</span>
+<a name="l00518"></a>00518 <span class="preprocessor"></span>    vc = &amp;(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec);
+<a name="l00519"></a>00519 <span class="preprocessor">#endif</span>
+<a name="l00520"></a>00520 <span class="preprocessor"></span>
+<a name="l00521"></a>00521 <span class="comment">//    vc-&gt;codec_tag = codec_tag;</span>
+<a name="l00522"></a>00522     <span class="comment">/* find the video encoder */</span>
+<a name="l00523"></a>00523     vcodec = avcodec_find_encoder(vc-&gt;codec_id);
+<a name="l00524"></a>00524     <span class="keywordflow">if</span> (!vcodec) {
+<a name="l00525"></a>00525         <span class="comment">// error</span>
+<a name="l00526"></a>00526         <span class="keywordflow">return</span> -1;
+<a name="l00527"></a>00527     }
+<a name="l00528"></a>00528 
+<a name="l00529"></a>00529     <span class="comment">/* open the codec */</span>
+<a name="l00530"></a>00530     <span class="keywordflow">if</span> ( (err=avcodec_open(vc, vcodec)) &lt; 0) {
+<a name="l00531"></a>00531         <span class="comment">// error</span>
+<a name="l00532"></a>00532         <span class="keywordflow">return</span> -1;
+<a name="l00533"></a>00533     }
+<a name="l00534"></a>00534 
+<a name="l00535"></a>00535     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a> = NULL;
+<a name="l00536"></a>00536 
+<a name="l00537"></a>00537     <span class="keywordflow">if</span> (!(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;oformat-&gt;flags &amp; AVFMT_RAWPICTURE)) {
+<a name="l00538"></a>00538         <span class="comment">/* allocate output buffer */</span>
+<a name="l00539"></a>00539         <span class="comment">/* assume we will never get codec output with more than 4 bytes per pixel... */</span>
+<a name="l00540"></a>00540         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">m_OutBufSize</a> = width*height*4;
+<a name="l00541"></a>00541         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a> = (uint8_t *) av_malloc(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">m_OutBufSize</a>);
+<a name="l00542"></a>00542     }
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544     <span class="keywordtype">bool</span> need_color_convert;
+<a name="l00545"></a>00545     need_color_convert = (vc-&gt;pix_fmt != input_pix_fmt);
+<a name="l00546"></a>00546 
+<a name="l00547"></a>00547     <span class="comment">/* allocate the encoded raw picture */</span>
+<a name="l00548"></a>00548     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a> = <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ad79ef63c255bb6c0757d579a54e3fe5f">icv_alloc_picture_FFMPEG</a>(vc-&gt;pix_fmt, vc-&gt;width, vc-&gt;height, need_color_convert);
+<a name="l00549"></a>00549     <span class="keywordflow">if</span> (!pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>) {
+<a name="l00550"></a>00550         <span class="comment">// error</span>
+<a name="l00551"></a>00551         <span class="keywordflow">return</span> -1;
+<a name="l00552"></a>00552     }
+<a name="l00553"></a>00553 
+<a name="l00554"></a>00554     <span class="comment">/* if the output format is not our input format, then a temporary</span>
+<a name="l00555"></a>00555 <span class="comment">       picture of the input format is needed too. It is then converted</span>
+<a name="l00556"></a>00556 <span class="comment">       to the required output format */</span>
+<a name="l00557"></a>00557     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a> = NULL;
+<a name="l00558"></a>00558     <span class="keywordflow">if</span> ( need_color_convert ) {
+<a name="l00559"></a>00559         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a> = <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ad79ef63c255bb6c0757d579a54e3fe5f">icv_alloc_picture_FFMPEG</a>(input_pix_fmt, vc-&gt;width, vc-&gt;height, <span class="keyword">false</span>);
+<a name="l00560"></a>00560         <span class="keywordflow">if</span> (!pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>) {
+<a name="l00561"></a>00561             <span class="comment">// error</span>
+<a name="l00562"></a>00562             <span class="keywordflow">return</span> -1;
+<a name="l00563"></a>00563         }
+<a name="l00564"></a>00564     }
+<a name="l00565"></a>00565 
+<a name="l00566"></a>00566     <span class="comment">/* open the output file, if needed */</span>
+<a name="l00567"></a>00567     <span class="keywordflow">if</span> (!(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;flags &amp; AVFMT_NOFILE)) {
+<a name="l00568"></a>00568         <span class="keywordflow">if</span> (url_fopen(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;pb, pFilename, URL_WRONLY) &lt; 0) {
+<a name="l00569"></a>00569             <span class="comment">// error</span>
+<a name="l00570"></a>00570             <span class="keywordflow">return</span> -1;
+<a name="l00571"></a>00571         }
+<a name="l00572"></a>00572     }
+<a name="l00573"></a>00573 
+<a name="l00574"></a>00574     <span class="comment">/* write the stream header, if any */</span>
+<a name="l00575"></a>00575     av_write_header( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> );
+<a name="l00576"></a>00576     
+<a name="l00577"></a>00577     av_init_packet(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>);
+<a name="l00578"></a>00578     
+<a name="l00579"></a>00579     
+<a name="l00580"></a>00580 <span class="preprocessor">    #define MAX_AUDIO_PACKET_SIZE (512 * 1024)</span>
+<a name="l00581"></a>00581 <span class="preprocessor"></span>    pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a> = av_fifo_alloc(2 * <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5022dc52e9bda86ed266bb7d4c74271b">MAX_AUDIO_PACKET_SIZE</a>);
+<a name="l00582"></a>00582     
+<a name="l00583"></a>00583     <span class="comment">// バッファを確保</span>
+<a name="l00584"></a>00584     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a> = (uint8_t*)av_malloc(2*<a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5022dc52e9bda86ed266bb7d4c74271b">MAX_AUDIO_PACKET_SIZE</a>);
+<a name="l00585"></a>00585     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a> = (uint8_t*)av_malloc(4*<a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5022dc52e9bda86ed266bb7d4c74271b">MAX_AUDIO_PACKET_SIZE</a>);
+<a name="l00586"></a>00586     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">buffer_resample</a> = (uint8_t*)av_malloc(2*<a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5022dc52e9bda86ed266bb7d4c74271b">MAX_AUDIO_PACKET_SIZE</a>);
+<a name="l00587"></a>00587 
+<a name="l00588"></a>00588     
+<a name="l00589"></a>00589 
+<a name="l00590"></a>00590     <span class="comment">// サンプリングレートまたはチャンネル数が違う場合は、リサンプルする</span>
+<a name="l00591"></a>00591     <span class="keywordflow">if</span>(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;sample_rate != pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;sample_rate || pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;channels != pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;channels)
+<a name="l00592"></a>00592         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">m_rs</a> = audio_resample_init(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;channels,pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;channels, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;sample_rate, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a>-&gt;sample_rate);
+<a name="l00593"></a>00593 
+<a name="l00594"></a>00594     <span class="keywordflow">return</span> 0;
+<a name="l00595"></a>00595 }
+<a name="l00596"></a>00596 
+<a name="l00597"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#ae9d1da9673451b8a7746f1b2cff0fd61">00597</a> <span class="keywordtype">void</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#ae9d1da9673451b8a7746f1b2cff0fd61">ffmpegquit</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm ){
+<a name="l00598"></a>00598     <span class="keywordflow">if</span>( !(pffm) ) <span class="keywordflow">return</span>;
+<a name="l00599"></a>00599     
+<a name="l00600"></a>00600     av_write_trailer(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>);
+<a name="l00601"></a>00601     
+<a name="l00602"></a>00602     <span class="comment">// ここから解放処理</span>
+<a name="l00603"></a>00603     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">m_rs</a> ){
+<a name="l00604"></a>00604         audio_resample_close( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">m_rs</a> );
+<a name="l00605"></a>00605         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ac3ea17027a655c09a67c106ad7bc3f8a">m_rs</a> = NULL;
+<a name="l00606"></a>00606     }
+<a name="l00607"></a>00607     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">buffer_resample</a> ){
+<a name="l00608"></a>00608         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">buffer_resample</a>);
+<a name="l00609"></a>00609         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a98c93958cfcc84f00b3eb1022af6c6c3">buffer_resample</a> = NULL;
+<a name="l00610"></a>00610     }
+<a name="l00611"></a>00611     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a> ){
+<a name="l00612"></a>00612         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a>);
+<a name="l00613"></a>00613         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a> = NULL;
+<a name="l00614"></a>00614     }
+<a name="l00615"></a>00615     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a> ){
+<a name="l00616"></a>00616         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a>);
+<a name="l00617"></a>00617         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a> = NULL;
+<a name="l00618"></a>00618     }
+<a name="l00619"></a>00619     
+<a name="l00620"></a>00620     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a> ){
+<a name="l00621"></a>00621         av_fifo_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a>);
+<a name="l00622"></a>00622         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a> = NULL;
+<a name="l00623"></a>00623     }
+<a name="l00624"></a>00624     
+<a name="l00625"></a>00625     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a> ){
+<a name="l00626"></a>00626         avcodec_close( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a> );
+<a name="l00627"></a>00627         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#ab257a594205702c2afa40028d7e77036">m_pDCodecCtx</a> = NULL;
+<a name="l00628"></a>00628     }
+<a name="l00629"></a>00629     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a> ){
+<a name="l00630"></a>00630         avcodec_close( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a> );
+<a name="l00631"></a>00631         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a> = NULL;
+<a name="l00632"></a>00632     }
+<a name="l00633"></a>00633     
+<a name="l00634"></a>00634     
+<a name="l00635"></a>00635     <span class="keywordflow">if</span> (pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>) {
+<a name="l00636"></a>00636 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00637"></a>00637 <span class="preprocessor"></span>        <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec-&gt;pix_fmt != PIX_FMT_BGR24){
+<a name="l00638"></a>00638 <span class="preprocessor">#else</span>
+<a name="l00639"></a>00639 <span class="preprocessor"></span>        <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec.pix_fmt != PIX_FMT_BGR24){
+<a name="l00640"></a>00640 <span class="preprocessor">#endif</span>
+<a name="l00641"></a>00641 <span class="preprocessor"></span>            <span class="keyword">delete</span> [] pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>-&gt;data[0];
+<a name="l00642"></a>00642         }
+<a name="l00643"></a>00643         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>);
+<a name="l00644"></a>00644         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a> = NULL;
+<a name="l00645"></a>00645     }
+<a name="l00646"></a>00646     
+<a name="l00647"></a>00647     <span class="keywordflow">if</span> (pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>) {
+<a name="l00648"></a>00648         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>);
+<a name="l00649"></a>00649         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a> = NULL;
+<a name="l00650"></a>00650     }
+<a name="l00651"></a>00651     <span class="comment">//</span>
+<a name="l00652"></a>00652     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a> ){
+<a name="l00653"></a>00653         av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a>);
+<a name="l00654"></a>00654         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a> = NULL;
+<a name="l00655"></a>00655         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">m_OutBufSize</a> = 0;
+<a name="l00656"></a>00656     }
+<a name="l00657"></a>00657 
+<a name="l00658"></a>00658 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00659"></a>00659 <span class="preprocessor"></span>    avcodec_close(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec);
+<a name="l00660"></a>00660     avcodec_close(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a>-&gt;codec);
+<a name="l00661"></a>00661 <span class="preprocessor">#else</span>
+<a name="l00662"></a>00662 <span class="preprocessor"></span>    avcodec_close(&amp;(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec));
+<a name="l00663"></a>00663     avcodec_close(&amp;(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a>-&gt;codec));
+<a name="l00664"></a>00664 <span class="preprocessor">#endif</span>
+<a name="l00665"></a>00665 <span class="preprocessor"></span>
+<a name="l00666"></a>00666     av_free(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a> );
+<a name="l00667"></a>00667 
+<a name="l00668"></a>00668     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a> ){
+<a name="l00669"></a>00669         sws_freeContext( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a> );
+<a name="l00670"></a>00670         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a> = NULL;
+<a name="l00671"></a>00671     }
+<a name="l00672"></a>00672     
+<a name="l00673"></a>00673     <span class="keywordflow">if</span>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> ){
+<a name="l00674"></a>00674         <span class="comment">/* free the streams */</span>
+<a name="l00675"></a>00675         <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;nb_streams; i++) {
+<a name="l00676"></a>00676             av_freep(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;streams[i]-&gt;codec);
+<a name="l00677"></a>00677             av_freep(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;streams[i]);
+<a name="l00678"></a>00678         }
+<a name="l00679"></a>00679         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a> = NULL;
+<a name="l00680"></a>00680         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a> = NULL;
+<a name="l00681"></a>00681         
+<a name="l00682"></a>00682         <span class="keywordflow">if</span> (!(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#acd2a68d57c9be3f39f753083d1bcfc9a">m_pFmt</a>-&gt;flags &amp; AVFMT_NOFILE)) {
+<a name="l00683"></a>00683             <span class="comment">/* close the output file */</span>
+<a name="l00684"></a>00684 <span class="preprocessor">#if LIBAVCODEC_VERSION_INT &gt;= ((51&lt;&lt;16)+(49&lt;&lt;8)+0)</span>
+<a name="l00685"></a>00685 <span class="preprocessor"></span>            url_fclose(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;pb);
+<a name="l00686"></a>00686 <span class="preprocessor">#else</span>
+<a name="l00687"></a>00687 <span class="preprocessor"></span>            url_fclose(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;pb);
+<a name="l00688"></a>00688 <span class="preprocessor">#endif</span>
+<a name="l00689"></a>00689 <span class="preprocessor"></span>            pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>-&gt;pb = NULL;
+<a name="l00690"></a>00690 
+<a name="l00691"></a>00691         }
+<a name="l00692"></a>00692 
+<a name="l00693"></a>00693         av_free( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> );
+<a name="l00694"></a>00694         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a> = NULL;
+<a name="l00695"></a>00695     }
+<a name="l00696"></a>00696     
+<a name="l00697"></a>00697 }
+<a name="l00698"></a>00698 
+<a name="l00699"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a1b0ac21e5b4d8331b3c02c5005504e7c">00699</a> <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a1b0ac21e5b4d8331b3c02c5005504e7c">ffmpeg_addVFrame</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *pBuf , <span class="keywordtype">long</span> width , <span class="keywordtype">long</span> height ){
+<a name="l00700"></a>00700     <span class="keywordflow">if</span>( !(pffm) ) <span class="keywordflow">return</span> -1;
+<a name="l00701"></a>00701     
+<a name="l00702"></a>00702     <span class="comment">//</span>
+<a name="l00703"></a>00703 <span class="preprocessor">#if LIBAVFORMAT_BUILD &gt; 4628</span>
+<a name="l00704"></a>00704 <span class="preprocessor"></span>    AVCodecContext *c = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec;
+<a name="l00705"></a>00705 <span class="preprocessor">#else</span>
+<a name="l00706"></a>00706 <span class="preprocessor"></span>    AVCodecContext *c = &amp;(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>-&gt;codec);
+<a name="l00707"></a>00707 <span class="preprocessor">#endif</span>
+<a name="l00708"></a>00708 <span class="preprocessor"></span>    
+<a name="l00709"></a>00709     c = c;
+<a name="l00710"></a>00710     <span class="keywordflow">if</span> ( c-&gt;pix_fmt != PIX_FMT_BGR24 ) {
+<a name="l00711"></a>00711         <span class="comment">// 画像形式を変換する必要がある</span>
+<a name="l00712"></a>00712         avpicture_fill((AVPicture *)pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a> , (uint8_t *) pBuf ,
+<a name="l00713"></a>00713             (PixelFormat)PIX_FMT_BGR24, width, height);
+<a name="l00714"></a>00714         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a> = sws_getContext(width,
+<a name="l00715"></a>00715                      height,
+<a name="l00716"></a>00716                      PIX_FMT_BGR24,
+<a name="l00717"></a>00717                      c-&gt;width,
+<a name="l00718"></a>00718                      c-&gt;height,
+<a name="l00719"></a>00719                      c-&gt;pix_fmt,
+<a name="l00720"></a>00720                      SWS_BICUBIC,
+<a name="l00721"></a>00721                      NULL, NULL, NULL);
+<a name="l00722"></a>00722 
+<a name="l00723"></a>00723 <span class="preprocessor">#if _MSC_VER &gt;= 1400</span>
+<a name="l00724"></a>00724 <span class="preprocessor"></span>            <span class="keywordflow">if</span> ( sws_scale(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>-&gt;data,
+<a name="l00725"></a>00725                      pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>-&gt;linesize, 0,
+<a name="l00726"></a>00726                      height,
+<a name="l00727"></a>00727                      pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>-&gt;data, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>-&gt;linesize) &lt; 0 )
+<a name="l00728"></a>00728 <span class="preprocessor">#else</span>
+<a name="l00729"></a>00729 <span class="preprocessor"></span>            <span class="keywordflow">if</span> ( sws_scale(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a>, (<span class="keyword">const</span> uint8_t**)pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>-&gt;data,
+<a name="l00730"></a>00730                      pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#aeb65394aa2f3cc1d98f93f74a7979bea">m_pInputPicture</a>-&gt;linesize, 0,
+<a name="l00731"></a>00731                      height,
+<a name="l00732"></a>00732                      pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>-&gt;data, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>-&gt;linesize) &lt; 0 )
+<a name="l00733"></a>00733 <span class="preprocessor">#endif</span>
+<a name="l00734"></a>00734 <span class="preprocessor"></span>            {
+<a name="l00735"></a>00735                 <span class="comment">// error</span>
+<a name="l00736"></a>00736                 <a class="code" href="../../d2/d00/__tprintd_8h.html#aab39a106e262abd037a501ef807a65e5">_tprintd</a>( _T(<span class="stringliteral">&quot;Error sws_scale¥n&quot;</span>) );
+<a name="l00737"></a>00737             }
+<a name="l00738"></a>00738         sws_freeContext(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a>);
+<a name="l00739"></a>00739         pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab7cb66bf20168b0812017321d00635a1">m_img_convert_ctx</a> = NULL;
+<a name="l00740"></a>00740 
+<a name="l00741"></a>00741     }<span class="keywordflow">else</span>{
+<a name="l00742"></a>00742         avpicture_fill((AVPicture *)pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>, (uint8_t *) pBuf,
+<a name="l00743"></a>00743                 (PixelFormat)PIX_FMT_BGR24, width, height);
+<a name="l00744"></a>00744     }
+<a name="l00745"></a>00745     
+<a name="l00746"></a>00746     <span class="keywordtype">bool</span> ret = <span class="keyword">false</span>;
+<a name="l00747"></a>00747     ret = <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a05689e2c1016c964561820c1e7e4d680">icv_av_write_frame_FFMPEG</a>( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#afdaf49fa90a686d5c86decd0e0664d7e">m_pVStream</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a207c5bb97174b6903c5acfe737c41d02">m_pOutBuf</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6e0fdb6c563493d67841bb45844066f4">m_OutBufSize</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a4d2e98a6d3c8d1fe0da56eac18a85cae">m_Video</a>.<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ad51e19cf54e66b80461d243134fcd2d7">m_pPicture</a>) &gt;= 0;
+<a name="l00748"></a>00748     
+<a name="l00749"></a>00749     <span class="keywordflow">return</span> 0;
+<a name="l00750"></a>00750     <span class="comment">//</span>
+<a name="l00751"></a>00751 }
+<a name="l00752"></a>00752 
+<a name="l00753"></a><a class="code" href="../../dd/de6/CAVISAVE_8h.html#a5b4624b6cc54538e3b4a889347eea06f">00753</a> <span class="keywordtype">int</span> <a class="code" href="../../d1/d06/CAVISAVE_8cpp.html#a5b4624b6cc54538e3b4a889347eea06f">ffmpeg_addAFrame</a>( <a class="code" href="../../d9/dae/struct__ffmpeg__struct.html">_ffmpeg_struct</a>* pffm , <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *pBuf , <span class="keywordtype">size_t</span> bufsize ){
+<a name="l00754"></a>00754         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> samples_size= 0;
+<a name="l00755"></a>00755         <span class="comment">// Is this a packet from the audio stream?</span>
+<a name="l00756"></a>00756 <span class="comment">//          samples = (short *) av_fast_realloc(samples, &amp;samples_size, FFMAX(blocksize, AVCODEC_MAX_AUDIO_FRAME_SIZE)); //192000</span>
+<a name="l00757"></a>00757 <span class="comment">//          int audiobufsize = AVCODEC_MAX_AUDIO_FRAME_SIZE*2;</span>
+<a name="l00758"></a>00758 <span class="comment">//          avcodec_decode_audio2(pCodecCtx, samples, &amp;audiobufsize, pBuf, blocksize);</span>
+<a name="l00759"></a>00759 <span class="comment">//          memset( samples , 0 , samples_size );</span>
+<a name="l00760"></a>00760 
+<a name="l00761"></a>00761             <span class="comment">// fifoに保存する？</span>
+<a name="l00762"></a>00762 <span class="comment">/*          if(pWrite-&gt;m_pDCodecCtx-&gt;sample_rate != pWrite-&gt;m_pECodecCtx-&gt;sample_rate || pWrite-&gt;m_pDCodecCtx-&gt;channels != pWrite-&gt;m_pECodecCtx-&gt;channels) {</span>
+<a name="l00763"></a>00763 <span class="comment">                // リサンプリングしてfifoに保存する？</span>
+<a name="l00764"></a>00764 <span class="comment">                int size_out = audio_resample(pWrite-&gt;m_rs, (short *)pWrite-&gt;m_tmpbuf.buffer_resample, samples, blocksize/ (pWrite-&gt;m_pDCodecCtx-&gt;channels * 2) );</span>
+<a name="l00765"></a>00765 <span class="comment">                av_fifo_generic_write(pWrite-&gt;m_fifo, (uint8_t *)pWrite-&gt;m_tmpbuf.buffer_resample, size_out * pWrite-&gt;m_pECodecCtx-&gt;channels * 2, NULL );</span>
+<a name="l00766"></a>00766 <span class="comment">            }else*/</span>
+<a name="l00767"></a>00767                 <span class="comment">// fifoに保存する？</span>
+<a name="l00768"></a>00768                 av_fifo_generic_write(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a>, (uint8_t *)pBuf, bufsize, NULL );
+<a name="l00769"></a>00769 
+<a name="l00770"></a>00770             <span class="comment">// Did we get a audio frame?</span>
+<a name="l00771"></a>00771             <span class="keywordflow">if</span>(bufsize){
+<a name="l00772"></a>00772                 <span class="keywordtype">int</span> frame_bytes = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;frame_size * 2 * pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>-&gt;channels;
+<a name="l00773"></a>00773 
+<a name="l00774"></a>00774                 <span class="keywordflow">while</span>( av_fifo_size(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a>) &gt;= frame_bytes ) {
+<a name="l00775"></a>00775 
+<a name="l00776"></a>00776                     <span class="keywordtype">int</span> ret = av_fifo_generic_read( pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a592b10cbf0acb4a57dbf76e749f1b75f">m_fifo</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a>, frame_bytes, NULL );   
+<a name="l00777"></a>00777                     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>.size= avcodec_encode_audio(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a47a99eeedd154f2fa193fa3d92998db1">m_pECodecCtx</a>, pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a>, frame_bytes , (<span class="keywordtype">short</span> *)pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a70cc81b34c9a8ecf28f1af231818c83a">data_buf</a>);
+<a name="l00778"></a>00778 
+<a name="l00779"></a>00779                     <span class="comment">//pkt.pts= av_rescale_q(c-&gt;coded_frame-&gt;pts, c-&gt;time_base, audio_st-&gt;time_base);</span>
+<a name="l00780"></a>00780                     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>.stream_index  = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#adcd88e1e049d90f3d79d41d6d9a5eef8">m_pAStream</a>-&gt;index;
+<a name="l00781"></a>00781                     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>.data          = pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a4273373b1a3b8a44585916a37c750206">m_tmpbuf</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#a2141a97d714da9362f5fe60a4a7dc3c5">audio_out</a>;
+<a name="l00782"></a>00782                     pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>.flags         |= PKT_FLAG_KEY;
+<a name="l00783"></a>00783                     
+<a name="l00784"></a>00784                     <span class="comment">// ファイルに圧縮されたフレームを書く</span>
+<a name="l00785"></a>00785                     <span class="keywordflow">if</span> (av_interleaved_write_frame(pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#ab5aa710ec104211e3834c751b60605ad">m_pOutFmtContext</a>, &amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>) != 0) {
+<a name="l00786"></a>00786                         fprintf(stderr, <span class="stringliteral">&quot;Error while writing audio frame¥n&quot;</span>);
+<a name="l00787"></a>00787                         <span class="keywordflow">return</span> -1;
+<a name="l00788"></a>00788                     }
+<a name="l00789"></a>00789                 } <span class="comment">// while( av_fifo_size(fifo) &gt;= frame_bytes ) {</span>
+<a name="l00790"></a>00790             } <span class="comment">// if(audiobufsize){</span>
+<a name="l00791"></a>00791 
+<a name="l00792"></a>00792         <span class="comment">// Free the packet that was allocated by av_read_frame</span>
+<a name="l00793"></a>00793         av_free_packet(&amp;pffm-&gt;<a class="code" href="../../d9/dae/struct__ffmpeg__struct.html#a6cfda5e5c0475f3f13a30ffb701d65dd">m_Audio</a>.<a class="code" href="../../d0/d64/struct__ffmpeg__struct_1_1m__audio.html#adb7cd6c6810b40c8eb51b6f139da9fb4">pkt</a>);
+<a name="l00794"></a>00794         <span class="keywordflow">return</span> 0;
+<a name="l00795"></a>00795 }
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

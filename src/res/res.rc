@@ -327,14 +327,14 @@ BEGIN
             VALUE "Comments", "偽トロキャプチャ用プレビューソフト"
 //			VALUE "CompanyName", "companyname"
             VALUE "FileDescription", "偽トロプレビュー(60fps対応)"
-            VALUE "FileVersion", "2010/2/14"
+            VALUE "FileVersion", "2010/3/16"
 //            VALUE "InternalName", "InternalName"
 //			VALUE "LegalCopyright", "copyright"
 //			VALUE "LegalTrademarks", "Trademarks"
             VALUE "OriginalFilename", "NiseTroPreview*.exe"
 //            VALUE "PrivateBuild", "privatebuild"
 //            VALUE "ProductName", "ProductName"
-			VALUE "ProductVersion", "local svn revision:260"
+			VALUE "ProductVersion", "local svn revision:266"
 //            VALUE "SpecialBuild", "specialbuild"
         END
     END
@@ -370,11 +370,11 @@ STRINGTABLE
 BEGIN
     IDS_STRING_TOP          "上画面のみ"
     IDS_STRING_BTM          "下画面のみ"
+    IDS_STRING_DSCR         "両画面"
 END
 
 STRINGTABLE 
 BEGIN
-    IDS_STRING_DSCR         "両画面"
     IDS_STRING_60FPS        "60 FPS"
     IDS_STRING_30FPS        "30 FPS"
     IDS_STRING_20FPS        "20 FPS"

@@ -1,0 +1,1022 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: クラス CNISETRO</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li class="current"><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../annotated.html"><span>構成</span></a></li>
+      <li><a href="../../hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="../../functions.html"><span>構成メンバ</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>クラス CNISETRO</h1><!-- doxytag: class="CNISETRO" -->
+<p>偽トロからのデータ取得用クラス  
+<a href="#_details">[詳細]</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a>&gt;</code></p>
+
+<p><a href="../../d8/d97/classCNISETRO-members.html">すべてのメンバ一覧</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Public メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a9942209db001b765bdc2eeb320fdc1b8">CNISETRO</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#aebf69f1e40faae871daf0bed4ce48f1a">‾CNISETRO</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dba/classcusb2.html">cusb2</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a6e97072b0fb80e886140fecfee5bfdd9">GetCUSB2</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a394879dacebdaad712310e14db062de2">NisetroInit</a> (<a class="el" href="../../df/da9/nisetro_8h.html#a5e5396ca1b0944a941f397ba35e50f2e">ECAPFPS</a> eFps, <a class="el" href="../../df/da9/nisetro_8h.html#a4e098c15f3713d88bf01b65cc4752f7a">ECAPSCR</a> eScr, int id=0, HWND hWnd=NULL)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">初期化処理  <a href="#a394879dacebdaad712310e14db062de2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a32c3fc21280623a9075c65cd27a829a2">NisetroQuit</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">終了処理  <a href="#a32c3fc21280623a9075c65cd27a829a2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a2c48561664bc8441576787beeefc710b">GetScrData</a> (BYTE *pScrData, size_t BufSize, DWORD dwWaitMS=INFINITE)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">スクリーンデータを取得する  <a href="#a2c48561664bc8441576787beeefc710b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a35ddb41eb58527e1fa61d508a7af1a24">GetDropFrame</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">エラーフレームの設定を取得  <a href="#a35ddb41eb58527e1fa61d508a7af1a24"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a4790fc98b955d775700b7009930f40a7">SetDropFrame</a> (bool bDropFrame)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">エラーフレームを設定する  <a href="#a4790fc98b955d775700b7009930f40a7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#abb054ff728d5d465839bbd3916f388e2">GetErrorFrameCount</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">取得したエラーフレームの数を取得する  <a href="#abb054ff728d5d465839bbd3916f388e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#adfb7aff3b0ea3bc575dd397d9e795e14">GetFps</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">データ更新頻度を取得する  <a href="#adfb7aff3b0ea3bc575dd397d9e795e14"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/da9/nisetro_8h.html#afbbb9b594300ee38fb1a87f75ad80a0c">ECAPDATAVER</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a449c90f3a999dc3a99fe8531b2e5f01b">GetDataVersion</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">データのバージョンを取得  <a href="#a449c90f3a999dc3a99fe8531b2e5f01b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a9e4724f84e843bdbf3d8a694fceb5539">rec_start</a> (TCHAR *filename)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">フレームデータの保存を開始する  <a href="#a9e4724f84e843bdbf3d8a694fceb5539"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a196f4e5cf1bc172f71cb6af2f8479069">rec_stop</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">フレームデータの保存を中止する  <a href="#a196f4e5cf1bc172f71cb6af2f8479069"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a4079fcb7bc84821d585d82762ec4adfb">IsRec</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">フレーム保存状態を取得する  <a href="#a4079fcb7bc84821d585d82762ec4adfb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ace0215139b78cf0f95d66d4b54ae3284">IsInit</a> (void)</td></tr>
+<tr><td colspan="2"><h2>Private 型</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef bool(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a6852b4caad70a0fb82a343c51e263062">nise_func</a> )(<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>, <a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *)</td></tr>
+<tr><td colspan="2"><h2>Private メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#afbe6d40b3252093fa0a5df75e73d305c">checkFPS</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">FPSを取得する.  <a href="#afbe6d40b3252093fa0a5df75e73d305c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#af5f52ede3aa9405b4a17834ecdbd32c5">func_first</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *buf, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">以前のバージョン  <a href="#af5f52ede3aa9405b4a17834ecdbd32c5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a3a9b41d9a67a63fdf3b19bd690e1e0fc">func_60fps</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *buf, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">60fps対応版  <a href="#a3a9b41d9a67a63fdf3b19bd690e1e0fc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a2e2ec3f5431bc1f91c0f68f1a588c20a">param_init</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">パラメータの初期化  <a href="#a2e2ec3f5431bc1f91c0f68f1a588c20a"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Private メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a09f2d13126c076e92343087814c05135">getdata_from_cusb2_func</a> (<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *buf, <a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> len, <a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *tcb)</td></tr>
+<tr><td colspan="2"><h2>Private 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dba/classcusb2.html">cusb2</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a41aad80fd44af90b6b49255e8d5be254">usb</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#afe4a81551310fb67ed60415bdceffd58">m_cusb2id</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">cusb2_tcb *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a05fe42b3fa06e3698dc4700d484c9a40">tcb1</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a2b231d0851c7cf3fe8f1fb749b68e952">cmd_len</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#acddd7ca49bc76c3794896f22ae8c2b96">ret_len</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a2beabf6278750f944891e766b1e7f5ae">cmd</a> [64]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a79e8a2f32251cbc09f9e244256197534">ret</a> [64]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a17cc2837843f391c5673560f2ce2ed1a">inep</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a7f4bf8e2b692d16ea2aba3866d5cf55f">outep</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ab2b08266cd2d876f8c65734f4eec01b8">top_cut</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ac6ba5f571eed8e1ae6c5ffebd831b894">usb_init</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/da9/nisetro_8h.html#afbbb9b594300ee38fb1a87f75ad80a0c">ECAPDATAVER</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ae20b83994a11bffee3d4857ea6902d04">m_eVer</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">データのバージョン情報  <a href="#ae20b83994a11bffee3d4857ea6902d04"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/da9/nisetro_8h.html#a4e098c15f3713d88bf01b65cc4752f7a">ECAPSCR</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a09b11a0cf616af7596a306785b0c8b2f">m_eScr</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">取り込む画面  <a href="#a09b11a0cf616af7596a306785b0c8b2f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a00ce0d108cdd500426f991284750b32e">m_ulErrFrm</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">エラーフレームのカウント  <a href="#a00ce0d108cdd500426f991284750b32e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ad140abf155125b41110749c73d168aa7">m_dFps</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">画面データの更新数  <a href="#ad140abf155125b41110749c73d168aa7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">FILE *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a8eef42563eff714c7ace483be0218998">pRecfile</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a477db5c5fc04981cd796aaf6c885ca36">m_bDropFrame</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ドロップフラグ  <a href="#a477db5c5fc04981cd796aaf6c885ca36"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ab2dddbf6a55b6eb3f278c2e47a576124">m_CapBufCur1</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">キャプチャー用カーソル(1)  <a href="#ab2dddbf6a55b6eb3f278c2e47a576124"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ab3e698fa3a0e086cbfc9332fe5870eff">m_CapBufCur2</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">キャプチャー用カーソル(2)  <a href="#ab3e698fa3a0e086cbfc9332fe5870eff"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BYTE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a5a7acc9375981d2917bb1acf65ca24a0">m_CaptureBuffer</a> [<a class="el" href="../../df/da9/nisetro_8h.html#a0122d2315c2d19c1ef57d81d6962359f">CCAPBUFSIZE</a>]</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">キャプチャーバッファ  <a href="#a5a7acc9375981d2917bb1acf65ca24a0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#aef3438ad1524787288b4cac589352cce">m_lScrBufSel</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/d4d/classCMUTEX__WIN.html">CMUTEX</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#ae1ea43994ff1070849dc1b7a910c57e4">m_mutex_</a> [2]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BYTE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d35/classCNISETRO.html#a1f59517597e77e1e9356fec23977d8a3">m_ScrData_</a> [2][<a class="el" href="../../df/da9/nisetro_8h.html#ad2d609eb594a3b29611d7320070242db">NDS_SCREEN2BUF_SIZE</a>]</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">描画用バッファ(18Bit)  <a href="#a1f59517597e77e1e9356fec23977d8a3"></a><br/></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>説明</h2>
+<p>偽トロからのデータ取得用クラス </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00166">166</a> 行で定義されています。</p>
+<hr/><h2>型定義</h2>
+<a class="anchor" id="a6852b4caad70a0fb82a343c51e263062"></a><!-- doxytag: member="CNISETRO::nise_func" ref="a6852b4caad70a0fb82a343c51e263062" args=")(u8 *, u32, _cusb2_tcb *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef bool(* <a class="el" href="../../d6/d35/classCNISETRO.html#a6852b4caad70a0fb82a343c51e263062">CNISETRO::nise_func</a>)(<a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *,<a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>, <a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *)<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00170">170</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>コンストラクタとデストラクタ</h2>
+<a class="anchor" id="a9942209db001b765bdc2eeb320fdc1b8"></a><!-- doxytag: member="CNISETRO::CNISETRO" ref="a9942209db001b765bdc2eeb320fdc1b8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CNISETRO::CNISETRO </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00274">274</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>関数</h2>
+<a class="anchor" id="afbe6d40b3252093fa0a5df75e73d305c"></a><!-- doxytag: member="CNISETRO::checkFPS" ref="afbe6d40b3252093fa0a5df75e73d305c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CNISETRO::checkFPS </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>FPSを取得する. </p>
+<dl class="return"><dt><b>戻り値:</b></dt><dd>FPSが double で返される </dd></dl>
+<dl class="note"><dt><b>覚え書き:</b></dt><dd>※毎フレーム呼び出す必要がある </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a9b41d9a67a63fdf3b19bd690e1e0fc"></a><!-- doxytag: member="CNISETRO::func_60fps" ref="a3a9b41d9a67a63fdf3b19bd690e1e0fc" args="(u8 *buf, u32 len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CNISETRO::func_60fps </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *&nbsp;</td>
+          <td class="paramname"> <em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>60fps対応版 </p>
+<dl class="todo"><dt><b><a class="el" href="../../todo.html#_todo000002">TODO:</a></b></dt><dd>関数名の変更</dd></dl>
+<p><a class="el" href="../../nise_capture_dataformat.html">偽トロキャプチャのキャプチャーデータフォーマットについて</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="af5f52ede3aa9405b4a17834ecdbd32c5"></a><!-- doxytag: member="CNISETRO::func_first" ref="af5f52ede3aa9405b4a17834ecdbd32c5" args="(u8 *buf, u32 len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CNISETRO::func_first </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *&nbsp;</td>
+          <td class="paramname"> <em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>以前のバージョン </p>
+<dl class="todo"><dt><b><a class="el" href="../../todo.html#_todo000001">TODO:</a></b></dt><dd>関数名の変更</dd></dl>
+<p><a class="el" href="../../nise_capture_dataformat.html">偽トロキャプチャのキャプチャーデータフォーマットについて</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e97072b0fb80e886140fecfee5bfdd9"></a><!-- doxytag: member="CNISETRO::GetCUSB2" ref="a6e97072b0fb80e886140fecfee5bfdd9" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dba/classcusb2.html">cusb2</a>* CNISETRO::GetCUSB2 </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00297">297</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a09f2d13126c076e92343087814c05135"></a><!-- doxytag: member="CNISETRO::getdata_from_cusb2_func" ref="a09f2d13126c076e92343087814c05135" args="(u8 *buf, u32 len, _cusb2_tcb *tcb)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool CNISETRO::getdata_from_cusb2_func </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *&nbsp;</td>
+          <td class="paramname"> <em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a> *&nbsp;</td>
+          <td class="paramname"> <em>tcb</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p><a class="el" href="../../nise_capture_dataformat.html">偽トロキャプチャのキャプチャーデータフォーマットについて</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a449c90f3a999dc3a99fe8531b2e5f01b"></a><!-- doxytag: member="CNISETRO::GetDataVersion" ref="a449c90f3a999dc3a99fe8531b2e5f01b" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/da9/nisetro_8h.html#afbbb9b594300ee38fb1a87f75ad80a0c">ECAPDATAVER</a> CNISETRO::GetDataVersion </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>データのバージョンを取得 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00352">352</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a35ddb41eb58527e1fa61d508a7af1a24"></a><!-- doxytag: member="CNISETRO::GetDropFrame" ref="a35ddb41eb58527e1fa61d508a7af1a24" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CNISETRO::GetDropFrame </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>エラーフレームの設定を取得 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00336">336</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="abb054ff728d5d465839bbd3916f388e2"></a><!-- doxytag: member="CNISETRO::GetErrorFrameCount" ref="abb054ff728d5d465839bbd3916f388e2" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CNISETRO::GetErrorFrameCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>取得したエラーフレームの数を取得する </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00346">346</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adfb7aff3b0ea3bc575dd397d9e795e14"></a><!-- doxytag: member="CNISETRO::GetFps" ref="adfb7aff3b0ea3bc575dd397d9e795e14" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CNISETRO::GetFps </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>データ更新頻度を取得する </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00349">349</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2c48561664bc8441576787beeefc710b"></a><!-- doxytag: member="CNISETRO::GetScrData" ref="a2c48561664bc8441576787beeefc710b" args="(BYTE *pScrData, size_t BufSize, DWORD dwWaitMS=INFINITE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CNISETRO::GetScrData </td>
+          <td>(</td>
+          <td class="paramtype">BYTE *&nbsp;</td>
+          <td class="paramname"> <em>pScrData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>BufSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DWORD&nbsp;</td>
+          <td class="paramname"> <em>dwWaitMS</em> = <code>INFINITE</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>スクリーンデータを取得する </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pScrData</em>&nbsp;</td><td>[in] 受け取るバッファへのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>BufSize</em>&nbsp;</td><td>[in] 受け取るバッファサイズ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>dwWaitMS</em>&nbsp;</td><td>[in] 受け取るまでの制限時間(ms)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><a class="el" href="../../nise_screen_dataformat.html">CNISETROのスクリーンデータフォーマットについて</a> </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00319">319</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ace0215139b78cf0f95d66d4b54ae3284"></a><!-- doxytag: member="CNISETRO::IsInit" ref="ace0215139b78cf0f95d66d4b54ae3284" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CNISETRO::IsInit </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00387">387</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4079fcb7bc84821d585d82762ec4adfb"></a><!-- doxytag: member="CNISETRO::IsRec" ref="a4079fcb7bc84821d585d82762ec4adfb" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CNISETRO::IsRec </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>フレーム保存状態を取得する </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00383">383</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a394879dacebdaad712310e14db062de2"></a><!-- doxytag: member="CNISETRO::NisetroInit" ref="a394879dacebdaad712310e14db062de2" args="(ECAPFPS eFps, ECAPSCR eScr, int id=0, HWND hWnd=NULL)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CNISETRO::NisetroInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/da9/nisetro_8h.html#a5e5396ca1b0944a941f397ba35e50f2e">ECAPFPS</a>&nbsp;</td>
+          <td class="paramname"> <em>eFps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../df/da9/nisetro_8h.html#a4e098c15f3713d88bf01b65cc4752f7a">ECAPSCR</a>&nbsp;</td>
+          <td class="paramname"> <em>eScr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>id</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">HWND&nbsp;</td>
+          <td class="paramname"> <em>hWnd</em> = <code>NULL</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>初期化処理 </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>eFps</em>&nbsp;</td><td>[in] フレーム数 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>eScr</em>&nbsp;</td><td>[in] 取得する画面 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>[in] カメレオンusbのID </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>hWnd</em>&nbsp;</td><td>[in] メッセージを受け取るウィンドウハンドル </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a32c3fc21280623a9075c65cd27a829a2"></a><!-- doxytag: member="CNISETRO::NisetroQuit" ref="a32c3fc21280623a9075c65cd27a829a2" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CNISETRO::NisetroQuit </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>終了処理 </p>
+
+</div>
+</div>
+<a class="anchor" id="a2e2ec3f5431bc1f91c0f68f1a588c20a"></a><!-- doxytag: member="CNISETRO::param_init" ref="a2e2ec3f5431bc1f91c0f68f1a588c20a" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CNISETRO::param_init </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>パラメータの初期化 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00250">250</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e4724f84e843bdbf3d8a694fceb5539"></a><!-- doxytag: member="CNISETRO::rec_start" ref="a9e4724f84e843bdbf3d8a694fceb5539" args="(TCHAR *filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CNISETRO::rec_start </td>
+          <td>(</td>
+          <td class="paramtype">TCHAR *&nbsp;</td>
+          <td class="paramname"> <em>filename</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>フレームデータの保存を開始する </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>filename</em>&nbsp;</td><td>[in] 保存するファイル名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00358">358</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a196f4e5cf1bc172f71cb6af2f8479069"></a><!-- doxytag: member="CNISETRO::rec_stop" ref="a196f4e5cf1bc172f71cb6af2f8479069" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CNISETRO::rec_stop </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>フレームデータの保存を中止する </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00375">375</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4790fc98b955d775700b7009930f40a7"></a><!-- doxytag: member="CNISETRO::SetDropFrame" ref="a4790fc98b955d775700b7009930f40a7" args="(bool bDropFrame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CNISETRO::SetDropFrame </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>bDropFrame</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>エラーフレームを設定する </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00341">341</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aebf69f1e40faae871daf0bed4ce48f1a"></a><!-- doxytag: member="CNISETRO::‾CNISETRO" ref="aebf69f1e40faae871daf0bed4ce48f1a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CNISETRO::‾CNISETRO </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00285">285</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>変数</h2>
+<a class="anchor" id="a2beabf6278750f944891e766b1e7f5ae"></a><!-- doxytag: member="CNISETRO::cmd" ref="a2beabf6278750f944891e766b1e7f5ae" args="[64]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <a class="el" href="../../d6/d35/classCNISETRO.html#a2beabf6278750f944891e766b1e7f5ae">CNISETRO::cmd</a>[64]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00177">177</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b231d0851c7cf3fe8f1fb749b68e952"></a><!-- doxytag: member="CNISETRO::cmd_len" ref="a2b231d0851c7cf3fe8f1fb749b68e952" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LONG <a class="el" href="../../d6/d35/classCNISETRO.html#a2b231d0851c7cf3fe8f1fb749b68e952">CNISETRO::cmd_len</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00176">176</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a17cc2837843f391c5673560f2ce2ed1a"></a><!-- doxytag: member="CNISETRO::inep" ref="a17cc2837843f391c5673560f2ce2ed1a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>* <a class="el" href="../../d6/d35/classCNISETRO.html#a17cc2837843f391c5673560f2ce2ed1a">CNISETRO::inep</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00179">179</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a477db5c5fc04981cd796aaf6c885ca36"></a><!-- doxytag: member="CNISETRO::m_bDropFrame" ref="a477db5c5fc04981cd796aaf6c885ca36" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d6/d35/classCNISETRO.html#a477db5c5fc04981cd796aaf6c885ca36">CNISETRO::m_bDropFrame</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ドロップフラグ </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00201">201</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab2dddbf6a55b6eb3f278c2e47a576124"></a><!-- doxytag: member="CNISETRO::m_CapBufCur1" ref="ab2dddbf6a55b6eb3f278c2e47a576124" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="../../d6/d35/classCNISETRO.html#ab2dddbf6a55b6eb3f278c2e47a576124">CNISETRO::m_CapBufCur1</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>キャプチャー用カーソル(1) </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00204">204</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab3e698fa3a0e086cbfc9332fe5870eff"></a><!-- doxytag: member="CNISETRO::m_CapBufCur2" ref="ab3e698fa3a0e086cbfc9332fe5870eff" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="../../d6/d35/classCNISETRO.html#ab3e698fa3a0e086cbfc9332fe5870eff">CNISETRO::m_CapBufCur2</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>キャプチャー用カーソル(2) </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00207">207</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5a7acc9375981d2917bb1acf65ca24a0"></a><!-- doxytag: member="CNISETRO::m_CaptureBuffer" ref="a5a7acc9375981d2917bb1acf65ca24a0" args="[CCAPBUFSIZE]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BYTE <a class="el" href="../../d6/d35/classCNISETRO.html#a5a7acc9375981d2917bb1acf65ca24a0">CNISETRO::m_CaptureBuffer</a>[<a class="el" href="../../df/da9/nisetro_8h.html#a0122d2315c2d19c1ef57d81d6962359f">CCAPBUFSIZE</a>]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>キャプチャーバッファ </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00210">210</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="afe4a81551310fb67ed60415bdceffd58"></a><!-- doxytag: member="CNISETRO::m_cusb2id" ref="afe4a81551310fb67ed60415bdceffd58" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="../../d6/d35/classCNISETRO.html#afe4a81551310fb67ed60415bdceffd58">CNISETRO::m_cusb2id</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00173">173</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad140abf155125b41110749c73d168aa7"></a><!-- doxytag: member="CNISETRO::m_dFps" ref="ad140abf155125b41110749c73d168aa7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="../../d6/d35/classCNISETRO.html#ad140abf155125b41110749c73d168aa7">CNISETRO::m_dFps</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>画面データの更新数 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00196">196</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a09b11a0cf616af7596a306785b0c8b2f"></a><!-- doxytag: member="CNISETRO::m_eScr" ref="a09b11a0cf616af7596a306785b0c8b2f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/da9/nisetro_8h.html#a4e098c15f3713d88bf01b65cc4752f7a">ECAPSCR</a> <a class="el" href="../../d6/d35/classCNISETRO.html#a09b11a0cf616af7596a306785b0c8b2f">CNISETRO::m_eScr</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>取り込む画面 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00190">190</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae20b83994a11bffee3d4857ea6902d04"></a><!-- doxytag: member="CNISETRO::m_eVer" ref="ae20b83994a11bffee3d4857ea6902d04" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/da9/nisetro_8h.html#afbbb9b594300ee38fb1a87f75ad80a0c">ECAPDATAVER</a> <a class="el" href="../../d6/d35/classCNISETRO.html#ae20b83994a11bffee3d4857ea6902d04">CNISETRO::m_eVer</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>データのバージョン情報 </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00187">187</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aef3438ad1524787288b4cac589352cce"></a><!-- doxytag: member="CNISETRO::m_lScrBufSel" ref="aef3438ad1524787288b4cac589352cce" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="../../d6/d35/classCNISETRO.html#aef3438ad1524787288b4cac589352cce">CNISETRO::m_lScrBufSel</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00212">212</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ae1ea43994ff1070849dc1b7a910c57e4"></a><!-- doxytag: member="CNISETRO::m_mutex_" ref="ae1ea43994ff1070849dc1b7a910c57e4" args="[2]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dd/d4d/classCMUTEX__WIN.html">CMUTEX</a> <a class="el" href="../../d6/d35/classCNISETRO.html#ae1ea43994ff1070849dc1b7a910c57e4">CNISETRO::m_mutex_</a>[2]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00214">214</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1f59517597e77e1e9356fec23977d8a3"></a><!-- doxytag: member="CNISETRO::m_ScrData_" ref="a1f59517597e77e1e9356fec23977d8a3" args="[2][NDS_SCREEN2BUF_SIZE]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BYTE <a class="el" href="../../d6/d35/classCNISETRO.html#a1f59517597e77e1e9356fec23977d8a3">CNISETRO::m_ScrData_</a>[2][<a class="el" href="../../df/da9/nisetro_8h.html#ad2d609eb594a3b29611d7320070242db">NDS_SCREEN2BUF_SIZE</a>]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>描画用バッファ(18Bit) </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00217">217</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a00ce0d108cdd500426f991284750b32e"></a><!-- doxytag: member="CNISETRO::m_ulErrFrm" ref="a00ce0d108cdd500426f991284750b32e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="../../d6/d35/classCNISETRO.html#a00ce0d108cdd500426f991284750b32e">CNISETRO::m_ulErrFrm</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>エラーフレームのカウント </p>
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00193">193</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7f4bf8e2b692d16ea2aba3866d5cf55f"></a><!-- doxytag: member="CNISETRO::outep" ref="a7f4bf8e2b692d16ea2aba3866d5cf55f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>* <a class="el" href="../../d6/d35/classCNISETRO.html#a7f4bf8e2b692d16ea2aba3866d5cf55f">CNISETRO::outep</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00180">180</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8eef42563eff714c7ace483be0218998"></a><!-- doxytag: member="CNISETRO::pRecfile" ref="a8eef42563eff714c7ace483be0218998" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* <a class="el" href="../../d6/d35/classCNISETRO.html#a8eef42563eff714c7ace483be0218998">CNISETRO::pRecfile</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00198">198</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a79e8a2f32251cbc09f9e244256197534"></a><!-- doxytag: member="CNISETRO::ret" ref="a79e8a2f32251cbc09f9e244256197534" args="[64]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <a class="el" href="../../d6/d35/classCNISETRO.html#a79e8a2f32251cbc09f9e244256197534">CNISETRO::ret</a>[64]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00178">178</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="acddd7ca49bc76c3794896f22ae8c2b96"></a><!-- doxytag: member="CNISETRO::ret_len" ref="acddd7ca49bc76c3794896f22ae8c2b96" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LONG <a class="el" href="../../d6/d35/classCNISETRO.html#acddd7ca49bc76c3794896f22ae8c2b96">CNISETRO::ret_len</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00176">176</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a05fe42b3fa06e3698dc4700d484c9a40"></a><!-- doxytag: member="CNISETRO::tcb1" ref="a05fe42b3fa06e3698dc4700d484c9a40" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cusb2_tcb* <a class="el" href="../../d6/d35/classCNISETRO.html#a05fe42b3fa06e3698dc4700d484c9a40">CNISETRO::tcb1</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00174">174</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab2b08266cd2d876f8c65734f4eec01b8"></a><!-- doxytag: member="CNISETRO::top_cut" ref="ab2b08266cd2d876f8c65734f4eec01b8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d6/d35/classCNISETRO.html#ab2b08266cd2d876f8c65734f4eec01b8">CNISETRO::top_cut</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00182">182</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a41aad80fd44af90b6b49255e8d5be254"></a><!-- doxytag: member="CNISETRO::usb" ref="a41aad80fd44af90b6b49255e8d5be254" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dba/classcusb2.html">cusb2</a>* <a class="el" href="../../d6/d35/classCNISETRO.html#a41aad80fd44af90b6b49255e8d5be254">CNISETRO::usb</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00172">172</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac6ba5f571eed8e1ae6c5ffebd831b894"></a><!-- doxytag: member="CNISETRO::usb_init" ref="ac6ba5f571eed8e1ae6c5ffebd831b894" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d6/d35/classCNISETRO.html#ac6ba5f571eed8e1ae6c5ffebd831b894">CNISETRO::usb_init</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a> の <a class="el" href="../../df/da9/nisetro_8h_source.html#l00184">184</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="../../df/da9/nisetro_8h_source.html">nisetro.h</a></li>
+</ul>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:41 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

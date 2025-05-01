@@ -1,0 +1,1779 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: クラス CCyUSBDevice</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li class="current"><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../annotated.html"><span>構成</span></a></li>
+      <li><a href="../../hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="../../functions.html"><span>構成メンバ</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>クラス CCyUSBDevice</h1><!-- doxytag: class="CCyUSBDevice" -->
+<p><code>#include &lt;<a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a>&gt;</code></p>
+
+<p><a href="../../d8/d56/classCCyUSBDevice-members.html">すべてのメンバ一覧</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Public メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a1abadea6501dd6ac2f3b0f68882ba7a8">CCyUSBDevice</a> (HANDLE hnd=NULL, GUID guid=<a class="el" href="../../d6/d34/cyapi_8h.html#a06a92bfbf0359e488e5e03abd7ac2826">CYUSBDRV_GUID</a>, BOOL bOpen=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a5b3db59faf2875c8614d3c5c37d7ea8c">‾CCyUSBDevice</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad9e219f8aeb2c076e80beefb5087d2e8">EndPointOf</a> (UCHAR addr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a47116934e31123386ef832b9f5a6da5b">DeviceCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a5a56a5f989b3ee5d130055ee4d9347c5">ConfigCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aa472a73297948c3a279ffeeac53f4ac0">IntfcCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a1b2fa37659b2af684f1cba16ce69d4df">AltIntfcCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a93e7d14ab9e3abc2c6dbc2d7993a24e7">EndPointCount</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a393d1f9e6f02a05de1b03039698a2c79">Config</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a0f6275153c65935a08cf5cf93d276321">SetConfig</a> (UCHAR cfg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a83684b5c89164418de8d8aae54cb87b3">Interface</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a86029c92af1de2a76ad1d38f90045eda">AltIntfc</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a4d3b96a9d08f8a854cb97f3f6459b988">SetAltIntfc</a> (UCHAR alt)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">GUID&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a0f8baf5ba8ea2a725892a21f1ecd5737">DriverGUID</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HANDLE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aa3ee8059fa6382de51352607e2b1c5af">DeviceHandle</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a3d5b1158a610f83e24349b6d4874d331">UsbdStatusString</a> (ULONG stat, PCHAR s)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ae28c9c1ce79d3acf590f12b4d9c95516">CreateHandle</a> (UCHAR dev)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a12ac0e4e46bcd777230aedde40e41507">DestroyHandle</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad4d451b581baa8d6ce68ffad3e41a41d">Open</a> (UCHAR dev)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ae48ec32b55a5fb1c341445028c021f02">Reset</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ab5f6a32e8bd6c179effd4095555278f0">ReConnect</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a9cd052fcc33527d71ed1f637a2f0831c">Suspend</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a35a664a317ace1ae2e6c92777a688981">Resume</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a85124e7e1a81bd938a6597aa91dfb2a5">IsOpen</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a943a60e1a17c95c5af9093bc4ee3c69e">PowerState</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a27a843d09e05ec748eac26bc96b12f21">GetDeviceDescriptor</a> (<a class="el" href="../../d0/de5/struct__USB__DEVICE__DESCRIPTOR.html">PUSB_DEVICE_DESCRIPTOR</a> descr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a757e162b45979d1e97a717f469a1175c">GetConfigDescriptor</a> (<a class="el" href="../../d5/dae/struct__USB__CONFIGURATION__DESCRIPTOR.html">PUSB_CONFIGURATION_DESCRIPTOR</a> descr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a19b5d3250ff74467d01037893c0e9238">GetIntfcDescriptor</a> (<a class="el" href="../../d4/d1b/struct__USB__INTERFACE__DESCRIPTOR.html">PUSB_INTERFACE_DESCRIPTOR</a> descr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d8c/classCCyUSBConfig.html">CCyUSBConfig</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a35bad8e7bb40f3ee0cc9845aae267f69">GetUSBConfig</a> (int index)</td></tr>
+<tr><td colspan="2"><h2>Public 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> **&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a9f86f7b66fe7d90d4f49e62fab95c542">EndPoints</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d8c/classCCyControlEndPoint.html">CCyControlEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d0d/classCCyIsocEndPoint.html">CCyIsocEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#af61711a5346e68cd8210248b63e87978">IsocInEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d0d/classCCyIsocEndPoint.html">CCyIsocEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a2c90505011bd1f3d1c3bd8e00a5ac034">IsocOutEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d57/classCCyBulkEndPoint.html">CCyBulkEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ac409a743452bb408078f86ae81c19903">BulkInEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d57/classCCyBulkEndPoint.html">CCyBulkEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a51d92cf59541dee63b05d58eb4fefdd6">BulkOutEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d90/classCCyInterruptEndPoint.html">CCyInterruptEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a51192ec6a80935158c1751fc4aaf234b">InterruptInEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d90/classCCyInterruptEndPoint.html">CCyInterruptEndPoint</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#adb356bd327091e4c27bfdeff9de68606">InterruptOutEndPt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">USHORT&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#adf34d0bc7f2dc5b54135923f30850ba3">StrLangID</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ULONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad6d052c5b9226848f782ab5c124d1ea8">UsbdStatus</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ULONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a981b9935fa9fe7ddeb922803c04609c9">NtStatus</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ULONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ac28dea1e4145378937abc258bd0d9c58">DriverVersion</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ULONG&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a0bf109b3b54b178d4a53df06750fee6f">USBDIVersion</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#abda8c1704fc75e51f44f2b22b2498610">DeviceName</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad5bc6b3470a4723f4b52d89cabcc4cdf">FriendlyName</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">wchar_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a7098e43e8efeff5505151431dd79f0e2">Manufacturer</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">wchar_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a666b981e74c9605b320f58aafecb945d">Product</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">wchar_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a72d6b3e4545b3f3d27a52cf0d79f58da">SerialNumber</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">CHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ac6cc891e56d274c750619ba122a12545">DevPath</a> [<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">USHORT&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a98104e97ec07f038b95baf9554f7ba77">BcdUSB</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">USHORT&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">USHORT&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a92c5d8d34fe5705f18f10d81bcb3a0ba">USBAddress</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a4ec1073dcb6d5a6c82d6995cdbb53d4c">DevClass</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a03483c829812c3d9b2745f2eb62276da">DevSubClass</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a278549d3d7a4f2e67b142578b4866a0b">DevProtocol</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aa0db817d12194d208d0e0ee488a9ee43">MaxPacketSize</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">USHORT&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a2f85fb15255f504a30862cfdb6515177">ConfigValue</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a6739754d475b3d498fc39f9afeec3f02">ConfigAttrib</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#adb3dafc261b204da545b9dd71fe541c4">MaxPower</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a8c8f35b1bdbca13a418ab8c278e47495">IntfcClass</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a737bbc16bb985273e1b83f6c2c7b51e4">IntfcSubClass</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a58f34d9feeeebed8d4777a81995cd295">IntfcProtocol</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#abdafba9874ab5bb77eb6fd69c2600fa7">bHighSpeed</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">DWORD&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aab16bb9899ddc5e13eb02375e0b1c579">BytesXfered</a></td></tr>
+<tr><td colspan="2"><h2>Private メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#add4b1dde97f72e5916e1a63e93986e80">GetDevDescriptor</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad353c10e398799b3570a7daa24498ffd">GetCfgDescriptor</a> (int descIndex)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ad56827a829253350bf86a4cbefdc2cbf">GetString</a> (wchar_t *s, UCHAR sIndex)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a76700a29f841c6a8cc9c3a20931ded51">SetStringDescrLanguage</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a6754bc0366b00bcb190743bf81e90e6d">SetAltIntfcParams</a> (UCHAR alt)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a5fd89498c417433342ba6ea3e593a0da">IoControl</a> (ULONG cmd, PUCHAR buf, ULONG len)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a5b26745c0d9fdec56c7d6ac0e9280ad2">SetEndPointPtrs</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a48b6d6b715e7ff461ab05b40816aa738">GetDeviceName</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a776ba529cdb48135bb3a958663e5e23c">GetFriendlyName</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a9e53f51f67af29a6c6c24b7634d3c4d1">GetDriverVer</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a60cd3da8dbef3c11b0c2beccfa8c7211">GetUSBDIVer</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a0ac5ee590925f0448475fda572df816b">GetSpeed</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aad6c90a8107e4656088dc05c946a7736">GetUSBAddress</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aa0381ccfd0a913dd1cdbb40255d521e1">RegisterForPnpEvents</a> (HANDLE h)</td></tr>
+<tr><td colspan="2"><h2>Private 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/de5/struct__USB__DEVICE__DESCRIPTOR.html">USB_DEVICE_DESCRIPTOR</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a0bfe540f27284ed60dfa064281b5580c">USBDeviceDescriptor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/dae/struct__USB__CONFIGURATION__DESCRIPTOR.html">PUSB_CONFIGURATION_DESCRIPTOR</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ac2487879ff6208e3a93b2db4a0596dd0">USBConfigDescriptors</a> [2]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d8c/classCCyUSBConfig.html">CCyUSBConfig</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a73b6d2767cd485526b26081fa77502f2">USBCfgs</a> [2]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HANDLE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a236a63b4b3573e300f51a269c8b5491a">hWnd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HANDLE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#af12d4ed55b5f197e34997214d231bc0e">hDevice</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HANDLE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#ac69d4120ba40602632d99f3d12f5ad41">hDevNotification</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HANDLE&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#af22e54700064fc9d2c4a268e114114c3">hHndNotification</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">GUID&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a43616a8bbaf85cbdd3755d77261ee141">DrvGuid</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a28b6efde6d8982d478de31a93be1aa99">Devices</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a3df4b1a62b364cd88c96e92287bb0215">Interfaces</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a3a52ee48990830b2042e4d787bebdae8">AltInterfaces</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a1931287b4c324a645d85385bd86e7d70">Configs</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a7bbf6144f55b765e073bbad51ac3ab3d">DevNum</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a42d40c2ef8bb47df5200adabec4f127c">CfgNum</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#a19ea63dfe0c261caf02c5de9241fde99">IntfcNum</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UCHAR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de7/classCCyUSBDevice.html#aefb84a5e795929c2c694e4764f032865">IntfcIndex</a></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>説明</h2>
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00320">320</a> 行で定義されています。</p>
+<hr/><h2>コンストラクタとデストラクタ</h2>
+<a class="anchor" id="a1abadea6501dd6ac2f3b0f68882ba7a8"></a><!-- doxytag: member="CCyUSBDevice::CCyUSBDevice" ref="a1abadea6501dd6ac2f3b0f68882ba7a8" args="(HANDLE hnd=NULL, GUID guid=CYUSBDRV_GUID, BOOL bOpen=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CCyUSBDevice::CCyUSBDevice </td>
+          <td>(</td>
+          <td class="paramtype">HANDLE&nbsp;</td>
+          <td class="paramname"> <em>hnd</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GUID&nbsp;</td>
+          <td class="paramname"> <em>guid</em> = <code><a class="el" href="../../d6/d34/cyapi_8h.html#a06a92bfbf0359e488e5e03abd7ac2826">CYUSBDRV_GUID</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&nbsp;</td>
+          <td class="paramname"> <em>bOpen</em> = <code>true</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>関数</h2>
+<a class="anchor" id="a86029c92af1de2a76ad1d38f90045eda"></a><!-- doxytag: member="CCyUSBDevice::AltIntfc" ref="a86029c92af1de2a76ad1d38f90045eda" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::AltIntfc </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1b2fa37659b2af684f1cba16ce69d4df"></a><!-- doxytag: member="CCyUSBDevice::AltIntfcCount" ref="a1b2fa37659b2af684f1cba16ce69d4df" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::AltIntfcCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acbec6b5a7576992e75b34a4852bffd6f"></a><!-- doxytag: member="CCyUSBDevice::Close" ref="acbec6b5a7576992e75b34a4852bffd6f" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::Close </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a393d1f9e6f02a05de1b03039698a2c79"></a><!-- doxytag: member="CCyUSBDevice::Config" ref="a393d1f9e6f02a05de1b03039698a2c79" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::Config </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00383">383</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a5a56a5f989b3ee5d130055ee4d9347c5"></a><!-- doxytag: member="CCyUSBDevice::ConfigCount" ref="a5a56a5f989b3ee5d130055ee4d9347c5" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::ConfigCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae28c9c1ce79d3acf590f12b4d9c95516"></a><!-- doxytag: member="CCyUSBDevice::CreateHandle" ref="ae28c9c1ce79d3acf590f12b4d9c95516" args="(UCHAR dev)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::CreateHandle </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>dev</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a12ac0e4e46bcd777230aedde40e41507"></a><!-- doxytag: member="CCyUSBDevice::DestroyHandle" ref="a12ac0e4e46bcd777230aedde40e41507" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::DestroyHandle </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a47116934e31123386ef832b9f5a6da5b"></a><!-- doxytag: member="CCyUSBDevice::DeviceCount" ref="a47116934e31123386ef832b9f5a6da5b" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::DeviceCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa3ee8059fa6382de51352607e2b1c5af"></a><!-- doxytag: member="CCyUSBDevice::DeviceHandle" ref="aa3ee8059fa6382de51352607e2b1c5af" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE CCyUSBDevice::DeviceHandle </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00393">393</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0f8baf5ba8ea2a725892a21f1ecd5737"></a><!-- doxytag: member="CCyUSBDevice::DriverGUID" ref="a0f8baf5ba8ea2a725892a21f1ecd5737" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GUID CCyUSBDevice::DriverGUID </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00392">392</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a93e7d14ab9e3abc2c6dbc2d7993a24e7"></a><!-- doxytag: member="CCyUSBDevice::EndPointCount" ref="a93e7d14ab9e3abc2c6dbc2d7993a24e7" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::EndPointCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad9e219f8aeb2c076e80beefb5087d2e8"></a><!-- doxytag: member="CCyUSBDevice::EndPointOf" ref="ad9e219f8aeb2c076e80beefb5087d2e8" args="(UCHAR addr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>* CCyUSBDevice::EndPointOf </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>addr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad353c10e398799b3570a7daa24498ffd"></a><!-- doxytag: member="CCyUSBDevice::GetCfgDescriptor" ref="ad353c10e398799b3570a7daa24498ffd" args="(int descIndex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetCfgDescriptor </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>descIndex</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a757e162b45979d1e97a717f469a1175c"></a><!-- doxytag: member="CCyUSBDevice::GetConfigDescriptor" ref="a757e162b45979d1e97a717f469a1175c" args="(PUSB_CONFIGURATION_DESCRIPTOR descr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetConfigDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d5/dae/struct__USB__CONFIGURATION__DESCRIPTOR.html">PUSB_CONFIGURATION_DESCRIPTOR</a>&nbsp;</td>
+          <td class="paramname"> <em>descr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="add4b1dde97f72e5916e1a63e93986e80"></a><!-- doxytag: member="CCyUSBDevice::GetDevDescriptor" ref="add4b1dde97f72e5916e1a63e93986e80" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetDevDescriptor </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a27a843d09e05ec748eac26bc96b12f21"></a><!-- doxytag: member="CCyUSBDevice::GetDeviceDescriptor" ref="a27a843d09e05ec748eac26bc96b12f21" args="(PUSB_DEVICE_DESCRIPTOR descr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetDeviceDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d0/de5/struct__USB__DEVICE__DESCRIPTOR.html">PUSB_DEVICE_DESCRIPTOR</a>&nbsp;</td>
+          <td class="paramname"> <em>descr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a48b6d6b715e7ff461ab05b40816aa738"></a><!-- doxytag: member="CCyUSBDevice::GetDeviceName" ref="a48b6d6b715e7ff461ab05b40816aa738" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetDeviceName </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9e53f51f67af29a6c6c24b7634d3c4d1"></a><!-- doxytag: member="CCyUSBDevice::GetDriverVer" ref="a9e53f51f67af29a6c6c24b7634d3c4d1" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetDriverVer </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a776ba529cdb48135bb3a958663e5e23c"></a><!-- doxytag: member="CCyUSBDevice::GetFriendlyName" ref="a776ba529cdb48135bb3a958663e5e23c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetFriendlyName </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19b5d3250ff74467d01037893c0e9238"></a><!-- doxytag: member="CCyUSBDevice::GetIntfcDescriptor" ref="a19b5d3250ff74467d01037893c0e9238" args="(PUSB_INTERFACE_DESCRIPTOR descr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetIntfcDescriptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d1b/struct__USB__INTERFACE__DESCRIPTOR.html">PUSB_INTERFACE_DESCRIPTOR</a>&nbsp;</td>
+          <td class="paramname"> <em>descr</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0ac5ee590925f0448475fda572df816b"></a><!-- doxytag: member="CCyUSBDevice::GetSpeed" ref="a0ac5ee590925f0448475fda572df816b" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetSpeed </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad56827a829253350bf86a4cbefdc2cbf"></a><!-- doxytag: member="CCyUSBDevice::GetString" ref="ad56827a829253350bf86a4cbefdc2cbf" args="(wchar_t *s, UCHAR sIndex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetString </td>
+          <td>(</td>
+          <td class="paramtype">wchar_t *&nbsp;</td>
+          <td class="paramname"> <em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>sIndex</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aad6c90a8107e4656088dc05c946a7736"></a><!-- doxytag: member="CCyUSBDevice::GetUSBAddress" ref="aad6c90a8107e4656088dc05c946a7736" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetUSBAddress </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a35bad8e7bb40f3ee0cc9845aae267f69"></a><!-- doxytag: member="CCyUSBDevice::GetUSBConfig" ref="a35bad8e7bb40f3ee0cc9845aae267f69" args="(int index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d6/d8c/classCCyUSBConfig.html">CCyUSBConfig</a> CCyUSBDevice::GetUSBConfig </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>index</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a60cd3da8dbef3c11b0c2beccfa8c7211"></a><!-- doxytag: member="CCyUSBDevice::GetUSBDIVer" ref="a60cd3da8dbef3c11b0c2beccfa8c7211" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::GetUSBDIVer </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a83684b5c89164418de8d8aae54cb87b3"></a><!-- doxytag: member="CCyUSBDevice::Interface" ref="a83684b5c89164418de8d8aae54cb87b3" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::Interface </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00386">386</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa472a73297948c3a279ffeeac53f4ac0"></a><!-- doxytag: member="CCyUSBDevice::IntfcCount" ref="aa472a73297948c3a279ffeeac53f4ac0" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::IntfcCount </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5fd89498c417433342ba6ea3e593a0da"></a><!-- doxytag: member="CCyUSBDevice::IoControl" ref="a5fd89498c417433342ba6ea3e593a0da" args="(ULONG cmd, PUCHAR buf, ULONG len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::IoControl </td>
+          <td>(</td>
+          <td class="paramtype">ULONG&nbsp;</td>
+          <td class="paramname"> <em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PUCHAR&nbsp;</td>
+          <td class="paramname"> <em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ULONG&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a85124e7e1a81bd938a6597aa91dfb2a5"></a><!-- doxytag: member="CCyUSBDevice::IsOpen" ref="a85124e7e1a81bd938a6597aa91dfb2a5" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::IsOpen </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00405">405</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad4d451b581baa8d6ce68ffad3e41a41d"></a><!-- doxytag: member="CCyUSBDevice::Open" ref="ad4d451b581baa8d6ce68ffad3e41a41d" args="(UCHAR dev)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::Open </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>dev</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a943a60e1a17c95c5af9093bc4ee3c69e"></a><!-- doxytag: member="CCyUSBDevice::PowerState" ref="a943a60e1a17c95c5af9093bc4ee3c69e" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR CCyUSBDevice::PowerState </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab5f6a32e8bd6c179effd4095555278f0"></a><!-- doxytag: member="CCyUSBDevice::ReConnect" ref="ab5f6a32e8bd6c179effd4095555278f0" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::ReConnect </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa0381ccfd0a913dd1cdbb40255d521e1"></a><!-- doxytag: member="CCyUSBDevice::RegisterForPnpEvents" ref="aa0381ccfd0a913dd1cdbb40255d521e1" args="(HANDLE h)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::RegisterForPnpEvents </td>
+          <td>(</td>
+          <td class="paramtype">HANDLE&nbsp;</td>
+          <td class="paramname"> <em>h</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae48ec32b55a5fb1c341445028c021f02"></a><!-- doxytag: member="CCyUSBDevice::Reset" ref="ae48ec32b55a5fb1c341445028c021f02" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::Reset </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a35a664a317ace1ae2e6c92777a688981"></a><!-- doxytag: member="CCyUSBDevice::Resume" ref="a35a664a317ace1ae2e6c92777a688981" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::Resume </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4d3b96a9d08f8a854cb97f3f6459b988"></a><!-- doxytag: member="CCyUSBDevice::SetAltIntfc" ref="a4d3b96a9d08f8a854cb97f3f6459b988" args="(UCHAR alt)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::SetAltIntfc </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>alt</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6754bc0366b00bcb190743bf81e90e6d"></a><!-- doxytag: member="CCyUSBDevice::SetAltIntfcParams" ref="a6754bc0366b00bcb190743bf81e90e6d" args="(UCHAR alt)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::SetAltIntfcParams </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>alt</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0f6275153c65935a08cf5cf93d276321"></a><!-- doxytag: member="CCyUSBDevice::SetConfig" ref="a0f6275153c65935a08cf5cf93d276321" args="(UCHAR cfg)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::SetConfig </td>
+          <td>(</td>
+          <td class="paramtype">UCHAR&nbsp;</td>
+          <td class="paramname"> <em>cfg</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5b26745c0d9fdec56c7d6ac0e9280ad2"></a><!-- doxytag: member="CCyUSBDevice::SetEndPointPtrs" ref="a5b26745c0d9fdec56c7d6ac0e9280ad2" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::SetEndPointPtrs </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a76700a29f841c6a8cc9c3a20931ded51"></a><!-- doxytag: member="CCyUSBDevice::SetStringDescrLanguage" ref="a76700a29f841c6a8cc9c3a20931ded51" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::SetStringDescrLanguage </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9cd052fcc33527d71ed1f637a2f0831c"></a><!-- doxytag: member="CCyUSBDevice::Suspend" ref="a9cd052fcc33527d71ed1f637a2f0831c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CCyUSBDevice::Suspend </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3d5b1158a610f83e24349b6d4874d331"></a><!-- doxytag: member="CCyUSBDevice::UsbdStatusString" ref="a3d5b1158a610f83e24349b6d4874d331" args="(ULONG stat, PCHAR s)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CCyUSBDevice::UsbdStatusString </td>
+          <td>(</td>
+          <td class="paramtype">ULONG&nbsp;</td>
+          <td class="paramname"> <em>stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PCHAR&nbsp;</td>
+          <td class="paramname"> <em>s</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5b3db59faf2875c8614d3c5c37d7ea8c"></a><!-- doxytag: member="CCyUSBDevice::‾CCyUSBDevice" ref="a5b3db59faf2875c8614d3c5c37d7ea8c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CCyUSBDevice::‾CCyUSBDevice </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>変数</h2>
+<a class="anchor" id="a3a52ee48990830b2042e4d787bebdae8"></a><!-- doxytag: member="CCyUSBDevice::AltInterfaces" ref="a3a52ee48990830b2042e4d787bebdae8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a3a52ee48990830b2042e4d787bebdae8">CCyUSBDevice::AltInterfaces</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00432">432</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9876af8e67e6a1384a685dbafe7138b9"></a><!-- doxytag: member="CCyUSBDevice::BcdDevice" ref="a9876af8e67e6a1384a685dbafe7138b9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">USHORT <a class="el" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">CCyUSBDevice::BcdDevice</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00363">363</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a98104e97ec07f038b95baf9554f7ba77"></a><!-- doxytag: member="CCyUSBDevice::BcdUSB" ref="a98104e97ec07f038b95baf9554f7ba77" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">USHORT <a class="el" href="../../db/de7/classCCyUSBDevice.html#a98104e97ec07f038b95baf9554f7ba77">CCyUSBDevice::BcdUSB</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00355">355</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="abdafba9874ab5bb77eb6fd69c2600fa7"></a><!-- doxytag: member="CCyUSBDevice::bHighSpeed" ref="abdafba9874ab5bb77eb6fd69c2600fa7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../db/de7/classCCyUSBDevice.html#abdafba9874ab5bb77eb6fd69c2600fa7">CCyUSBDevice::bHighSpeed</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00372">372</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac409a743452bb408078f86ae81c19903"></a><!-- doxytag: member="CCyUSBDevice::BulkInEndPt" ref="ac409a743452bb408078f86ae81c19903" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d57/classCCyBulkEndPoint.html">CCyBulkEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#ac409a743452bb408078f86ae81c19903">CCyUSBDevice::BulkInEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00337">337</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a51d92cf59541dee63b05d58eb4fefdd6"></a><!-- doxytag: member="CCyUSBDevice::BulkOutEndPt" ref="a51d92cf59541dee63b05d58eb4fefdd6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d57/classCCyBulkEndPoint.html">CCyBulkEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#a51d92cf59541dee63b05d58eb4fefdd6">CCyUSBDevice::BulkOutEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00338">338</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aab16bb9899ddc5e13eb02375e0b1c579"></a><!-- doxytag: member="CCyUSBDevice::BytesXfered" ref="aab16bb9899ddc5e13eb02375e0b1c579" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD <a class="el" href="../../db/de7/classCCyUSBDevice.html#aab16bb9899ddc5e13eb02375e0b1c579">CCyUSBDevice::BytesXfered</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00374">374</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a42d40c2ef8bb47df5200adabec4f127c"></a><!-- doxytag: member="CCyUSBDevice::CfgNum" ref="a42d40c2ef8bb47df5200adabec4f127c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a42d40c2ef8bb47df5200adabec4f127c">CCyUSBDevice::CfgNum</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00436">436</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a6739754d475b3d498fc39f9afeec3f02"></a><!-- doxytag: member="CCyUSBDevice::ConfigAttrib" ref="a6739754d475b3d498fc39f9afeec3f02" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a6739754d475b3d498fc39f9afeec3f02">CCyUSBDevice::ConfigAttrib</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00366">366</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a1931287b4c324a645d85385bd86e7d70"></a><!-- doxytag: member="CCyUSBDevice::Configs" ref="a1931287b4c324a645d85385bd86e7d70" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a1931287b4c324a645d85385bd86e7d70">CCyUSBDevice::Configs</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00433">433</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f85fb15255f504a30862cfdb6515177"></a><!-- doxytag: member="CCyUSBDevice::ConfigValue" ref="a2f85fb15255f504a30862cfdb6515177" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a2f85fb15255f504a30862cfdb6515177">CCyUSBDevice::ConfigValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00365">365</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aff4e651d067444c6bca96ab1672fd976"></a><!-- doxytag: member="CCyUSBDevice::ControlEndPt" ref="aff4e651d067444c6bca96ab1672fd976" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d6/d8c/classCCyControlEndPoint.html">CCyControlEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">CCyUSBDevice::ControlEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00334">334</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a4ec1073dcb6d5a6c82d6995cdbb53d4c"></a><!-- doxytag: member="CCyUSBDevice::DevClass" ref="a4ec1073dcb6d5a6c82d6995cdbb53d4c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a4ec1073dcb6d5a6c82d6995cdbb53d4c">CCyUSBDevice::DevClass</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00359">359</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="abda8c1704fc75e51f44f2b22b2498610"></a><!-- doxytag: member="CCyUSBDevice::DeviceName" ref="abda8c1704fc75e51f44f2b22b2498610" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="../../db/de7/classCCyUSBDevice.html#abda8c1704fc75e51f44f2b22b2498610">CCyUSBDevice::DeviceName</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00347">347</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a28b6efde6d8982d478de31a93be1aa99"></a><!-- doxytag: member="CCyUSBDevice::Devices" ref="a28b6efde6d8982d478de31a93be1aa99" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a28b6efde6d8982d478de31a93be1aa99">CCyUSBDevice::Devices</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00430">430</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7bbf6144f55b765e073bbad51ac3ab3d"></a><!-- doxytag: member="CCyUSBDevice::DevNum" ref="a7bbf6144f55b765e073bbad51ac3ab3d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a7bbf6144f55b765e073bbad51ac3ab3d">CCyUSBDevice::DevNum</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00435">435</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac6cc891e56d274c750619ba122a12545"></a><!-- doxytag: member="CCyUSBDevice::DevPath" ref="ac6cc891e56d274c750619ba122a12545" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#ac6cc891e56d274c750619ba122a12545">CCyUSBDevice::DevPath</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00353">353</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a278549d3d7a4f2e67b142578b4866a0b"></a><!-- doxytag: member="CCyUSBDevice::DevProtocol" ref="a278549d3d7a4f2e67b142578b4866a0b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a278549d3d7a4f2e67b142578b4866a0b">CCyUSBDevice::DevProtocol</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00361">361</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a03483c829812c3d9b2745f2eb62276da"></a><!-- doxytag: member="CCyUSBDevice::DevSubClass" ref="a03483c829812c3d9b2745f2eb62276da" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a03483c829812c3d9b2745f2eb62276da">CCyUSBDevice::DevSubClass</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00360">360</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac28dea1e4145378937abc258bd0d9c58"></a><!-- doxytag: member="CCyUSBDevice::DriverVersion" ref="ac28dea1e4145378937abc258bd0d9c58" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG <a class="el" href="../../db/de7/classCCyUSBDevice.html#ac28dea1e4145378937abc258bd0d9c58">CCyUSBDevice::DriverVersion</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00345">345</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a43616a8bbaf85cbdd3755d77261ee141"></a><!-- doxytag: member="CCyUSBDevice::DrvGuid" ref="a43616a8bbaf85cbdd3755d77261ee141" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GUID <a class="el" href="../../db/de7/classCCyUSBDevice.html#a43616a8bbaf85cbdd3755d77261ee141">CCyUSBDevice::DrvGuid</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00428">428</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f86f7b66fe7d90d4f49e62fab95c542"></a><!-- doxytag: member="CCyUSBDevice::EndPoints" ref="a9f86f7b66fe7d90d4f49e62fab95c542" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>** <a class="el" href="../../db/de7/classCCyUSBDevice.html#a9f86f7b66fe7d90d4f49e62fab95c542">CCyUSBDevice::EndPoints</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00331">331</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad5bc6b3470a4723f4b52d89cabcc4cdf"></a><!-- doxytag: member="CCyUSBDevice::FriendlyName" ref="ad5bc6b3470a4723f4b52d89cabcc4cdf" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="../../db/de7/classCCyUSBDevice.html#ad5bc6b3470a4723f4b52d89cabcc4cdf">CCyUSBDevice::FriendlyName</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00348">348</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="af12d4ed55b5f197e34997214d231bc0e"></a><!-- doxytag: member="CCyUSBDevice::hDevice" ref="af12d4ed55b5f197e34997214d231bc0e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE <a class="el" href="../../db/de7/classCCyUSBDevice.html#af12d4ed55b5f197e34997214d231bc0e">CCyUSBDevice::hDevice</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00424">424</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac69d4120ba40602632d99f3d12f5ad41"></a><!-- doxytag: member="CCyUSBDevice::hDevNotification" ref="ac69d4120ba40602632d99f3d12f5ad41" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE <a class="el" href="../../db/de7/classCCyUSBDevice.html#ac69d4120ba40602632d99f3d12f5ad41">CCyUSBDevice::hDevNotification</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00425">425</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="af22e54700064fc9d2c4a268e114114c3"></a><!-- doxytag: member="CCyUSBDevice::hHndNotification" ref="af22e54700064fc9d2c4a268e114114c3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE <a class="el" href="../../db/de7/classCCyUSBDevice.html#af22e54700064fc9d2c4a268e114114c3">CCyUSBDevice::hHndNotification</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00426">426</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a236a63b4b3573e300f51a269c8b5491a"></a><!-- doxytag: member="CCyUSBDevice::hWnd" ref="a236a63b4b3573e300f51a269c8b5491a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE <a class="el" href="../../db/de7/classCCyUSBDevice.html#a236a63b4b3573e300f51a269c8b5491a">CCyUSBDevice::hWnd</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00423">423</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3df4b1a62b364cd88c96e92287bb0215"></a><!-- doxytag: member="CCyUSBDevice::Interfaces" ref="a3df4b1a62b364cd88c96e92287bb0215" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a3df4b1a62b364cd88c96e92287bb0215">CCyUSBDevice::Interfaces</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00431">431</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a51192ec6a80935158c1751fc4aaf234b"></a><!-- doxytag: member="CCyUSBDevice::InterruptInEndPt" ref="a51192ec6a80935158c1751fc4aaf234b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../da/d90/classCCyInterruptEndPoint.html">CCyInterruptEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#a51192ec6a80935158c1751fc4aaf234b">CCyUSBDevice::InterruptInEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00339">339</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adb356bd327091e4c27bfdeff9de68606"></a><!-- doxytag: member="CCyUSBDevice::InterruptOutEndPt" ref="adb356bd327091e4c27bfdeff9de68606" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../da/d90/classCCyInterruptEndPoint.html">CCyInterruptEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#adb356bd327091e4c27bfdeff9de68606">CCyUSBDevice::InterruptOutEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00340">340</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c8f35b1bdbca13a418ab8c278e47495"></a><!-- doxytag: member="CCyUSBDevice::IntfcClass" ref="a8c8f35b1bdbca13a418ab8c278e47495" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a8c8f35b1bdbca13a418ab8c278e47495">CCyUSBDevice::IntfcClass</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00369">369</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aefb84a5e795929c2c694e4764f032865"></a><!-- doxytag: member="CCyUSBDevice::IntfcIndex" ref="aefb84a5e795929c2c694e4764f032865" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#aefb84a5e795929c2c694e4764f032865">CCyUSBDevice::IntfcIndex</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00438">438</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a19ea63dfe0c261caf02c5de9241fde99"></a><!-- doxytag: member="CCyUSBDevice::IntfcNum" ref="a19ea63dfe0c261caf02c5de9241fde99" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a19ea63dfe0c261caf02c5de9241fde99">CCyUSBDevice::IntfcNum</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00437">437</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a58f34d9feeeebed8d4777a81995cd295"></a><!-- doxytag: member="CCyUSBDevice::IntfcProtocol" ref="a58f34d9feeeebed8d4777a81995cd295" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a58f34d9feeeebed8d4777a81995cd295">CCyUSBDevice::IntfcProtocol</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00371">371</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a737bbc16bb985273e1b83f6c2c7b51e4"></a><!-- doxytag: member="CCyUSBDevice::IntfcSubClass" ref="a737bbc16bb985273e1b83f6c2c7b51e4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a737bbc16bb985273e1b83f6c2c7b51e4">CCyUSBDevice::IntfcSubClass</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00370">370</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="af61711a5346e68cd8210248b63e87978"></a><!-- doxytag: member="CCyUSBDevice::IsocInEndPt" ref="af61711a5346e68cd8210248b63e87978" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/d0d/classCCyIsocEndPoint.html">CCyIsocEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#af61711a5346e68cd8210248b63e87978">CCyUSBDevice::IsocInEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00335">335</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2c90505011bd1f3d1c3bd8e00a5ac034"></a><!-- doxytag: member="CCyUSBDevice::IsocOutEndPt" ref="a2c90505011bd1f3d1c3bd8e00a5ac034" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/d0d/classCCyIsocEndPoint.html">CCyIsocEndPoint</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#a2c90505011bd1f3d1c3bd8e00a5ac034">CCyUSBDevice::IsocOutEndPt</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00336">336</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7098e43e8efeff5505151431dd79f0e2"></a><!-- doxytag: member="CCyUSBDevice::Manufacturer" ref="a7098e43e8efeff5505151431dd79f0e2" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wchar_t <a class="el" href="../../db/de7/classCCyUSBDevice.html#a7098e43e8efeff5505151431dd79f0e2">CCyUSBDevice::Manufacturer</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00349">349</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa0db817d12194d208d0e0ee488a9ee43"></a><!-- doxytag: member="CCyUSBDevice::MaxPacketSize" ref="aa0db817d12194d208d0e0ee488a9ee43" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#aa0db817d12194d208d0e0ee488a9ee43">CCyUSBDevice::MaxPacketSize</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00362">362</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adb3dafc261b204da545b9dd71fe541c4"></a><!-- doxytag: member="CCyUSBDevice::MaxPower" ref="adb3dafc261b204da545b9dd71fe541c4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#adb3dafc261b204da545b9dd71fe541c4">CCyUSBDevice::MaxPower</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00367">367</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a981b9935fa9fe7ddeb922803c04609c9"></a><!-- doxytag: member="CCyUSBDevice::NtStatus" ref="a981b9935fa9fe7ddeb922803c04609c9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG <a class="el" href="../../db/de7/classCCyUSBDevice.html#a981b9935fa9fe7ddeb922803c04609c9">CCyUSBDevice::NtStatus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00344">344</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a666b981e74c9605b320f58aafecb945d"></a><!-- doxytag: member="CCyUSBDevice::Product" ref="a666b981e74c9605b320f58aafecb945d" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wchar_t <a class="el" href="../../db/de7/classCCyUSBDevice.html#a666b981e74c9605b320f58aafecb945d">CCyUSBDevice::Product</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00350">350</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad74cc947388d0645d93c06d3384e5da7"></a><!-- doxytag: member="CCyUSBDevice::ProductID" ref="ad74cc947388d0645d93c06d3384e5da7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">USHORT <a class="el" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">CCyUSBDevice::ProductID</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00357">357</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a72d6b3e4545b3f3d27a52cf0d79f58da"></a><!-- doxytag: member="CCyUSBDevice::SerialNumber" ref="a72d6b3e4545b3f3d27a52cf0d79f58da" args="[USB_STRING_MAXLEN]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wchar_t <a class="el" href="../../db/de7/classCCyUSBDevice.html#a72d6b3e4545b3f3d27a52cf0d79f58da">CCyUSBDevice::SerialNumber</a>[<a class="el" href="../../d6/d34/cyapi_8h.html#aa0e9dcfbd4f1ebf349bf2edff8097a33">USB_STRING_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00351">351</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adf34d0bc7f2dc5b54135923f30850ba3"></a><!-- doxytag: member="CCyUSBDevice::StrLangID" ref="adf34d0bc7f2dc5b54135923f30850ba3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">USHORT <a class="el" href="../../db/de7/classCCyUSBDevice.html#adf34d0bc7f2dc5b54135923f30850ba3">CCyUSBDevice::StrLangID</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00342">342</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a92c5d8d34fe5705f18f10d81bcb3a0ba"></a><!-- doxytag: member="CCyUSBDevice::USBAddress" ref="a92c5d8d34fe5705f18f10d81bcb3a0ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UCHAR <a class="el" href="../../db/de7/classCCyUSBDevice.html#a92c5d8d34fe5705f18f10d81bcb3a0ba">CCyUSBDevice::USBAddress</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00358">358</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a73b6d2767cd485526b26081fa77502f2"></a><!-- doxytag: member="CCyUSBDevice::USBCfgs" ref="a73b6d2767cd485526b26081fa77502f2" args="[2]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d6/d8c/classCCyUSBConfig.html">CCyUSBConfig</a>* <a class="el" href="../../db/de7/classCCyUSBDevice.html#a73b6d2767cd485526b26081fa77502f2">CCyUSBDevice::USBCfgs</a>[2]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00421">421</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ac2487879ff6208e3a93b2db4a0596dd0"></a><!-- doxytag: member="CCyUSBDevice::USBConfigDescriptors" ref="ac2487879ff6208e3a93b2db4a0596dd0" args="[2]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d5/dae/struct__USB__CONFIGURATION__DESCRIPTOR.html">PUSB_CONFIGURATION_DESCRIPTOR</a> <a class="el" href="../../db/de7/classCCyUSBDevice.html#ac2487879ff6208e3a93b2db4a0596dd0">CCyUSBDevice::USBConfigDescriptors</a>[2]<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00419">419</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0bfe540f27284ed60dfa064281b5580c"></a><!-- doxytag: member="CCyUSBDevice::USBDeviceDescriptor" ref="a0bfe540f27284ed60dfa064281b5580c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/de5/struct__USB__DEVICE__DESCRIPTOR.html">USB_DEVICE_DESCRIPTOR</a> <a class="el" href="../../db/de7/classCCyUSBDevice.html#a0bfe540f27284ed60dfa064281b5580c">CCyUSBDevice::USBDeviceDescriptor</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00418">418</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0bf109b3b54b178d4a53df06750fee6f"></a><!-- doxytag: member="CCyUSBDevice::USBDIVersion" ref="a0bf109b3b54b178d4a53df06750fee6f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG <a class="el" href="../../db/de7/classCCyUSBDevice.html#a0bf109b3b54b178d4a53df06750fee6f">CCyUSBDevice::USBDIVersion</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00346">346</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad6d052c5b9226848f782ab5c124d1ea8"></a><!-- doxytag: member="CCyUSBDevice::UsbdStatus" ref="ad6d052c5b9226848f782ab5c124d1ea8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ULONG <a class="el" href="../../db/de7/classCCyUSBDevice.html#ad6d052c5b9226848f782ab5c124d1ea8">CCyUSBDevice::UsbdStatus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00343">343</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ab663fa70ebbec67f3af80ca2bdce8935"></a><!-- doxytag: member="CCyUSBDevice::VendorID" ref="ab663fa70ebbec67f3af80ca2bdce8935" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">USHORT <a class="el" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">CCyUSBDevice::VendorID</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a> の <a class="el" href="../../d6/d34/cyapi_8h_source.html#l00356">356</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="../../d6/d34/cyapi_8h_source.html">cyapi.h</a></li>
+</ul>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:41 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

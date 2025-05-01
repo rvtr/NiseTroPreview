@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: 偽トロキャプチャのキャプチャーデータフォーマットについて</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li class="current"><a href="pages.html"><span>関連ページ</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li><a href="dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+
+
+<h1><a class="anchor" id="nise_capture_dataformat">偽トロキャプチャのキャプチャーデータフォーマットについて </a></h1><p>初期版のデータフォーマット("読んだ方が良い.txt"より抜粋) <br/>
+</p>
+<p>&gt;RGB３バイトのRAWデータです。 <br/>
+ &gt;各バイトデータにRGBデータが6ビットずつ格納されています。 <br/>
+ &gt;各バイトデータの先頭ビットはフレームスタート(Vsync)です。 <br/>
+ &gt;先頭ビットが1になったタイミングから256x192または256x384ドット分のデータが１画面分。 <br/>
+ &gt;先頭ビットは30ピクセル分ほど1になってます。 <br/>
+</p>
+<pre>&gt;1byte    2byte    3byte    4byte    5byte</pre> <pre>&gt;V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG</pre><p>&gt;１フレーム分のデータ完成する前に先頭ビットがHighになった場合、そのフレームの <br/>
+ &gt;どこかで、データが欠落してます。 <br/>
+</p>
+<hr/>
+ <br/>
+</p>
+<p>60fps対応版("偽トロキャプチャと車とかとか"の記事から抜粋) <br/>
+</p>
+<p>&gt;上画面と下画面がドットレベルで交互に出力されています。 <br/>
+ &gt;今まで使っていなかった前から２ビット目を上画面・下画面のフラグとしました。 <br/>
+ &gt;これで上記のように交互にデータが来てもどっちの画面のデータか判断できると思います。 <br/>
+</p>
+<hr/>
+ <br/>
+</p>
+<p>V = VSync(垂直同期) <br/>
+ 0 = NULL <br/>
+ R = 赤(0〜63) <br/>
+ G = 緑(0〜63) <br/>
+ B = 青(0〜63) <br/>
+</p>
+<p>S = 画面 0:上画面 1:下画面(60fps対応版のみ) <br/>
+</p>
+<p>初期版 <br/>
+ V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG V0BBBBBB ... <br/>
+</p>
+<p>60fps版 <br/>
+ VSRRRRRR VSGGGGGG VSBBBBBB VSRRRRRR VSGGGGGG VSBBBBBB VSRRRRRR VSGGGGGG VSBBBBBB ... <br/>
+</p>
+<p>60fps版の例 <br/>
+ 10RRRRRR 10GGGGGG 10BBBBBB 11RRRRRR 11GGGGGG 11BBBBBB 10RRRRRR 10GGGGGG 10BBBBBB ... <br/>
+</p>
+<hr/>
+ <br/>
+ <a class="el" href="d6/d35/classCNISETRO.html#a09f2d13126c076e92343087814c05135">CNISETRO::getdata_from_cusb2_func</a></p>
+<p><a class="el" href="d6/d35/classCNISETRO.html#af5f52ede3aa9405b4a17834ecdbd32c5">CNISETRO::func_first</a></p>
+<p><a class="el" href="d6/d35/classCNISETRO.html#a3a9b41d9a67a63fdf3b19bd690e1e0fc">CNISETRO::func_60fps</a> </p>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

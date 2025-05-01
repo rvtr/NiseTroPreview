@@ -1,9 +1,12 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include "_tprintd.h"
 #include "nisetro.h"
 #include "configio.h"
+
+extern "C" {
+#include "_tprintd.h"
+};
 
 #import "msxml4.dll" raw_interfaces_only
 

@@ -4,7 +4,9 @@
 #include <string.h>
 #include <tchar.h>
 #include "CAVISAVE.h"
+extern "C" {
 #include "_tprintd.h"
+};
 
 #pragma comment(lib,"avutil-50.lib")
 #pragma comment(lib,"avformat-52.lib")

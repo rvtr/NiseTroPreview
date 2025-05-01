@@ -6,7 +6,9 @@
 */
 #include <time.h>
 #include "nisetro.h"
+extern "C" {
 #include "_tprintd.h"
+};
 
 #ifdef DEBUG_FW
 u8 fw_iic[1024*8];
@@ -53,7 +55,10 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 		// なんか微妙
 		if( (30*3) < pNise->m_CapBufCur1 && bVSync ){
 			bool bError = false;
-			if( pNise->m_CapBufCur1 < NDS_SCREEN2BUF_SIZE ){
+			
+			// エラーチェック
+			unsigned long ulScrBufSize = ( pNise->m_eScr == ECAPSCR_DSCR ? NDS_SCREEN2BUF_SIZE : NDS_SCREENBUF_SIZE );
+			if( pNise->m_CapBufCur1 < ulScrBufSize ){
 				if( pNise->m_ulErrFrm++ == 0xFFFFFFFF )	pNise->m_ulErrFrm = 0;
 				bError = true;
 			}
@@ -64,10 +69,14 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 				if( pNise->m_lScrBufSel == 0 ) lSel = 1; else lSel = 1;
 				if( pNise->m_mutex_[lSel].lock(INFINITE) == false){
 					m_dFps = checkFPS();
+					
+					// 書き込む位置のオフセット
+					unsigned long offset = (pNise->m_eScr == ECAPSCR_BTM ? NDS_SCREENBUF_SIZE : 0);
+					size_t write_size = (pNise->m_eScr == ECAPSCR_DSCR ? NDS_SCREEN2BUF_SIZE : NDS_SCREENBUF_SIZE);
 #if _MSC_VER >= 1400
-					errno_t e = memcpy_s( pNise->m_ScrData_[lSel] , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					errno_t e = memcpy_s( pNise->m_ScrData_[lSel]+offset , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , write_size );
 #else
-					memcpy( pNise->m_ScrData_[lSel] , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					memcpy( pNise->m_ScrData_[lSel]+offset , pNise->m_CaptureBuffer , write_size );
 #endif
 					pNise->m_lScrBufSel = lSel;
 					pNise->m_mutex_[lSel].unlock();
@@ -86,7 +95,7 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 		
 		pNise->m_CaptureBuffer[cur] = d;
 		
-		// バッファーオーバーを防ぐために
+		// バッファーオーバーライトを防ぐために
 		if( pNise->m_CapBufCur1 > NDS_SCREEN2BUF_SIZE )			
 			pNise->m_CapBufCur1 = pNise->m_CapBufCur2 = 0;
 		//
@@ -142,7 +151,7 @@ void CNISETRO::func_60fps( u8* buf , u32 len ){
 		
 		pNise->m_CaptureBuffer[cur] = d;
 		
-		// バッファーオーバーを防ぐために
+		// バッファーオーバーライトを防ぐために
 		if( pNise->m_CapBufCur1 > NDS_SCREENBUF_SIZE )			
 			pNise->m_CapBufCur1 = pNise->m_CapBufCur2 = 0;
 		//
@@ -278,6 +287,7 @@ void CNISETRO::NisetroQuit( void ){
 			delete usb;
 			usb = NULL;
 		}
+		param_init();
 		return;
 	}
 	

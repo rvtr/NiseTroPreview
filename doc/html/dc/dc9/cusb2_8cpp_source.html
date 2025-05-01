@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: cusb2.cpp ソースファイル</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="../../globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><a class="el" href="../../dir_d3eab47ab00cf93b43160fe3b67b2869.html">src</a>
+  </div>
+</div>
+<div class="contents">
+<h1>cusb2.cpp</h1><a href="../../dc/dc9/cusb2_8cpp.html">説明を見る。</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//</span>
+<a name="l00002"></a>00002 <span class="comment">//Chameleon USB FX2 API Ver1.00 By OPTIMIZE</span>
+<a name="l00003"></a>00003 <span class="comment">//</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;tchar.h&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;fcntl.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;sys/stat.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;io.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;windows.h&gt;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="../../d9/d8e/cusb2_8h.html">cusb2.h</a>&quot;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="../../d4/dba/classcusb2.html#abdff54e7436149c35a858f0eb31686b3">00015</a> <a class="code" href="../../d4/dba/classcusb2.html#abdff54e7436149c35a858f0eb31686b3">cusb2::cusb2</a>(HANDLE h)  <span class="comment">//コンソールモード時はhはNULLを指定</span>
+<a name="l00016"></a>00016 {
+<a name="l00017"></a>00017     <a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a> = <span class="keyword">false</span>;
+<a name="l00018"></a>00018     <a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a> = 0;
+<a name="l00019"></a>00019     <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a> = <span class="keyword">new</span> <a class="code" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a>(h);
+<a name="l00020"></a>00020     <a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a> = <span class="keyword">false</span>;
+<a name="l00021"></a>00021     <a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a> = <span class="keyword">false</span>;
+<a name="l00022"></a>00022     <span class="keywordflow">if</span>(h == NULL)
+<a name="l00023"></a>00023     {
+<a name="l00024"></a>00024         <a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a> = <span class="keyword">true</span>;
+<a name="l00025"></a>00025         <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>= NULL;
+<a name="l00026"></a>00026     }
+<a name="l00027"></a>00027     <span class="keywordflow">else</span>
+<a name="l00028"></a>00028     {
+<a name="l00029"></a>00029         <a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a> = <span class="keyword">false</span>;
+<a name="l00030"></a>00030         <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>= <span class="keyword">new</span> <a class="code" href="../../db/de7/classCCyUSBDevice.html">CCyUSBDevice</a>();
+<a name="l00031"></a>00031     }
+<a name="l00032"></a>00032 }
+<a name="l00033"></a>00033 
+<a name="l00034"></a><a class="code" href="../../d4/dba/classcusb2.html#a45a789b4163de6ef43d578c455ec259a">00034</a> <a class="code" href="../../d4/dba/classcusb2.html#a45a789b4163de6ef43d578c455ec259a">cusb2::‾cusb2</a>()
+<a name="l00035"></a>00035 {
+<a name="l00036"></a>00036     <span class="keywordflow">if</span>(<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a85124e7e1a81bd938a6597aa91dfb2a5">IsOpen</a>()) <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00037"></a>00037     <span class="keyword">delete</span> <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>;
+<a name="l00038"></a>00038     <span class="keyword">delete</span> <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>;
+<a name="l00039"></a>00039 }
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="../../d4/dba/classcusb2.html#a5c872c37114d7becf4dbffe7f73c81cd">00041</a> <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a5c872c37114d7becf4dbffe7f73c81cd">cusb2::fwload</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <span class="keywordtype">id</span>, <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *fw, <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *string1)
+<a name="l00042"></a>00042 {
+<a name="l00043"></a>00043     <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> d;
+<a name="l00044"></a>00044     <span class="keywordtype">bool</span> find = <span class="keyword">false</span>;
+<a name="l00045"></a>00045     <a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a> = id;
+<a name="l00046"></a>00046     <span class="keywordflow">if</span>(<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a85124e7e1a81bd938a6597aa91dfb2a5">IsOpen</a>()) <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     <span class="keywordflow">if</span>(<a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a> || (<a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a> == <span class="keyword">false</span>)){
+<a name="l00049"></a>00049         <span class="keywordflow">for</span>(d=0; d &lt; <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a47116934e31123386ef832b9f5a6da5b">DeviceCount</a>(); d++)
+<a name="l00050"></a>00050         {
+<a name="l00051"></a>00051             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad4d451b581baa8d6ce68ffad3e41a41d">Open</a>(d);
+<a name="l00052"></a>00052             <span class="keywordflow">if</span>(((<span class="keywordtype">id</span> == 0)&amp;&amp;((<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a> &amp; 0x0f00) == 0x0000)) <span class="comment">//FX2LP:0xA0nn FX2:0x00nn</span>
+<a name="l00053"></a>00053                 || (<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a> == 0xff00+<span class="keywordtype">id</span>))
+<a name="l00054"></a>00054             {
+<a name="l00055"></a>00055                 <span class="keywordflow">if</span>((<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a> == 0x04B4) &amp;&amp; (<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a> == 0x8613)) find = <span class="keyword">true</span>;
+<a name="l00056"></a>00056                 <span class="keywordflow">if</span>((<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a> == 0x04B4) &amp;&amp; (<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a> == 0x1004)) find = <span class="keyword">true</span>;
+<a name="l00057"></a>00057             }
+<a name="l00058"></a>00058             <span class="keywordflow">if</span>(find) <span class="keywordflow">break</span>;
+<a name="l00059"></a>00059             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a7098e43e8efeff5505151431dd79f0e2">Manufacturer</a>[0]=0;   <span class="comment">//前回openしたデバイスの情報が残るので消しておく</span>
+<a name="l00060"></a>00060             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062         <span class="keywordflow">if</span>(!find) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064         <span class="comment">//必要なファームがロードされているか文字列で判断</span>
+<a name="l00065"></a>00065         <span class="keywordflow">if</span>(string1 != NULL)
+<a name="l00066"></a>00066         {
+<a name="l00067"></a>00067             <span class="keywordtype">wchar_t</span> wcs[64];
+<a name="l00068"></a>00068 <span class="preprocessor">#if _MSC_VER &gt;= 1400</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span>            <span class="keywordtype">size_t</span> n;
+<a name="l00070"></a>00070             mbstowcs_s(&amp;n, wcs, 64, (<span class="keywordtype">char</span> *)string1, 64);
+<a name="l00071"></a>00071 <span class="preprocessor">#else</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>            mbstowcs( wcs, (<span class="keywordtype">char</span> *)string1 , strlen((<span class="keywordtype">char</span>*)string1));
+<a name="l00073"></a>00073 <span class="preprocessor">#endif</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>            <span class="keywordflow">if</span>(wcscmp(<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a7098e43e8efeff5505151431dd79f0e2">Manufacturer</a>, wcs) == 0)
+<a name="l00075"></a>00075                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00076"></a>00076         }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078         <span class="comment">//IICイメージのロード＆8051リセット</span>
+<a name="l00079"></a>00079         <a class="code" href="../../d9/d8e/cusb2_8h.html#aa0b167025ed1eead1300bc4dbdfb230e">u16</a> len, ofs;
+<a name="l00080"></a>00080         <span class="keywordtype">long</span> llen;  
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082         <span class="comment">//8051停止</span>
+<a name="l00083"></a>00083         <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#a89bdb30fb68cbd49d02c99dea6a72cff">ReqCode</a> = 0xA0;
+<a name="l00084"></a>00084         <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#a0cb7ccfe668a0fd98d5d48a184078f94">Value</a> = 0xE600;
+<a name="l00085"></a>00085         <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#afe59ed4f1d0a579a9705983622651d7e">Index</a> = 0;
+<a name="l00086"></a>00086         llen = 1;
+<a name="l00087"></a>00087         <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> tmp = 1;
+<a name="l00088"></a>00088         <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#abd5d8227e71899509d1adccae7eb3616">Write</a>(&amp;tmp, llen); 
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090         fw += 8;
+<a name="l00091"></a>00091         <span class="keywordtype">bool</span> fw_patch = <span class="keyword">false</span>;
+<a name="l00092"></a>00092         <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *fw_patch_ptr;
+<a name="l00093"></a>00093         <span class="keywordflow">for</span>(;;)
+<a name="l00094"></a>00094         {
+<a name="l00095"></a>00095             len = fw[0]*0x100 + fw[1];
+<a name="l00096"></a>00096             ofs = fw[2]*0x100 + fw[3];  
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098             <span class="comment">//FWのデバイスデスクリプタ VID=04B4 PID=1004 Bcd=0000を見つけ出し、</span>
+<a name="l00099"></a>00099             <span class="comment">//idに適合するBcd(FFxx)に書き換える</span>
+<a name="l00100"></a>00100             <span class="keyword">const</span> <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> des[]={0xb4, 0x04, 0x04, 0x10, 0x00, 0x00};
+<a name="l00101"></a>00101             <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> i,j;
+<a name="l00102"></a>00102             <span class="keywordflow">for</span>(i = 0; i &lt; (len &amp; (unsigned)0x7fff); i++)
+<a name="l00103"></a>00103             {
+<a name="l00104"></a>00104                 <span class="keywordflow">for</span>(j = 0; j &lt; 6; j++) <span class="keywordflow">if</span>(fw[4+i+j] != des[j]) <span class="keywordflow">break</span>;
+<a name="l00105"></a>00105                 <span class="keywordflow">if</span>(j &gt;= 6)
+<a name="l00106"></a>00106                 {
+<a name="l00107"></a>00107                     fw[4+i+4] = id;
+<a name="l00108"></a>00108                     fw[4+i+5] = 0xff;
+<a name="l00109"></a>00109                     fw_patch = <span class="keyword">true</span>;
+<a name="l00110"></a>00110                     fw_patch_ptr = fw+4+i+4;
+<a name="l00111"></a>00111                     <span class="keywordflow">break</span>;
+<a name="l00112"></a>00112                 }
+<a name="l00113"></a>00113             }
+<a name="l00114"></a>00114             <span class="comment">//ベンダリクエスト&apos;A0&apos;を使用して8051に書き込む</span>
+<a name="l00115"></a>00115             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#a0cb7ccfe668a0fd98d5d48a184078f94">Value</a> = ofs;
+<a name="l00116"></a>00116             llen = len &amp; 0x7fff;
+<a name="l00117"></a>00117             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#aff4e651d067444c6bca96ab1672fd976">ControlEndPt</a>-&gt;<a class="code" href="../../d6/d8c/classCCyControlEndPoint.html#abd5d8227e71899509d1adccae7eb3616">Write</a>(fw+4, llen); 
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119             <span class="keywordflow">if</span>(len &amp; 0x8000)
+<a name="l00120"></a>00120                 <span class="keywordflow">break</span>;  <span class="comment">//最終（リセット）</span>
+<a name="l00121"></a>00121             fw += len+4;
+<a name="l00122"></a>00122         }
+<a name="l00123"></a>00123         <span class="keywordflow">if</span>(fw_patch)
+<a name="l00124"></a>00124         {
+<a name="l00125"></a>00125             fw_patch_ptr[0]=fw_patch_ptr[1]=0;
+<a name="l00126"></a>00126         }
+<a name="l00127"></a>00127         <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00128"></a>00128         <a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a> = <span class="keyword">true</span>;
+<a name="l00129"></a>00129         <span class="keywordflow">if</span>(!<a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00130"></a>00130         Sleep(100);
+<a name="l00131"></a>00131     }
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133     <span class="comment">//再起動後のファームに接続</span>
+<a name="l00134"></a>00134     find = <span class="keyword">false</span>;
+<a name="l00135"></a>00135     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> i;
+<a name="l00136"></a>00136     <span class="keywordflow">for</span>(i = 0; i &lt; 400; i++)
+<a name="l00137"></a>00137     {
+<a name="l00138"></a>00138         <span class="keywordflow">for</span>(d=0; d &lt; <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a47116934e31123386ef832b9f5a6da5b">DeviceCount</a>(); d++)
+<a name="l00139"></a>00139         {
+<a name="l00140"></a>00140             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad4d451b581baa8d6ce68ffad3e41a41d">Open</a>(d);
+<a name="l00141"></a>00141             <span class="keywordflow">if</span>((<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a> == 0xff00+<span class="keywordtype">id</span>) &amp;&amp; 
+<a name="l00142"></a>00142                 (<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a> == 0x04B4) &amp;&amp; (<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a> == 0x1004)) find = <span class="keyword">true</span>;
+<a name="l00143"></a>00143             <span class="keywordflow">if</span>(find) <span class="keywordflow">break</span>;
+<a name="l00144"></a>00144             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00145"></a>00145         }
+<a name="l00146"></a>00146         <span class="keywordflow">if</span>(find || !<a class="code" href="../../d4/dba/classcusb2.html#adfdcde08cb69eda7769216a84c4e2f9c">cons_mode</a>) <span class="keywordflow">break</span>;
+<a name="l00147"></a>00147         Sleep(100);
+<a name="l00148"></a>00148     }
+<a name="l00149"></a>00149     <span class="keywordflow">if</span>(!find) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00150"></a>00150     <a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a> = <span class="keyword">false</span>;
+<a name="l00151"></a>00151     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00152"></a>00152 }
+<a name="l00153"></a>00153 
+<a name="l00154"></a><a class="code" href="../../d4/dba/classcusb2.html#a82912504c372ec6db974e4a85b8912dc">00154</a> <a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a>* <a class="code" href="../../d4/dba/classcusb2.html#a82912504c372ec6db974e4a85b8912dc">cusb2::get_endpoint</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> addr)
+<a name="l00155"></a>00155 {
+<a name="l00156"></a>00156     <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> ep;
+<a name="l00157"></a>00157     <span class="keywordflow">for</span>(ep = 0; ep &lt; <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a93e7d14ab9e3abc2c6dbc2d7993a24e7">EndPointCount</a>(); ep++)
+<a name="l00158"></a>00158     {
+<a name="l00159"></a>00159         <span class="keywordflow">if</span>(<a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9f86f7b66fe7d90d4f49e62fab95c542">EndPoints</a>[ep]-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a191d893403c0f79223df25198234cd92">Address</a> == addr)
+<a name="l00160"></a>00160         {
+<a name="l00161"></a>00161             <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9f86f7b66fe7d90d4f49e62fab95c542">EndPoints</a>[ep]-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a06f9b70011482755ec4770a266127aac">Reset</a>();
+<a name="l00162"></a>00162             <span class="keywordflow">return</span> <a class="code" href="../../d4/dba/classcusb2.html#a8c7feab39db19fcb8605e6652409b7f6">USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9f86f7b66fe7d90d4f49e62fab95c542">EndPoints</a>[ep];
+<a name="l00163"></a>00163         }
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165     <span class="keywordflow">return</span> NULL;
+<a name="l00166"></a>00166 }
+<a name="l00167"></a>00167 
+<a name="l00168"></a><a class="code" href="../../d4/dba/classcusb2.html#a77f428befb5aa8c2eaed70066da4826d">00168</a> <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a77f428befb5aa8c2eaed70066da4826d">cusb2::xfer</a>(<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *ep, PUCHAR buf, LONG &amp;len)
+<a name="l00169"></a>00169 {
+<a name="l00170"></a>00170     <span class="keywordflow">if</span>(ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a076beff096af5aa7ed70817ec5729d68">GetXferSize</a>() &lt; (unsigned)len)
+<a name="l00171"></a>00171         ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#acd080c3293a5ed4e1a9e868f9c7bf903">SetXferSize</a>(len);
+<a name="l00172"></a>00172     <span class="keywordflow">return</span>(ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a131b57a19ba62a5d29d883e2bb65d68d">XferData</a>(buf, len));
+<a name="l00173"></a>00173 }
+<a name="l00174"></a>00174 
+<a name="l00175"></a><a class="code" href="../../dc/dc9/cusb2_8cpp.html#a66d6b4f0b2af15b021cf3d09b026134e">00175</a> <span class="keywordtype">void</span> <a class="code" href="../../dc/dc9/cusb2_8cpp.html#a66d6b4f0b2af15b021cf3d09b026134e">thread_proc</a>(cusb2_tcb *tcb)
+<a name="l00176"></a>00176 {
+<a name="l00177"></a>00177     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> i;
+<a name="l00178"></a>00178     <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> qnum=0;
+<a name="l00179"></a>00179     <span class="keywordtype">bool</span> success = <span class="keyword">false</span>;
+<a name="l00180"></a>00180     LONG len;
+<a name="l00181"></a>00181     <a class="code" href="../../dc/d91/classCCyUSBEndPoint.html">CCyUSBEndPoint</a> *ep;
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184     ep = tcb-&gt;ep;
+<a name="l00185"></a>00185     tcb-&gt;nsuccess = 0;
+<a name="l00186"></a>00186     tcb-&gt;nfailure = 0;
+<a name="l00187"></a>00187     tcb-&gt;looping = <span class="keyword">true</span>;
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189     OVERLAPPED *ovlp = <span class="keyword">new</span> OVERLAPPED[tcb-&gt;ques];
+<a name="l00190"></a>00190     PUCHAR *data = <span class="keyword">new</span> PUCHAR[tcb-&gt;ques];
+<a name="l00191"></a>00191     PUCHAR *context = <span class="keyword">new</span> PUCHAR[tcb-&gt;ques];
+<a name="l00192"></a>00192     ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#acd080c3293a5ed4e1a9e868f9c7bf903">SetXferSize</a>(tcb-&gt;xfer);
+<a name="l00193"></a>00193     BOOL ret=SetThreadPriority(tcb-&gt;th, THREAD_PRIORITY_HIGHEST);
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195     <span class="keywordflow">if</span>(tcb-&gt;epaddr &amp; 0x80)
+<a name="l00196"></a>00196     {   <span class="comment">//IN(FX2-&gt;PC)転送</span>
+<a name="l00197"></a>00197         <span class="keywordflow">for</span>(i=0; i&lt;tcb-&gt;ques; i++)
+<a name="l00198"></a>00198         {
+<a name="l00199"></a>00199             data[i] = <span class="keyword">new</span> UCHAR[tcb-&gt;xfer];
+<a name="l00200"></a>00200             ovlp[i].hEvent = CreateEvent(NULL, <span class="keyword">false</span>, <span class="keyword">false</span>, NULL);
+<a name="l00201"></a>00201             context[i] = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a01532406679f46f1595826ba100d783c">BeginDataXfer</a>(data[i], tcb-&gt;xfer, &amp;(ovlp[i]));
+<a name="l00202"></a>00202             qnum++;
+<a name="l00203"></a>00203         }
+<a name="l00204"></a>00204         <span class="keywordflow">for</span>(i=0;;)
+<a name="l00205"></a>00205         {
+<a name="l00206"></a>00206             <span class="keywordflow">if</span>(!ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a229d61107a4a39ded01a1e4123a30a2e">WaitForXfer</a>(&amp;(ovlp[i]),500))
+<a name="l00207"></a>00207             {
+<a name="l00208"></a>00208                 ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a824bef23479916d9c73317811520f263">Abort</a>();
+<a name="l00209"></a>00209                 WaitForSingleObject(&amp;(ovlp[i]),500);
+<a name="l00210"></a>00210             }
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212             len = tcb-&gt;xfer;
+<a name="l00213"></a>00213             success = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a93d3a841d27b53fb2345e66fb3812f88">FinishDataXfer</a>(data[i], len, &amp;(ovlp[i]), context[i]);
+<a name="l00214"></a>00214             qnum--;
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216             <span class="keywordflow">if</span>(success)
+<a name="l00217"></a>00217             {
+<a name="l00218"></a>00218                 <span class="keywordflow">if</span>(tcb-&gt;looping)
+<a name="l00219"></a>00219                 {
+<a name="l00220"></a>00220                     <span class="keywordflow">if</span>(!tcb-&gt;cb_func(data[i], (<a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>)len , tcb))
+<a name="l00221"></a>00221                     {
+<a name="l00222"></a>00222                         tcb-&gt;looping = <span class="keyword">false</span>;
+<a name="l00223"></a>00223                     }
+<a name="l00224"></a>00224                 }
+<a name="l00225"></a>00225                 tcb-&gt;nsuccess++;
+<a name="l00226"></a>00226             }
+<a name="l00227"></a>00227             <span class="keywordflow">else</span>
+<a name="l00228"></a>00228             {
+<a name="l00229"></a>00229                 tcb-&gt;nfailure++;
+<a name="l00230"></a>00230             }
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232             <span class="keywordflow">if</span>(tcb-&gt;looping)
+<a name="l00233"></a>00233             {
+<a name="l00234"></a>00234                 context[i] = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a01532406679f46f1595826ba100d783c">BeginDataXfer</a>(data[i], tcb-&gt;xfer, &amp;(ovlp[i]));
+<a name="l00235"></a>00235                 qnum++;
+<a name="l00236"></a>00236             }
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238             <span class="keywordflow">if</span>(++i == tcb-&gt;ques) i = 0;
+<a name="l00239"></a>00239             <span class="keywordflow">if</span>(tcb-&gt;looping == <span class="keyword">false</span>)
+<a name="l00240"></a>00240             {
+<a name="l00241"></a>00241                 <span class="keywordflow">if</span>(qnum == 0)
+<a name="l00242"></a>00242                     <span class="keywordflow">break</span>;
+<a name="l00243"></a>00243             }
+<a name="l00244"></a>00244         }
+<a name="l00245"></a>00245     }
+<a name="l00246"></a>00246     <span class="keywordflow">else</span>
+<a name="l00247"></a>00247     {   <span class="comment">//OUT(PC-&gt;FX2)転送</span>
+<a name="l00248"></a>00248         <span class="keywordflow">for</span>(i=0; i&lt;tcb-&gt;ques; i++)
+<a name="l00249"></a>00249         {
+<a name="l00250"></a>00250             data[i] = <span class="keyword">new</span> UCHAR[tcb-&gt;xfer];
+<a name="l00251"></a>00251             ovlp[i].hEvent = CreateEvent(NULL, <span class="keyword">false</span>, <span class="keyword">false</span>, NULL);
+<a name="l00252"></a>00252             <span class="keywordflow">if</span>(tcb-&gt;looping)
+<a name="l00253"></a>00253             {
+<a name="l00254"></a>00254                 <span class="keywordflow">if</span>(!tcb-&gt;cb_func(data[i], (<a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>)tcb-&gt;xfer , tcb))
+<a name="l00255"></a>00255                 {
+<a name="l00256"></a>00256                     tcb-&gt;looping = <span class="keyword">false</span>;
+<a name="l00257"></a>00257                 }
+<a name="l00258"></a>00258             }
+<a name="l00259"></a>00259             context[i] = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a01532406679f46f1595826ba100d783c">BeginDataXfer</a>(data[i], tcb-&gt;xfer, &amp;(ovlp[i]));
+<a name="l00260"></a>00260             qnum++;
+<a name="l00261"></a>00261         }
+<a name="l00262"></a>00262         <span class="keywordflow">for</span>(i=0;;)
+<a name="l00263"></a>00263         {
+<a name="l00264"></a>00264             <span class="keywordflow">if</span>(!ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a229d61107a4a39ded01a1e4123a30a2e">WaitForXfer</a>(&amp;(ovlp[i]),500))
+<a name="l00265"></a>00265             {
+<a name="l00266"></a>00266                 ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a824bef23479916d9c73317811520f263">Abort</a>();
+<a name="l00267"></a>00267                 WaitForSingleObject(&amp;(ovlp[i]),500);
+<a name="l00268"></a>00268             }
+<a name="l00269"></a>00269 
+<a name="l00270"></a>00270             len = tcb-&gt;xfer;
+<a name="l00271"></a>00271             success = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a93d3a841d27b53fb2345e66fb3812f88">FinishDataXfer</a>(data[i], len, &amp;(ovlp[i]), context[i]);
+<a name="l00272"></a>00272             qnum--;
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274             <span class="keywordflow">if</span>(success)
+<a name="l00275"></a>00275             {
+<a name="l00276"></a>00276                 tcb-&gt;nsuccess++;
+<a name="l00277"></a>00277             }
+<a name="l00278"></a>00278             <span class="keywordflow">else</span>
+<a name="l00279"></a>00279             {
+<a name="l00280"></a>00280                 tcb-&gt;nfailure++;
+<a name="l00281"></a>00281             }
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283             <span class="keywordflow">if</span>(tcb-&gt;looping)
+<a name="l00284"></a>00284             {
+<a name="l00285"></a>00285                 <span class="keywordflow">if</span>(!tcb-&gt;cb_func(data[i], (<a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a>)tcb-&gt;xfer , tcb))
+<a name="l00286"></a>00286                 {
+<a name="l00287"></a>00287                     tcb-&gt;looping = <span class="keyword">false</span>;
+<a name="l00288"></a>00288                 }
+<a name="l00289"></a>00289                 context[i] = ep-&gt;<a class="code" href="../../dc/d91/classCCyUSBEndPoint.html#a01532406679f46f1595826ba100d783c">BeginDataXfer</a>(data[i], tcb-&gt;xfer, &amp;(ovlp[i]));
+<a name="l00290"></a>00290                 qnum++;
+<a name="l00291"></a>00291             }
+<a name="l00292"></a>00292 
+<a name="l00293"></a>00293             <span class="keywordflow">if</span>(++i == tcb-&gt;ques) i = 0;
+<a name="l00294"></a>00294             <span class="keywordflow">if</span>(tcb-&gt;looping == <span class="keyword">false</span>)
+<a name="l00295"></a>00295             {
+<a name="l00296"></a>00296                 <span class="keywordflow">if</span>(qnum == 0)
+<a name="l00297"></a>00297                     <span class="keywordflow">break</span>;
+<a name="l00298"></a>00298             }
+<a name="l00299"></a>00299         }
+<a name="l00300"></a>00300     }
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302     <span class="keywordflow">for</span>(i=0; i&lt;tcb-&gt;ques; i++)
+<a name="l00303"></a>00303     {
+<a name="l00304"></a>00304         CloseHandle(ovlp[i].hEvent);
+<a name="l00305"></a>00305         <span class="keyword">delete</span> [] data[i];
+<a name="l00306"></a>00306     }
+<a name="l00307"></a>00307     <span class="keyword">delete</span> [] context;
+<a name="l00308"></a>00308     <span class="keyword">delete</span> [] data;
+<a name="l00309"></a>00309     <span class="keyword">delete</span> [] ovlp;
+<a name="l00310"></a>00310 }
+<a name="l00311"></a>00311 
+<a name="l00312"></a><a class="code" href="../../d4/dba/classcusb2.html#aa3b52f7feaffa74d56f994fd6cbd3b4c">00312</a> cusb2_tcb* <a class="code" href="../../d4/dba/classcusb2.html#aa3b52f7feaffa74d56f994fd6cbd3b4c">cusb2::start_thread</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> epaddr, <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> xfer, <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> ques, <span class="keywordtype">bool</span> (*cb_func)(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> *, <a class="code" href="../../d9/d8e/cusb2_8h.html#a10e94b422ef0c20dcdec20d31a1f5049">u32</a> , <a class="code" href="../../d0/db2/struct__cusb2__tcb.html">_cusb2_tcb</a>*))
+<a name="l00313"></a>00313 {
+<a name="l00314"></a>00314     cusb2_tcb *tcb = <span class="keyword">new</span> cusb2_tcb;
+<a name="l00315"></a>00315     tcb-&gt;epaddr = epaddr;
+<a name="l00316"></a>00316     tcb-&gt;ep = <a class="code" href="../../d4/dba/classcusb2.html#a82912504c372ec6db974e4a85b8912dc">get_endpoint</a>(epaddr);
+<a name="l00317"></a>00317     tcb-&gt;epaddr = epaddr;
+<a name="l00318"></a>00318     tcb-&gt;xfer = xfer;
+<a name="l00319"></a>00319     tcb-&gt;ques = ques;
+<a name="l00320"></a>00320     tcb-&gt;cb_func = cb_func;
+<a name="l00321"></a>00321     tcb-&gt;userpointer = NULL;
+<a name="l00322"></a>00322     tcb-&gt;th = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)<a class="code" href="../../dc/dc9/cusb2_8cpp.html#a66d6b4f0b2af15b021cf3d09b026134e">thread_proc</a>, tcb, 0, NULL);
+<a name="l00323"></a>00323     Sleep(100);
+<a name="l00324"></a>00324     <span class="keywordflow">return</span> tcb;
+<a name="l00325"></a>00325 }
+<a name="l00326"></a>00326 
+<a name="l00327"></a><a class="code" href="../../d4/dba/classcusb2.html#a217db1b8cc28ece4655e0216bd84a528">00327</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/dba/classcusb2.html#a217db1b8cc28ece4655e0216bd84a528">cusb2::delete_thread</a>(cusb2_tcb *tcb)
+<a name="l00328"></a>00328 {
+<a name="l00329"></a>00329     WaitForSingleObject(tcb-&gt;th, INFINITE);
+<a name="l00330"></a>00330     <span class="keyword">delete</span> tcb;
+<a name="l00331"></a>00331 }
+<a name="l00332"></a>00332 
+<a name="l00333"></a><a class="code" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">00333</a> <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> <a class="code" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">cusb2::check_fx2</a>(<a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> <span class="keywordtype">id</span>)
+<a name="l00334"></a>00334 {
+<a name="l00335"></a>00335     <a class="code" href="../../d9/d8e/cusb2_8h.html#aed742c436da53c1080638ce6ef7d13de">u8</a> d;
+<a name="l00336"></a>00336     <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> ret = 0;
+<a name="l00337"></a>00337     <span class="keywordflow">for</span>(d=0; d &lt; <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a47116934e31123386ef832b9f5a6da5b">DeviceCount</a>(); d++)
+<a name="l00338"></a>00338     {
+<a name="l00339"></a>00339         <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad4d451b581baa8d6ce68ffad3e41a41d">Open</a>(d);
+<a name="l00340"></a>00340         <span class="keywordflow">if</span>(((<span class="keywordtype">id</span> == 0)&amp;&amp;((<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a> &amp; 0x0f00) == 0x0000))    <span class="comment">//FX2LP:0xA0nn FX2:0x00nn</span>
+<a name="l00341"></a>00341             || (<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#a9876af8e67e6a1384a685dbafe7138b9">BcdDevice</a> == 0xff00+<span class="keywordtype">id</span>))
+<a name="l00342"></a>00342         {
+<a name="l00343"></a>00343             <span class="keywordflow">if</span>((<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a> == 0x04B4) &amp;&amp; (<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a> == 0x8613)) ret = 1;
+<a name="l00344"></a>00344             <span class="keywordflow">if</span>((<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ab663fa70ebbec67f3af80ca2bdce8935">VendorID</a> == 0x04B4) &amp;&amp; (<a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#ad74cc947388d0645d93c06d3384e5da7">ProductID</a> == 0x1004)) ret = 2;
+<a name="l00345"></a>00345         }
+<a name="l00346"></a>00346         <a class="code" href="../../d4/dba/classcusb2.html#abbf9793121fdfe56c8371a97c7fb840e">_USBDevice</a>-&gt;<a class="code" href="../../db/de7/classCCyUSBDevice.html#acbec6b5a7576992e75b34a4852bffd6f">Close</a>();
+<a name="l00347"></a>00347         <span class="keywordflow">if</span>(ret) <span class="keywordflow">break</span>;
+<a name="l00348"></a>00348     }
+<a name="l00349"></a>00349     <span class="keywordflow">return</span> ret;
+<a name="l00350"></a>00350 }
+<a name="l00351"></a>00351 
+<a name="l00352"></a><a class="code" href="../../d4/dba/classcusb2.html#a00ae5789e62966c680f6b12c7e38696f">00352</a> <span class="keywordtype">bool</span> <a class="code" href="../../d4/dba/classcusb2.html#a00ae5789e62966c680f6b12c7e38696f">cusb2::PnpEvent</a>(WPARAM wParam, LPARAM lParam) 
+<a name="l00353"></a>00353 {
+<a name="l00354"></a>00354     <a class="code" href="../../d9/d8e/cusb2_8h.html#a0ce6887c26c1c49ad3be5710dd42bfd6">s32</a> st;
+<a name="l00355"></a>00355     <span class="keywordflow">if</span> (wParam == DBT_DEVICEARRIVAL) 
+<a name="l00356"></a>00356         <span class="keywordflow">if</span> (<a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a>) 
+<a name="l00357"></a>00357             <a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a> = <span class="keyword">true</span>;
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359     <span class="keywordflow">if</span> (wParam == DBT_DEVICEREMOVECOMPLETE) 
+<a name="l00360"></a>00360     {
+<a name="l00361"></a>00361         <span class="keywordflow">if</span> (<a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a>) {
+<a name="l00362"></a>00362             <a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a> = <span class="keyword">false</span>;
+<a name="l00363"></a>00363             <span class="keywordflow">if</span>(<a class="code" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">check_fx2</a>(<a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a>) == 0)
+<a name="l00364"></a>00364                 <span class="keywordflow">return</span> <span class="keyword">true</span>;        <span class="comment">//対象FX2がリムーブ</span>
+<a name="l00365"></a>00365         }
+<a name="l00366"></a>00366     }
+<a name="l00367"></a>00367 
+<a name="l00368"></a>00368     <span class="keywordflow">if</span> (wParam == DBT_DEVNODES_CHANGED) 
+<a name="l00369"></a>00369     {
+<a name="l00370"></a>00370         <a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a> = <span class="keyword">true</span>;
+<a name="l00371"></a>00371 
+<a name="l00372"></a>00372         <span class="keywordflow">if</span> (<a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a>) {
+<a name="l00373"></a>00373             <a class="code" href="../../d4/dba/classcusb2.html#a6cfda61b4cd930bc5eaedbba5743c805">bArrived</a> = <span class="keyword">false</span>;
+<a name="l00374"></a>00374             <a class="code" href="../../d4/dba/classcusb2.html#a8bddd3bb55751cd6dca2ee25f3d8052a">bDevNodeChange</a> = <span class="keyword">false</span>;
+<a name="l00375"></a>00375             st = <a class="code" href="../../d4/dba/classcusb2.html#a83408ec4111cbd05be3e87c4e440b6fc">check_fx2</a>(<a class="code" href="../../d4/dba/classcusb2.html#a49c0b899c1a2dd2162477326e7b03ffd">_id</a>);
+<a name="l00376"></a>00376             <span class="keywordflow">if</span>(st == 1) <span class="keywordflow">return</span> <span class="keyword">true</span>;                <span class="comment">//FWロード要</span>
+<a name="l00377"></a>00377             <span class="keywordflow">if</span>((st == 2) &amp;&amp; <a class="code" href="../../d4/dba/classcusb2.html#a074449ea54ff43a13825fc2a7658ac1b">loading</a>) <span class="keywordflow">return</span> <span class="keyword">true</span>;   <span class="comment">//RENUM</span>
+<a name="l00378"></a>00378         }
+<a name="l00379"></a>00379     }
+<a name="l00380"></a>00380     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00381"></a>00381 }
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:39 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

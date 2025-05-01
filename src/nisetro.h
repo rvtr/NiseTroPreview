@@ -88,6 +88,79 @@ const int NDS_SCREEN2BUF_SIZE = NDS_SCREENBUF_SIZE * 2;
 const int			CCAPBUFSIZE = NDS_SCREEN2BUF_SIZE * 2; // オーバーライトに備えて多めに確保する
 
 /*!
+	@page	nise_capture_dataformat	偽トロキャプチャのキャプチャーデータフォーマットについて
+	初期版のデータフォーマット("読んだ方が良い.txt"より抜粋) @n
+	
+	>RGB３バイトのRAWデータです。 @n
+	>各バイトデータにRGBデータが6ビットずつ格納されています。 @n
+	>各バイトデータの先頭ビットはフレームスタート(Vsync)です。 @n
+	>先頭ビットが1になったタイミングから256x192または256x384ドット分のデータが１画面分。 @n
+	>先頭ビットは30ピクセル分ほど1になってます。 @n
+
+
+	<pre>>1byte    2byte    3byte    4byte    5byte</pre>
+	<pre>>V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG</pre>
+
+	>１フレーム分のデータ完成する前に先頭ビットがHighになった場合、そのフレームの @n
+	>どこかで、データが欠落してます。 @n
+	
+	<hr> @n
+	
+	60fps対応版("偽トロキャプチャと車とかとか"の記事から抜粋) @n
+	
+	
+	>上画面と下画面がドットレベルで交互に出力されています。 @n
+	>今まで使っていなかった前から２ビット目を上画面・下画面のフラグとしました。 @n
+	>これで上記のように交互にデータが来てもどっちの画面のデータか判断できると思います。 @n
+
+	
+	<hr> @n
+	
+	V = VSync(垂直同期) @n
+	0 = NULL @n
+	R = 赤(0～63) @n
+	G = 緑(0～63) @n
+	B = 青(0～63) @n
+
+	S = 画面 0:上画面 1:下画面(60fps対応版のみ) @n
+
+	初期版 @n
+	V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG V0BBBBBB V0RRRRRR V0GGGGGG V0BBBBBB ... @n
+
+	60fps版 @n
+	VSRRRRRR VSGGGGGG VSBBBBBB VSRRRRRR VSGGGGGG VSBBBBBB VSRRRRRR VSGGGGGG VSBBBBBB ... @n
+
+	60fps版の例 @n
+	10RRRRRR 10GGGGGG 10BBBBBB 11RRRRRR 11GGGGGG 11BBBBBB 10RRRRRR 10GGGGGG 10BBBBBB ... @n
+
+	<hr> @n
+	@ref CNISETRO::getdata_from_cusb2_func
+	
+	@ref CNISETRO::func_first
+	
+	@ref CNISETRO::func_60fps
+	//
+*/
+
+/*!
+	@page	nise_screen_dataformat	CNISETROのスクリーンデータフォーマットについて
+	
+	@ref nise_capture_dataformat 内の初期版を参照してください。 @n
+	
+	データサイズは、256x384ドット分のデータで固定されています。 @n
+	つまり、1スクリーンは、256*384*3 で、294912Byte です。 @n
+	
+	キャプチャーの設定で、片画面のみキャプチャするようになっていても取得する際には、2画面分のデータを必要とします。 @n
+	下画面のみ取得する設定になっている場合は、先頭から1画面分移動した位置からデータが格納されています。 @n
+	
+	<hr>
+	
+	@ref nise_capture_dataformat
+	
+	@ref CNISETRO::GetScrData
+*/
+
+/*!
 	@brief	偽トロからのデータ取得用クラス
 */
 class CNISETRO{
@@ -150,12 +223,27 @@ private:
 	*/
 	double checkFPS( void );
 	
+	/*!
+		@ref nise_capture_dataformat
+	*/
 	static bool getdata_from_cusb2_func(u8 *buf, u32 len , _cusb2_tcb* tcb);
 	
-	//! 以前のバージョン
+	/*!
+		@brief	以前のバージョン
+		
+		@todo	関数名の変更
+		
+		@ref nise_capture_dataformat
+	*/
 	void func_first( u8* buf , u32 len );
 	
-	//! 60fps対応版
+	/*!
+		@brief	60fps対応版
+		
+		@todo	関数名の変更
+		
+		@ref nise_capture_dataformat
+	*/
 	void func_60fps( u8* buf , u32 len );
 	
 	//! パラメータの初期化
@@ -225,6 +313,8 @@ public:
 		@param	pScrData	[in] 受け取るバッファへのポインタ
 		@param	BufSize		[in] 受け取るバッファサイズ
 		@param	dwWaitMS	[in] 受け取るまでの制限時間(ms)
+	
+		@ref nise_screen_dataformat
 	*/
 	int GetScrData( BYTE* pScrData , size_t BufSize , DWORD dwWaitMS = INFINITE ){
 		if( !(BufSize >= NDS_SCREEN2BUF_SIZE && pScrData) )
@@ -293,6 +383,8 @@ public:
 	bool IsRec( void ){
 		return (this->pRecfile != NULL);
 	}
+	
+	bool IsInit( void ){ return usb_init; }
 	
 	//
 };

@@ -7,11 +7,12 @@ extern "C" { // Ç±ÇÍèdóv
 	#include <libavformat/avformat.h>
 	#include <libswscale/swscale.h>
 	#include <libavutil/fifo.h>
+
+	#include "_tprintd.h"
 }
 
 #include "cthread.h"
 #include "cmutex.h"
-#include "_tprintd.h"
 
 #ifndef __CAVISAVE_H__
 #define __CAVISAVE_H__
@@ -85,7 +86,7 @@ protected:
 	
 	_ffmpeg_struct	m_ffm;
 	
-	static int CALLBACK _waveinCallback( HWAVEIN hwi , UINT uMsg , DWORD dwInstance , DWORD dwParam1 , DWORD dwParam2 ){
+	static int CALLBACK _waveinCallback( HWAVEIN hwi , UINT uMsg , DWORD_PTR dwInstance , DWORD_PTR dwParam1 , DWORD_PTR dwParam2 ){
 		CAVISAVECORE* pThis = (CAVISAVECORE*)dwInstance;
 		switch( uMsg ){
 			case WIM_OPEN:

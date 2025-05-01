@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>NiseTroPreview: クラス CWAVEINSAVE</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- 作成： Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../index.html"><span>メインページ</span></a></li>
+      <li><a href="../../pages.html"><span>関連ページ</span></a></li>
+      <li class="current"><a href="../../annotated.html"><span>クラス</span></a></li>
+      <li><a href="../../files.html"><span>ファイル</span></a></li>
+      <li><a href="../../dirs.html"><span>ディレクトリ</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../annotated.html"><span>構成</span></a></li>
+      <li><a href="../../hierarchy.html"><span>クラス階層</span></a></li>
+      <li><a href="../../functions.html"><span>構成メンバ</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>クラス CWAVEINSAVE</h1><!-- doxytag: class="CWAVEINSAVE" -->
+<p>WaveInによる簡易録音クラス.  
+<a href="#_details">[詳細]</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a>&gt;</code></p>
+
+<p><a href="../../db/d36/classCWAVEINSAVE-members.html">すべてのメンバ一覧</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Public メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#ae5ff90602c018c8de1aae1d2b190bb8d">CWAVEINSAVE</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a13862223cb5080f363c036f4e34ac340">‾CWAVEINSAVE</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a503419e57b9b8c7c478dd4e432238db0">Init</a> (UINT ID=WAVE_MAPPER, int iChannels=2, int iSamplesPerSec=44100, int iBps=16)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">初期化処理  <a href="#a503419e57b9b8c7c478dd4e432238db0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a686822b5fd8e657636d0b20760a74e12">Quit</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">終了処理  <a href="#a686822b5fd8e657636d0b20760a74e12"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a2553c576321c5aed316021ca2f30f798">Start</a> (TCHAR *pFilename)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">録音の開始  <a href="#a2553c576321c5aed316021ca2f30f798"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a7aa1b5ec6686ef168df50ea38b93d1bb">Stop</a> (void)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">録音の終了  <a href="#a7aa1b5ec6686ef168df50ea38b93d1bb"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Public メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int CALLBACK&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#af38c1344b654f6e6e34f6e38d51e6b5b">_waveinCallback</a> (HWAVEIN hwi, UINT uMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">保存用コールバック  <a href="#af38c1344b654f6e6e34f6e38d51e6b5b"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Protected メソッド</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a7ebd3d6dae285d48442305c3f18e8054">writeWaveHeader</a> (FILE *fp, LPWAVEFORMATEX pWFmt)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ファイルへヘッダを書き込む  <a href="#a7ebd3d6dae285d48442305c3f18e8054"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Protected 変数</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a9e2b17d72b761713ddc8bd6de6d7cdbc">m_bInit</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">初期化フラグ  <a href="#a9e2b17d72b761713ddc8bd6de6d7cdbc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#ad7515c0e07450ca0fa65a264fa6619a7">m_bRecord</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">録音フラグ  <a href="#ad7515c0e07450ca0fa65a264fa6619a7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/d4d/classCMUTEX__WIN.html">CMUTEX</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a91cf258f4144f616906aa57232ff0432">m_Mutex</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ミューテクスクラス  <a href="#a91cf258f4144f616906aa57232ff0432"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">FILE *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a7bf76db6e1bdc601ded544c9b152be7d">m_pOut</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ファイルポインタ  <a href="#a7bf76db6e1bdc601ded544c9b152be7d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HWAVEIN&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a0c19677ea1093e56f2793f5ab7192acc">m_hWavein</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">デバイスハンドル  <a href="#a0c19677ea1093e56f2793f5ab7192acc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">WAVEFORMATEX&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a0f7ff96f853913c8c7862746e17fd1a3">m_WFmt</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">フォーマット  <a href="#a0f7ff96f853913c8c7862746e17fd1a3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">WAVEHDR&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db9/classCWAVEINSAVE.html#aaf174c18a6d308b3ca35f727585bf4f7">m_WHdr</a> [<a class="el" href="../../de/dae/cwavesave_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a>]</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ハンドル  <a href="#aaf174c18a6d308b3ca35f727585bf4f7"></a><br/></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>説明</h2>
+<p>WaveInによる簡易録音クラス. </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00018">18</a> 行で定義されています。</p>
+<hr/><h2>コンストラクタとデストラクタ</h2>
+<a class="anchor" id="ae5ff90602c018c8de1aae1d2b190bb8d"></a><!-- doxytag: member="CWAVEINSAVE::CWAVEINSAVE" ref="ae5ff90602c018c8de1aae1d2b190bb8d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CWAVEINSAVE::CWAVEINSAVE </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00071">71</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>関数</h2>
+<a class="anchor" id="af38c1344b654f6e6e34f6e38d51e6b5b"></a><!-- doxytag: member="CWAVEINSAVE::_waveinCallback" ref="af38c1344b654f6e6e34f6e38d51e6b5b" args="(HWAVEIN hwi, UINT uMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int CALLBACK CWAVEINSAVE::_waveinCallback </td>
+          <td>(</td>
+          <td class="paramtype">HWAVEIN&nbsp;</td>
+          <td class="paramname"> <em>hwi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT&nbsp;</td>
+          <td class="paramname"> <em>uMsg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DWORD_PTR&nbsp;</td>
+          <td class="paramname"> <em>dwInstance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DWORD_PTR&nbsp;</td>
+          <td class="paramname"> <em>dwParam1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DWORD_PTR&nbsp;</td>
+          <td class="paramname"> <em>dwParam2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>保存用コールバック </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00089">89</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a503419e57b9b8c7c478dd4e432238db0"></a><!-- doxytag: member="CWAVEINSAVE::Init" ref="a503419e57b9b8c7c478dd4e432238db0" args="(UINT ID=WAVE_MAPPER, int iChannels=2, int iSamplesPerSec=44100, int iBps=16)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CWAVEINSAVE::Init </td>
+          <td>(</td>
+          <td class="paramtype">UINT&nbsp;</td>
+          <td class="paramname"> <em>ID</em> = <code>WAVE_MAPPER</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>iChannels</em> = <code>2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>iSamplesPerSec</em> = <code>44100</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>iBps</em> = <code>16</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>初期化処理 </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>ID</em>&nbsp;</td><td>[in] WaveIn用デバイスＩＤ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>iChannels</em>&nbsp;</td><td>[in] チャンネル数 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>iSamplesPerSec</em>&nbsp;</td><td>[in] 周波数 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>iBps</em>&nbsp;</td><td>[in] ビット数(1Sampleあたり) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00151">151</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a686822b5fd8e657636d0b20760a74e12"></a><!-- doxytag: member="CWAVEINSAVE::Quit" ref="a686822b5fd8e657636d0b20760a74e12" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CWAVEINSAVE::Quit </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>終了処理 </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00204">204</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a2553c576321c5aed316021ca2f30f798"></a><!-- doxytag: member="CWAVEINSAVE::Start" ref="a2553c576321c5aed316021ca2f30f798" args="(TCHAR *pFilename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CWAVEINSAVE::Start </td>
+          <td>(</td>
+          <td class="paramtype">TCHAR *&nbsp;</td>
+          <td class="paramname"> <em>pFilename</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>録音の開始 </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00249">249</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7aa1b5ec6686ef168df50ea38b93d1bb"></a><!-- doxytag: member="CWAVEINSAVE::Stop" ref="a7aa1b5ec6686ef168df50ea38b93d1bb" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CWAVEINSAVE::Stop </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>録音の終了 </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00278">278</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ebd3d6dae285d48442305c3f18e8054"></a><!-- doxytag: member="CWAVEINSAVE::writeWaveHeader" ref="a7ebd3d6dae285d48442305c3f18e8054" args="(FILE *fp, LPWAVEFORMATEX pWFmt)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void CWAVEINSAVE::writeWaveHeader </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&nbsp;</td>
+          <td class="paramname"> <em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LPWAVEFORMATEX&nbsp;</td>
+          <td class="paramname"> <em>pWFmt</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inline, static, protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ファイルへヘッダを書き込む </p>
+<dl><dt><b>引数:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>fp</em>&nbsp;</td><td>[in] 書き込むファイルへのポインタ </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pWFmt</em>&nbsp;</td><td>[in] waveフォーマットへのポインタ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00046">46</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a13862223cb5080f363c036f4e34ac340"></a><!-- doxytag: member="CWAVEINSAVE::‾CWAVEINSAVE" ref="a13862223cb5080f363c036f4e34ac340" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CWAVEINSAVE::‾CWAVEINSAVE </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00080">80</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/><h2>変数</h2>
+<a class="anchor" id="a9e2b17d72b761713ddc8bd6de6d7cdbc"></a><!-- doxytag: member="CWAVEINSAVE::m_bInit" ref="a9e2b17d72b761713ddc8bd6de6d7cdbc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a9e2b17d72b761713ddc8bd6de6d7cdbc">CWAVEINSAVE::m_bInit</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>初期化フラグ </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00021">21</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad7515c0e07450ca0fa65a264fa6619a7"></a><!-- doxytag: member="CWAVEINSAVE::m_bRecord" ref="ad7515c0e07450ca0fa65a264fa6619a7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#ad7515c0e07450ca0fa65a264fa6619a7">CWAVEINSAVE::m_bRecord</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>録音フラグ </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00024">24</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c19677ea1093e56f2793f5ab7192acc"></a><!-- doxytag: member="CWAVEINSAVE::m_hWavein" ref="a0c19677ea1093e56f2793f5ab7192acc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HWAVEIN <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a0c19677ea1093e56f2793f5ab7192acc">CWAVEINSAVE::m_hWavein</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>デバイスハンドル </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00033">33</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a91cf258f4144f616906aa57232ff0432"></a><!-- doxytag: member="CWAVEINSAVE::m_Mutex" ref="a91cf258f4144f616906aa57232ff0432" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dd/d4d/classCMUTEX__WIN.html">CMUTEX</a> <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a91cf258f4144f616906aa57232ff0432">CWAVEINSAVE::m_Mutex</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ミューテクスクラス </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00027">27</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a7bf76db6e1bdc601ded544c9b152be7d"></a><!-- doxytag: member="CWAVEINSAVE::m_pOut" ref="a7bf76db6e1bdc601ded544c9b152be7d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a7bf76db6e1bdc601ded544c9b152be7d">CWAVEINSAVE::m_pOut</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ファイルポインタ </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00030">30</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a0f7ff96f853913c8c7862746e17fd1a3"></a><!-- doxytag: member="CWAVEINSAVE::m_WFmt" ref="a0f7ff96f853913c8c7862746e17fd1a3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WAVEFORMATEX <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#a0f7ff96f853913c8c7862746e17fd1a3">CWAVEINSAVE::m_WFmt</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>フォーマット </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00036">36</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf174c18a6d308b3ca35f727585bf4f7"></a><!-- doxytag: member="CWAVEINSAVE::m_WHdr" ref="aaf174c18a6d308b3ca35f727585bf4f7" args="[_CWS_BUFFERCOUNT]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WAVEHDR <a class="el" href="../../d8/db9/classCWAVEINSAVE.html#aaf174c18a6d308b3ca35f727585bf4f7">CWAVEINSAVE::m_WHdr</a>[<a class="el" href="../../de/dae/cwavesave_8h.html#a83bc22f56dd6baed46089cc94b814e4b">_CWS_BUFFERCOUNT</a>]<code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>ハンドル </p>
+
+<p> <a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a> の <a class="el" href="../../de/dae/cwavesave_8h_source.html#l00039">39</a> 行で定義されています。</p>
+
+</div>
+</div>
+<hr/>このクラスの説明は次のファイルから生成されました:<ul>
+<li><a class="el" href="../../de/dae/cwavesave_8h_source.html">cwavesave.h</a></li>
+</ul>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>NiseTroPreviewに対してTue Mar 16 22:51:41 2010に生成されました。&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>
