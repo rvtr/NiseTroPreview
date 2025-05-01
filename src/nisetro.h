@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <tchar.h>
 #include <windows.h>
@@ -47,11 +46,6 @@ enum ECAPFPS{
 	ECAPFPS_15	= 0x03,
 	//
 };
-/*
-#define FPS60 0x00
-#define FPS30 0x01
-#define FPS20 0x02
-#define FPS15 0x03*/
 
 /*!
 	@brief キャプチャースクリーンの定数
@@ -66,17 +60,19 @@ enum ECAPSCR{
 	//! ２画面
 	ECAPSCR_DSCR	= 0x08,
 };
-/*
-#define CAPTOP    0x00
-#define CAPBTM    0x04
-#define CAPTOPBTM 0x08
-*/
+
 
 //! バージョン(勝手にバージョン付け)
 enum ECAPDATAVER {
+	
+	//! データが取得出来ていない状態
 	ECAPDATAVER_UNKNOWN,
-	ECAPDATAVER_FIRST,	// 2010/1/12以前
-	ECAPDATAVER_60FPS,	// 2010/1/12以降
+	
+	//! 初期版
+	ECAPDATAVER_FIRST,	
+	
+	//! 60fps対応版
+	ECAPDATAVER_60FPS,	//! 2010/1/12以降
 };
 
 // 1画面分
@@ -95,9 +91,12 @@ const int			CCAPBUFSIZE = NDS_SCREEN2BUF_SIZE * 2; // オーバーライトに備えて多め
 	@brief	偽トロからのデータ取得用クラス
 */
 class CNISETRO{
-public:
-	cusb2 *usb;
 private:
+//public:
+	// 関数用定義
+	typedef bool (*nise_func)( u8* ,u32 , _cusb2_tcb* );
+	
+	cusb2 *usb;
 	int m_cusb2id;
 	cusb2_tcb *tcb1;	// スレッド
 
@@ -114,6 +113,9 @@ private:
 	//! データのバージョン情報
 	ECAPDATAVER			m_eVer;
 	
+	//! 取り込む画面
+	ECAPSCR				m_eScr;
+	
 	//! エラーフレームのカウント
 	unsigned long		m_ulErrFrm;
 	
@@ -121,8 +123,6 @@ private:
 	double				m_dFps;
 	
 	FILE* pRecfile;
-	
-	typedef bool (*nise_func)( u8* ,u32 , _cusb2_tcb* );
 	
 	//! ドロップフラグ
 	bool				m_bDropFrame;
@@ -169,8 +169,8 @@ private:
 		memset( &cmd[0] , 0 , sizeof(u8) * 64 );
 		memset( &ret[0] , 0 , sizeof(u8) * 64 );
 		
-		m_bDropFrame = false;
 		m_eVer = ECAPDATAVER_UNKNOWN;
+		m_eScr = ECAPSCR_DSCR;
 		m_ulErrFrm = 0;
 		m_dFps = 0;
 		
@@ -187,6 +187,7 @@ public:
 		usb_init = false;
 		usb = NULL;
 		pRecfile = NULL;
+		m_bDropFrame = false;
 		m_mutex_[0].create();
 		m_mutex_[1].create();
 		param_init();
@@ -202,11 +203,17 @@ public:
 		m_mutex_[1].destroy();
 	}
 	
+	/*
+		@brief カメレオンUSB2 FX制御用クラスを取得する
+	*/
+	cusb2* GetCUSB2( void ){ return usb; }
+	
 	/*!
 		@brief	初期化処理
 		@param	eFps	[in] フレーム数
 		@param	eScr	[in] 取得する画面
 		@param	id		[in] カメレオンusbのID
+		@param	hWnd	[in] メッセージを受け取るウィンドウハンドル
 	*/
 	int NisetroInit( ECAPFPS eFps , ECAPSCR eScr , int id = 0 , HWND hWnd = NULL );
 	

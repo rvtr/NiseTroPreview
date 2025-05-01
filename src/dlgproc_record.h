@@ -408,16 +408,23 @@ BOOL CALLBACK RecordDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 					{
 						OPENFILENAME ofn;
 						TCHAR strFilename[MAX_PATH];
+						TCHAR strFilter[256];
+						TCHAR strExt[256];
 						
 						memset( &ofn , 0 , sizeof(OPENFILENAME) );
 						memset( strFilename , 0 , sizeof(TCHAR) * MAX_PATH );
+						memset( strFilter , 0 , sizeof(TCHAR) * 256 );
+						memset( strExt , 0 , sizeof(TCHAR) * 256 );
+						
+						LoadString( (HINSTANCE)GetWindowLongPtr(hDlgWnd, GWLP_HINSTANCE) , IDS_STRING_DEF_FILTER , strFilter , 256 );
+						LoadString( (HINSTANCE)GetWindowLongPtr(hDlgWnd, GWLP_HINSTANCE) , IDS_STRING_DEF_EXT , strExt , 256 );
 						
 						ofn.lStructSize = sizeof(OPENFILENAME);
 						ofn.hwndOwner	= hDlgWnd;
 						ofn.lpstrFile	= strFilename;
 						ofn.nMaxFile	= MAX_PATH;
-						ofn.lpstrFilter	= TEXT("*.avi\0*.avi\0\0");
-						ofn.lpstrDefExt	= TEXT("avi\0\0");
+						ofn.lpstrFilter	= strFilter;//TEXT("*.avi\0*.avi\0\0");
+						ofn.lpstrDefExt	= strExt;//TEXT("avi\0\0");
 						ofn.hInstance	= (HINSTANCE)GetWindowLongPtr( hDlgWnd , GWLP_HINSTANCE );
 						ofn.Flags		= OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT;
 						

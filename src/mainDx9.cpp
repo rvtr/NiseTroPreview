@@ -22,7 +22,10 @@
 
 #include "_tprintd.h"
 
+#if defined(HAVE_FFMPEG)
 #include "cavisave.h"
+#endif
+
 #include "configio.h"
 
 #include "res\resource.h"
@@ -65,9 +68,12 @@ LPDIRECT3DTEXTURE9 g_pTexTop = NULL;
 //! Bottomテクスチャ
 LPDIRECT3DTEXTURE9 g_pTexBtm = NULL;
 
-LPD3DXSPRITE g_pD3DXSprite = NULL;
+LPD3DXSPRITE	g_pD3DXSprite = NULL;
+//LPD3DXBUFFER			g_pD3DXBufShader = NULL;
+//LPDIRECT3DPIXELSHADER9	g_pD3DPShader = NULL;
 
-D3DTEXTUREFILTERTYPE g_eFilter = D3DTEXF_NONE;
+D3DTEXTUREFILTERTYPE g_eFilter = D3DTEXF_LINEAR;
+D3DTEXTUREFILTERTYPE g_eFilterMin = D3DTEXF_ANISOTROPIC;
 
 /*!
 	@brief	Direct3Dのリソースを確保する
@@ -92,6 +98,21 @@ int D3DResInit( LPDIRECT3DDEVICE9* pD3DDev ){
 		_tprintd( TEXT("Error D3DXCreateSprite\n") );
 		return -1;
 	}
+	
+/*	hr = D3DXAssembleShaderFromFile( TEXT("ps.psh"),NULL, 0, NULL, &g_pD3DXBufShader, NULL );
+	if( hr ){
+		_tprintd( TEXT("Error D3DXAssembleShaderFromFile\n") );
+		return -1;
+	}
+	
+	if( g_pD3DXBufShader ){
+		hr = (*pD3DDev)->CreatePixelShader( (DWORD*)g_pD3DXBufShader->GetBufferPointer(), &g_pD3DPShader );
+		if( hr ){
+			_tprintd( TEXT("Error CreatePixelShader\n") );
+			return -1;
+		}
+	}*/
+	
 	return 0;
 }
 
@@ -99,6 +120,9 @@ int D3DResInit( LPDIRECT3DDEVICE9* pD3DDev ){
 	@brief	Direct3Dのリソースを開放する
 */
 void D3DResQuit( void ){
+/*	SAFE_RELEASE(g_pD3DPShader);
+	SAFE_RELEASE(g_pD3DXBufShader);*/
+	
 	SAFE_RELEASE( g_pD3DXSprite );
 	SAFE_RELEASE( g_pTexBtm );
 	SAFE_RELEASE( g_pTexTop );
@@ -206,6 +230,8 @@ public:
 	}
 };
 
+
+#if defined(HAVE_FFMPEG)
 /*!
 	@brief 録画用スレッド
 */
@@ -276,6 +302,8 @@ public:
 		return 0;
 	}
 };
+#endif
+
 
 /*!
 	@brief	FPSを取得する
@@ -342,9 +370,11 @@ public:
 
 //! バッファからテクスチャーへ変換するスレッド
 CBUFtoTEX	g_thBuftoTEX;
-
-CAVISAVE	g_thAviSave;
 CRENDERTHREAD g_thRender;
+
+#if defined(HAVE_FFMPEG)
+CAVISAVE	g_thAviSave;
+#endif
 
 //! 描画関数
 void ReanderScreen( void )
@@ -413,6 +443,8 @@ void ReanderScreen( void )
 			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MINFILTER , g_eFilter );
 			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MIPFILTER , g_eFilter );
 			
+//			if( g_pD3DPShader )g_pD3DDev->SetPixelShader( g_pD3DPShader );
+			
 			g_pD3DXSprite->Draw( g_pTexTop , &SrcRc , &vecCenter , &vecPos , 0xFFFFFFFF );
 			g_pD3DXSprite->End();
 		}
@@ -468,6 +500,9 @@ void ReanderScreen( void )
 			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MAGFILTER , g_eFilter );
 			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MINFILTER , g_eFilter );
 			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MIPFILTER , g_eFilter );
+			
+//			if( g_pD3DPShader )g_pD3DDev->SetPixelShader( g_pD3DPShader );
+			
 			g_pD3DXSprite->Draw( g_pTexBtm , &SrcRc , &vecCenter , &vecPos , 0xFFFFFFFF );
 			g_pD3DXSprite->End();
 		}
@@ -479,22 +514,14 @@ void ReanderScreen( void )
 
 #include "dlgproc_config.h"
 #include "dlgproc_info.h"
+#if defined(HAVE_FFMPEG)
 #include "dlgproc_record.h"
+#endif
 
 //! 描画ウィンドウ用のコールバック
 LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 {
 	PAINTSTRUCT ps;
-//	_tprintd( TEXT("WindowProc start\n") );
-//	ShowAppConfig();
-	
-/*	if( uMsg == WM_CREATE )		_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_CREATE") , wParam , lParam );
-	if( uMsg == WM_QUIT )		_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_QUIT") , wParam , lParam );
-	if( uMsg == WM_CLOSE )		_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_CLOSE") , wParam , lParam );
-	if( uMsg == WM_COMMAND )	_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_COMMAND") , wParam , lParam );
-	if( uMsg == WM_RBUTTONUP )	_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_RBUTTONUP") , wParam , lParam );
-	if( uMsg == WM_SIZE )		_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_SIZE") , wParam , lParam );
-	if( uMsg == WM_PAINT )		_tprintd( TEXT("%s , w(0x%08x) , l(0x%08x)\n") , TEXT("WM_PAINT") , wParam , lParam );*/
 	
 	switch( uMsg )
 	{
@@ -504,12 +531,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 				if( hMenu ){
 					CheckMenuItem( hMenu , ID_MENU_TOPWINDOW , (g_AppConfig.m_bTopWindow?MF_CHECKED:MF_UNCHECKED) );
 					CheckMenuItem( hMenu , ID_MENU_DROP_ERRFRAME , (g_AppConfig.m_bDropFrame?MF_CHECKED:MF_UNCHECKED) );
+#if !defined(HAVE_FFMPEG)
+					// 録画ボタンを押せないようにする
+					EnableMenuItem( hMenu , ID_MENU_REC , MF_DISABLED | MF_GRAYED );
+#endif
 				}
 				if( g_AppConfig.m_bTopWindow ){
 					g_AppConfig.m_bTopWindow = false;
 					SendMessage( hwnd , WM_COMMAND , MAKEWPARAM(ID_MENU_TOPWINDOW,0) , 0 );
 				}
 //				SetTimer( hwnd , 1421356 , (1000 / 2) , NULL );
+				//
 			}
 			break;
 		
@@ -534,18 +566,22 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 			break;*/
 		
 		case WM_CLOSE:
+#if defined(HAVE_FFMPEG)
 			if( g_thAviSave.IsRec() == false ){
+#endif
 				if( g_hRecordDlg ){
 					DestroyWindow( g_hRecordDlg );
 					g_hRecordDlg = NULL;
 				}
 				PostQuitMessage(0);
+#if defined(HAVE_FFMPEG)
 			}else{
 				TCHAR strBuf[256];
 				LoadString( (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE) , IDS_STRING_WAR_EXIT_REC , strBuf , 256 );
 				MessageBox( hwnd , strBuf , TEXT("Warning") , MB_ICONWARNING );
 				return FALSE;
 			}
+#endif
 			break;
 		
 		// デバイスロスト等
@@ -569,8 +605,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 				if( wParam == DBT_QUERYCHANGECONFIG )		_tprintd( TEXT(" DBT_QUERYCHANGECONFIG\n") );
 				if( wParam == DBT_USERDEFINED )				_tprintd( TEXT(" DBT_USERDEFINED\n") );
 				
-				if( g_nise.usb ){
-					if( g_nise.usb->PnpEvent( wParam , lParam) ){
+				cusb2* pUsb = g_nise.GetCUSB2();
+				if( pUsb ){
+					if( pUsb->PnpEvent( wParam , lParam) ){
 						_tprintd( TEXT("PnpEvent\n") );
 						
 						HMENU hMenu;
@@ -579,7 +616,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							if( hMenu )EnableMenuItem( hMenu , (ID_MENU_CUSB2_ID0+i) , MF_GRAYED );
 						}
 						g_nise.NisetroQuit();
-						g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
+						g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , hwnd );
 						
 						hMenu = GetMenu( hwnd );
 						for( int i = 0; i < 4; i++ ){
@@ -597,11 +634,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 				switch (id) {
 					case ID_MENU_REC:
 						{
-//							break;	// 一時、録画機能を凍結
+#if defined(HAVE_FFMPEG)
 							if( g_hRecordDlg )break;
 							g_hRecordDlg = CreateDialog( g_hInst , MAKEINTRESOURCE(IDD_DLG_RECORD) , hwnd , (DLGPROC)RecordDlgProc );
 							ShowWindow(g_hRecordDlg, SW_SHOW);
 							UpdateWindow(g_hRecordDlg); 
+#endif
 						}
 						break;
 					
@@ -693,6 +731,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							if( id == ID_MENU_SRCSEL_BTM )	g_AppConfig.m_ScrSel = ECAPSCR_BTM;
 							if( id == ID_MENU_SRCSEL_DSCR )	g_AppConfig.m_ScrSel = ECAPSCR_DSCR;
 							D3DUpdateScreenConfig( &g_AppConfig , g_hWnd );
+							g_nise.NisetroQuit();
+							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , g_hWnd );
 							if( g_hConfigDlg )SendMessage( GetDlgItem(g_hConfigDlg, IDC_COMBO_SCRSEL) , CB_SETCURSEL , (id-ID_MENU_SRCSEL_TOP) , 0 );
 						}
 						break;
@@ -714,7 +754,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							g_thRender.setFps( fps );
 							g_thBuftoTEX.setFps( fps );
 							g_nise.NisetroQuit();
-							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd );
+							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , g_hWnd );
 						}
 						break;
 						
@@ -755,7 +795,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							if( cusb2id >= 0 && cusb2id <= 9 ){
 								g_AppConfig.m_iCUSB2_ID = cusb2id;
 								g_nise.NisetroQuit();
-								g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
+								g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , hwnd );
 							}
 						}
 						break;
@@ -1003,14 +1043,16 @@ HWND InitWindow( HINSTANCE hInst , WNDPROC CallBack )
 */
 void AppQuit( void )
 {
+#if defined(HAVE_FFMPEG)
 	g_thAviSave.Quit();
+#endif
 	
 	g_thBuftoTEX.stopThread();
 	g_mutex_Texture.destroy();
 	D3DResQuit();
 	D3DQuit( &g_pD3D , &g_pD3DDev );
 	
-	ConfigIOSave( &g_AppConfig , TEXT("config.xml") );
+	ConfigIOSave( &g_AppConfig , L"config.xml" );
 	
 	CoUninitialize();
 	//
@@ -1033,27 +1075,29 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 		return -1;
 	}
 
-	av_register_all ();
+	// ffmpegの前準備
+#if defined(HAVE_FFMPEG)
+	av_register_all();
 	avcodec_init();
 	avcodec_register_all();
+#endif
 	
 	memset( &g_AppConfig , 0 , sizeof(g_AppConfig) );
 	g_AppConfig.m_ScrSel = ECAPSCR_DSCR;
 	g_AppConfig.m_fScrScal = 1.0f;
 	
-	// config.xmlを開く
-	ConfigIOLoad( &g_AppConfig , TEXT("config.xml") );
+	// config.xmlから設定を読み込む
+	ConfigIOLoad( &g_AppConfig , L"config.xml" );
 	
-	// コマンドライン
-	if( _tcslen(lpszCmdLine) ){
+	// コマンドラインの処理
+	if( _tcslen(lpszCmdLine) )
 		ConfigIOCheckCmdLine( &g_AppConfig , lpszCmdLine );
-	}
-	int debugcount = 0;
+	
+	// 設定からスクリーンサイズを取得する
 	RECT rc = { 0 , 0 , NDS_SCREEN_W , NDS_SCREEN2_H };
 	GetClientSizeForAppconfig( &g_AppConfig , &rc );
-//	ShowAppConfig();
 	
-	
+	// ウィンドウを作成
 	g_hWnd = InitWindow( hInst , WindowProc );
 	
 	{
@@ -1066,20 +1110,15 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 		g_thRender.setFps( fps );
 		g_thBuftoTEX.setFps( fps );
 	}
+	
 	// usb start
-#if defined(NDEBUG) // 安全装置
-//	g_AppConfig.m_iCUSB2_ID = 0;
-#endif
-	if( g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd ) ){
-//		g_nise.NisetroQuit();
-/*		TCHAR buf[256];
-		LoadString( g_hInst , IDS_STRING_ERR_USB_CONNECT , buf , 256 );
-		MessageBox( NULL , buf , TEXT("USB Error") , MB_ICONWARNING | MB_OK );*/
-	}
+	if( g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , g_hWnd ) )
+		g_nise.NisetroQuit();
 	
+	// エラーフレームの対処を設定
 	g_nise.SetDropFrame(g_AppConfig.m_bDropFrame);
-	g_mutex_Texture.create();
 	
+	g_mutex_Texture.create();
 	g_thBuftoTEX.startThread();
 	
 	D3DInit( &g_pD3D , &g_pD3DDev , g_hWnd , rc.right , rc.bottom );
@@ -1088,10 +1127,14 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 	//ウィンドウの表示
 	ShowWindow( g_hWnd, nCmdShow );
 	UpdateWindow( g_hWnd );
+	
+	// ウィンドウサイズを更新
 	D3DUpdateScreenConfig( &g_AppConfig , g_hWnd );
 	
+	// ショートカットの設定を取得
 	HACCEL hAccel = LoadAccelerators( hInst,  MAKEINTRESOURCE(IDR_ACCELERATOR1) );
 	
+	// 描画スレッドの開始
 	g_thRender.startThread();
 	
 	//ループ開始

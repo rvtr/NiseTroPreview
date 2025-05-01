@@ -180,10 +180,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\CAVISAVE.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\cmutex.win.cpp"
 				>
 			</File>
@@ -222,10 +218,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\CAVISAVE.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\cmutex.h"
 				>
 			</File>
@@ -255,10 +247,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\dlgproc_info.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\dlgproc_record.h"
 				>
 			</File>
 			<File

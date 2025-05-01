@@ -60,7 +60,7 @@ void ShowAppConfig( LPAPPCONFIG pAppConfig ){
 	@param	pConfig		[in] 設定変数へのポインタ
 	@param	pFilename	[in] ファイル名
 */
-int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
+int ConfigIOSave( PAPPCONFIG pConfig , wchar_t* pFilename ){
 	if( pConfig == NULL || pFilename == NULL ) return -1;
 	
 	MSXML2::IXMLDOMDocument2Ptr pDoc;
@@ -68,20 +68,20 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 	MSXML2::IXMLDOMElementPtr	pEmtConfig;
 	MSXML2::IXMLDOMElementPtr	pElement;
 	MSXML2::IXMLDOMTextPtr		pEmtBLine;
-	TCHAR strBuf[256];
+	wchar_t strBuf[256];
 	
 	try{
 		pDoc.CreateInstance(__uuidof(MSXML2::DOMDocument30));
 		pDoc->put_async( VARIANT_FALSE );
 		
-		pDoc->createProcessingInstruction( TEXT("xml"), TEXT("version=\'1.0\' encoding=\'UTF-8\'") , &pPI );
+		pDoc->createProcessingInstruction( L"xml", L"version=\'1.0\' encoding=\'UTF-8\'" , &pPI );
 		pDoc->appendChild( pPI , NULL );
 		pPI = NULL;
 		
 		// <config>を作成
-		pDoc->createElement(_T("config"), &pEmtConfig);
+		pDoc->createElement(L"config", &pEmtConfig);
 		
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode(L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
@@ -104,128 +104,100 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtBLine = NULL;*/
 		
 		// <scrsel>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode(L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("scrsel"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_ScrSel );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_ScrSel );
-	#endif
+		pDoc->createElement(L"scrsel", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_ScrSel );
 		pElement->put_text( strBuf );
 		// <config>に<scrsel>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode(L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <frameskip>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode(L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("frameskip"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_eFrmSkip );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_eFrmSkip );
-	#endif
+		pDoc->createElement(L"frameskip", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_eFrmSkip );
 		pElement->put_text( strBuf );
 		// <config>に<frameskip>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode(L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <dir>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode(L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("dir"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_DirMode );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_DirMode );
-	#endif
+		pDoc->createElement(L"dir", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_DirMode );
 		pElement->put_text( strBuf );
 		// <config>に<dir>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode( L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <space>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode( L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("space"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_ScrSpace );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_ScrSpace );
-	#endif
+		pDoc->createElement( L"space", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_ScrSpace );
 		pElement->put_text( strBuf );
 		// <config>に<space>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode( L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <scale>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode( L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("scale"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%f") , pConfig->m_fScrScal );
-	#else
-		_stprintf( strBuf , TEXT("%f") , pConfig->m_fScrScal );
-	#endif
+		pDoc->createElement( L"scale", &pElement);
+		swprintf( strBuf , 256 , L"%f" , pConfig->m_fScrScal );
 		pElement->put_text( strBuf );
 		// <config>に<scale>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode( L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <topwindow>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode( L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("topwindow"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_bTopWindow );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_bTopWindow );
-	#endif
+		pDoc->createElement( L"topwindow", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_bTopWindow );
 		pElement->put_text( strBuf );
 		// <config>に<topwindow>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode( L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
 		// <dropframe>を作成
-		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pDoc->createTextNode( L"\t" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
-		pDoc->createElement(_T("dropframe"), &pElement);
-	#if _MSC_VER >= 1400
-		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_bDropFrame );
-	#else
-		_stprintf( strBuf , TEXT("%d") , pConfig->m_bDropFrame );
-	#endif
+		pDoc->createElement( L"dropframe", &pElement);
+		swprintf( strBuf , 256 , L"%d" , pConfig->m_bDropFrame );
 		pElement->put_text( strBuf );
 		// <config>に<dropframe>を追加する
 		pEmtConfig->appendChild(pElement, NULL);
 		pElement = NULL;
-		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pDoc->createTextNode( L"\n" , &pEmtBLine );
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
@@ -256,7 +228,7 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 	@param	pConfig		[out] 設定変数へのポインタ
 	@param	pFilename	[in] ファイル名
 */
-int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
+int ConfigIOLoad( PAPPCONFIG pConfig , wchar_t* pFilename ){
 	if( pConfig == NULL || pFilename == NULL ) return -1;
 	
 	MSXML2::IXMLDOMDocument2Ptr pDoc;
@@ -281,44 +253,44 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 			pNodeRet = NULL;
 		}*/
 		
-		pRoot->selectSingleNode( TEXT("scrsel") , &pNodeRet );
+		pRoot->selectSingleNode( L"scrsel" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("scrsel %d\n") , v );
 			if( v == ECAPSCR_BTM || v == ECAPSCR_TOP || v == ECAPSCR_DSCR )
 				pConfig->m_ScrSel = (ECAPSCR)v;
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("frameskip") , &pNodeRet );
+		pRoot->selectSingleNode( L"frameskip" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("frameskip %d\n") , v );
 			if( v == ECAPFPS_60 || v == ECAPFPS_30 || v == ECAPFPS_20 || v == ECAPFPS_15 )
 				pConfig->m_eFrmSkip = (ECAPFPS)v;
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("dir") , &pNodeRet );
+		pRoot->selectSingleNode( L"dir" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("dir %d\n") , v );
 			if( v >= 0 && v <= 2 )
 				pConfig->m_DirMode = (unsigned char)v;
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("space") , &pNodeRet );
+		pRoot->selectSingleNode( L"space" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("space %d\n") , v );
 			if( v <= CSCRSPACE_MIN ) v = CSCRSPACE_MIN;
 			if( v >= CSCRSPACE_MAX ) v = CSCRSPACE_MAX;
@@ -326,11 +298,11 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("scale") , &pNodeRet );
+		pRoot->selectSingleNode( L"scale" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			float v = (float)_tstof(value);
+			float v = (float)_wtof(value);
 			_tprintd( TEXT("scale %f\n") , v );
 			if( v <= CSCRSCAL_MIN ) v = CSCRSCAL_MIN;
 			if( v >= CSCRSCAL_MAX ) v = CSCRSCAL_MAX;
@@ -338,21 +310,21 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("topwindow") , &pNodeRet );
+		pRoot->selectSingleNode( L"topwindow" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("topwindow %d\n") , v );
 			pConfig->m_bTopWindow = (v ? true : false );
 			pNodeRet = NULL;
 		}
 		
-		pRoot->selectSingleNode( TEXT("dropframe") , &pNodeRet );
+		pRoot->selectSingleNode( L"dropframe" , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
 			pNodeRet->get_text( &value );
-			long v = _tstol(value);
+			long v = _wtol(value);
 			_tprintd( TEXT("dropframe %d\n") , v );
 			pConfig->m_bDropFrame = (v ? true : false );
 			pNodeRet = NULL;

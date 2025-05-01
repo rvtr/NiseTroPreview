@@ -20,7 +20,9 @@
 #define IDS_STRING_RROT                 132
 #define IDS_STRING_TITLE                200
 #define IDS_STRING_DEF_CAPNAME          201
-#define IDS_STRING_WAR_EXIT_REC         202
+#define IDS_STRING_DEF_FILTER           202
+#define IDS_STRING_DEF_EXT              204
+#define IDS_STRING_WAR_EXIT_REC         203
 #define IDS_STRING_ERR_USB_CONNECT      800
 #define IDS_STRING_ERR_SCREENSHOT       801
 #define IDS_STRING_ERR_RECORD           802

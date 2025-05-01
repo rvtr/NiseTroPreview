@@ -6,7 +6,7 @@
 　偽トロキャプチャと車とかとか	http://pipin.blog.eonet.jp/
 
 注意事項
-　・拡大／回転機能にDirectX9を使用するようにしました。DLLファイル(D3D*.dll)が無い場合は以下のURLからランタイムをインストールして下さい。
+　・拡大／回転機能にDirectX9を使用するようにしました。DLLファイルが無い場合は以下のURLからランタイムをインストールして下さい。
 　　http://www.microsoft.com/downloads/details.aspx?displaylang=ja&FamilyID=2da43d38-db71-4c1b-bc6a-9b6652cd92a3
 
 開発ツール＆ライブラリ
@@ -16,7 +16,7 @@
 　MSXML 4.0
 　ffmpeg r20986
 　　configureオプション
-　　--target-os=mingw32 --cc=gcc-sjlj --disable-mmx --disable-debug --disable-static --enable-shared --enable-memalign-hack --disable-ffserver --disable-ffplay --extra-cflags=-fomit-frame-pointer --enable-w32threads
+　　./configure --target-os=mingw32 --cc=gcc-sjlj --extra-cflags="-I/local/include" --extra-ldflags="-L/local/lib" --disable-mmx --disable-debug --disable-static --enable-shared --enable-memalign-hack --disable-ffserver --disable-ffplay --extra-cflags=-fomit-frame-pointer --enable-w32threads --enable-libvorbis --enable-libtheora
 
 動作確認ＯＳ(一部64bit)
 　Windows XP Home
@@ -86,3 +86,5 @@
 　2010/2/3	アイコンを変更した
 　2010/2/4	録画機能の録音サンプリングレートを変更できるようにした。
 　2010/2/4	画面のフィルタ機能を選択できるようにした。「メニュー」->「テスト」以降にあるメニューから選んでください。ビデオボードによっては機能しないことがあります。
+　2010/2/14	ffmpegを分離したものを作成 その他細々修正
+　

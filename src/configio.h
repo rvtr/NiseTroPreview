@@ -19,6 +19,7 @@ const float CSCRSCAL_MIN = 0.5f;
 //! 拡大率の最大値
 const float CSCRSCAL_MAX = 3.0f;
 
+//! 設定情報を格納する型
 typedef struct SAPPCONFIG {
 	//! 表示する画面
 	ECAPSCR			m_ScrSel;
@@ -54,6 +55,12 @@ typedef struct SAPPCONFIG {
 */
 void GetClientSizeForAppconfig( LPAPPCONFIG pAppConfig , RECT *pRC );
 
+/*!
+	@brief	デバック表示用関数
+	@param	pAppConfig	[in] 表示する設定変数へのポインタ
+	@note	表示方法は_printdに依存する。
+	
+*/
 void ShowAppConfig( LPAPPCONFIG pAppConfig );
 
 /*!
@@ -61,15 +68,20 @@ void ShowAppConfig( LPAPPCONFIG pAppConfig );
 	@param	pConfig		[in] 設定変数へのポインタ
 	@param	pFilename	[in] ファイル名
 */
-int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename );
+int ConfigIOSave( PAPPCONFIG pConfig , wchar_t* pFilename );
 
 /*!
 	@brief	設定ファイル(xml)から設定を読む
 	@param	pConfig		[out] 設定変数へのポインタ
 	@param	pFilename	[in] ファイル名
 */
-int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename );
+int ConfigIOLoad( PAPPCONFIG pConfig , wchar_t* pFilename );
 
+/*!
+	@brief	WinMainからのコマンドラインから設定情報を取得する。
+	@param	pConfig		[out] 設定変数へのポインタ
+	@param	lpszCmdLine	[in] コマンドライン文字列
+*/
 int ConfigIOCheckCmdLine( PAPPCONFIG pConfig , LPTSTR lpszCmdLine );
 
 #endif

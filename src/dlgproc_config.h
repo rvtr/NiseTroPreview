@@ -109,7 +109,7 @@ BOOL CALLBACK ConfigDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 							g_thRender.setFps( fps );
 							g_thBuftoTEX.setFps( fps );
 							g_nise.NisetroQuit();
-							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd );
+							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , g_AppConfig.m_ScrSel , g_AppConfig.m_iCUSB2_ID , g_hWnd );
 						}
 					}
 					break;

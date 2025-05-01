@@ -1,6 +1,8 @@
 
 /*!
-	@file
+	@file	nisetro.cpp
+	@brief	偽トロキャプチャ制御用
+	//
 */
 #include <time.h>
 #include "nisetro.h"
@@ -94,6 +96,9 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 void CNISETRO::func_60fps( u8* buf , u32 len ){
 	CNISETRO* pNise = this;
 	unsigned long* pCur = &pNise->m_CapBufCur1;
+	
+	if( m_eScr == ECAPSCR_BTM )
+		pCur = &pNise->m_CapBufCur2;
 	
 	for( u32 i = 0; i < len; i++ ){
 		u32 cur = 0;
@@ -218,7 +223,11 @@ int CNISETRO::NisetroInit( ECAPFPS eFps , ECAPSCR eScr , int id , HWND hWnd ){
 	if( usb == NULL )
 		return -1;
 	
-	if( usb->fwload((m_cusb2id = id)/* id */, fw_iic,(u8 *)"CFX2LOG") == false ){
+	m_cusb2id = id;
+	m_eScr = eScr;
+	
+	if( usb->fwload(m_cusb2id/* id */, fw_iic,(u8 *)"CFX2LOG") == false ){
+		_tprintd( TEXT("error nisetro fwload\n") );
 		return -1;
 	}
 	
@@ -228,6 +237,7 @@ int CNISETRO::NisetroInit( ECAPFPS eFps , ECAPSCR eScr , int id , HWND hWnd ){
 	memset( &cmd[0] , 0 , sizeof(u8) * 64 );
 	memset( &ret[0] , 0 , sizeof(u8) * 64 );
 	//FX2 I/Oポート設定　＆　MAX2初期パラメータ設定 ＆ MAX2リセット
+	cmd_len=0;
 	cmd[cmd_len++]=CMD_PORT_CFG;
 	cmd[cmd_len++]=0x07;					//ADDR[2:0]
 	cmd[cmd_len++]=PIO_RESET | PIO_DIR;		//RESET,DIR(out_pins)
@@ -249,6 +259,7 @@ int CNISETRO::NisetroInit( ECAPFPS eFps , ECAPSCR eScr , int id , HWND hWnd ){
 	tcb1 = usb->start_thread(0x86, BUF_LEN, QUE_NUM, this->getdata_from_cusb2_func );
 	tcb1->userpointer = (void*)this;
 
+	cmd_len=0;
 	cmd[cmd_len++]=CMD_PORT_WRITE;
 	cmd[cmd_len++]=PIO_RESET;
 	cmd[cmd_len++]=CMD_EP6IN_START;
@@ -273,6 +284,7 @@ void CNISETRO::NisetroQuit( void ){
 	tcb1->looping = false;
 	usb->delete_thread(tcb1);
 	
+	cmd_len=0;
 	cmd[cmd_len++]=CMD_PORT_WRITE;
 	cmd[cmd_len++]=0;
 	cmd[cmd_len++]=CMD_EP6IN_STOP;
@@ -280,6 +292,7 @@ void CNISETRO::NisetroQuit( void ){
 	usb->xfer(outep, cmd, cmd_len);
 	cmd_len=0;
 	
+	cmd_len=0;
 	cmd[cmd_len++]=CMD_REG_READ;
 	cmd[cmd_len++]=0x00;			//all_cnt[7:0]
 	cmd[cmd_len++]=CMD_REG_READ;

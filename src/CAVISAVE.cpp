@@ -399,6 +399,8 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , CodecID vcodec_id , lon
 	AVCodec			*pACodec;
 
 	pffm->m_pFmt = guess_format(NULL, pFilename, NULL);
+	if( pffm->m_pFmt == NULL )
+		return -1;
 	printf( "Name       :%s\n" , pffm->m_pFmt->name );
 	printf( "LongName   :%s\n" , pffm->m_pFmt->long_name );
 	printf( "MimeType   :%s\n" , pffm->m_pFmt->mime_type );

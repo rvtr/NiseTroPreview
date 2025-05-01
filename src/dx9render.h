@@ -41,6 +41,11 @@ int D3DInit( LPDIRECT3D9* pD3D , LPDIRECT3DDEVICE9* pD3DDev , HWND hWnd , long w
 */
 void D3DQuit( LPDIRECT3D9* pD3D , LPDIRECT3DDEVICE9* pD3DDev );
 
+/*!
+	@brief	設定情報に基づいてウィンドウサイズを変更する。
+	@param	pAppConfig	[in] -
+	@param	hwnd		[in] -
+*/
 void D3DUpdateScreenConfig( LPAPPCONFIG pAppConfig , HWND hwnd );
 
 #endif
