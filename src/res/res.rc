@@ -52,61 +52,63 @@ END
 // Dialog
 //
 
-IDD_DLG_CONFIG DIALOGEX 0, 0, 227, 131
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+IDD_DLG_CONFIG DIALOGEX 0, 0, 180, 131
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Config"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,170,7,50,14
-    COMBOBOX        IDC_COMBO_SCRSEL,70,7,100,50,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_FPS,70,33,100,52,CBS_DROPDOWNLIST | 
-                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_SCRDIR,70,60,100,49,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SCRSEL,70,7,100,50,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_FPS,70,33,100,52,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SCRDIR,70,60,100,49,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "画面",IDC_STATIC,7,7,63,26
-    LTEXT           "更新速度※",IDC_STATIC,7,33,63,12
+    LTEXT           "更新速度",IDC_STATIC,7,33,63,12
     LTEXT           "画面の向き",IDC_STATIC,7,60,63,17
     LTEXT           "画面の隙間",IDC_STATIC,7,84,63,13
-    CONTROL         "",IDC_SLIDER_SCRSPACE,"msctls_trackbar32",TBS_BOTH | 
-                    TBS_NOTICKS | WS_TABSTOP,70,84,67,11
-    EDITTEXT        IDC_EDIT_SCRSPACE,137,84,33,13,ES_AUTOHSCROLL | 
-                    WS_DISABLED
+    CONTROL         "",IDC_SLIDER_SCRSPACE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,70,84,67,11
+    EDITTEXT        IDC_EDIT_SCRSPACE,137,84,33,13,ES_AUTOHSCROLL | WS_DISABLED
     LTEXT           "拡大率",IDC_STATIC,7,107,63,14
-    CONTROL         "",IDC_SLIDER_SCRSCALE,"msctls_trackbar32",TBS_BOTH | 
-                    TBS_NOTICKS | WS_TABSTOP,70,107,67,11
-    EDITTEXT        IDC_EDIT_SCRSCALE,137,107,33,12,ES_AUTOHSCROLL | 
-                    WS_DISABLED
+    CONTROL         "",IDC_SLIDER_SCRSCALE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,70,107,67,11
+    EDITTEXT        IDC_EDIT_SCRSCALE,137,107,33,12,ES_AUTOHSCROLL | WS_DISABLED
 END
 
-IDD_DLG_RECORD DIALOGEX 0, 0, 197, 107
+IDD_DLG_RECORD DIALOGEX 0, 0, 371, 204
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 CAPTION "Record"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "録画",IDC_BTN_RECORD,62,87,50,13
-    PUSHBUTTON      "閉じる",IDCLOSE,140,86,50,14
-    LTEXT           "録音デバイス",IDC_STATIC,7,7,55,13
-    COMBOBOX        IDC_COMBO_WAVEINDEV,62,7,95,60,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    LTEXT           "ファイル名",IDC_STATIC,7,36,55,11
-    EDITTEXT        IDC_EDIT_FILENAME,62,36,110,12,ES_RIGHT | ES_AUTOHSCROLL | 
-                    ES_READONLY,WS_EX_RIGHT
-    EDITTEXT        IDC_EDIT_TIME,122,55,68,15,ES_AUTOHSCROLL | WS_DISABLED,
-                    WS_EX_RIGHT | WS_EX_STATICEDGE
-    PUSHBUTTON      "更新",IDC_BTN_UPDATE,156,7,34,13
-    PUSHBUTTON      "...",IDC_BTN_FILESEL,172,36,18,11
+    DEFPUSHBUTTON   "録画",IDC_BTN_RECORD,265,184,50,13
+    PUSHBUTTON      "閉じる",IDCLOSE,314,183,50,14
+    LTEXT           "録音デバイス",IDC_STATIC,7,84,55,13
+    COMBOBOX        IDC_COMBO_WAVEINDEV,62,84,266,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ファイル名",IDC_STATIC,7,13,55,11
+    EDITTEXT        IDC_EDIT_FILENAME,62,13,280,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_TIME,183,182,68,15,ES_AUTOHSCROLL | WS_DISABLED,WS_EX_RIGHT | WS_EX_STATICEDGE
+    PUSHBUTTON      "更新",IDC_BTN_UPDATE,328,84,36,12
+    PUSHBUTTON      "...",IDC_BTN_FILESEL,342,13,22,11
+    LTEXT           "描画速度",IDC_STATIC,62,50,121,12
+    CONTROL         "",IDC_SLIDER_FPS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,62,62,85,16
+    EDITTEXT        IDC_EDIT_FPS,147,62,36,16,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+    COMBOBOX        IDC_COMBO_SAMPLE_RATE,62,140,121,50,CBS_DROPDOWNLIST | CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "サンプリングレート",IDC_STATIC,62,128,121,12
+    LTEXT           "映像ビットレート",IDC_STATIC,194,50,125,12
+    CONTROL         "",IDC_SLIDER_VBITRATE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,195,62,85,16
+    EDITTEXT        IDC_EDIT_VBITRATE,281,62,38,16,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "音声ビットレート",IDC_STATIC,194,128,125,12
+    CONTROL         "",IDC_SLIDER_ABITRATE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,195,140,85,14
+    EDITTEXT        IDC_EDIT_ABITRATE,281,140,38,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "映像コーディック",IDC_STATIC,7,32,55,12
+    COMBOBOX        IDC_COMBO_VCODEC,62,32,266,46,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "音声コーディック",IDC_STATIC,7,104,55,12
+    COMBOBOX        IDC_COMBO_ACODEC,62,104,266,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_FILEINFO,7,152,176,45,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
 END
 
-IDD_DLG_INFO DIALOGEX 0, 0, 193, 122
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
-CAPTION "Dialog"
+IDD_DLG_INFO DIALOGEX 0, 0, 180, 131
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    EDITTEXT        IDC_EDIT_INFO,7,7,179,94,ES_AUTOHSCROLL
-    PUSHBUTTON      "更新",IDC_BTN_UPDATE,7,101,179,14
+    EDITTEXT        IDC_EDIT_INFO,0,0,169,94,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
 END
 
 
@@ -121,17 +123,31 @@ BEGIN
     IDD_DLG_RECORD, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 190
+        RIGHTMARGIN, 364
         VERTGUIDE, 62
-        VERTGUIDE, 156
-        VERTGUIDE, 172
-        VERTGUIDE, 190
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 100
-        HORZGUIDE, 20
-        HORZGUIDE, 36
-        HORZGUIDE, 47
-        HORZGUIDE, 55
+        VERTGUIDE, 147
+        VERTGUIDE, 183
+        VERTGUIDE, 195
+        VERTGUIDE, 280
+        VERTGUIDE, 319
+        VERTGUIDE, 328
+        VERTGUIDE, 342
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 197
+        HORZGUIDE, 13
+        HORZGUIDE, 24
+        HORZGUIDE, 32
+        HORZGUIDE, 44
+        HORZGUIDE, 50
+        HORZGUIDE, 62
+        HORZGUIDE, 78
+        HORZGUIDE, 84
+        HORZGUIDE, 97
+        HORZGUIDE, 104
+        HORZGUIDE, 116
+        HORZGUIDE, 128
+        HORZGUIDE, 140
+        HORZGUIDE, 152
     END
 
     IDD_DLG_INFO, DIALOG
@@ -155,44 +171,66 @@ IDR_MENU_POPUP MENU
 BEGIN
     POPUP "popup"
     BEGIN
-        MENUITEM "設定",                        ID_MENU_SETTING
-        MENUITEM "常に手前に表示",              ID_MENU_TOPWINDOW
-        MENUITEM "エラーフレームを表示しない",  ID_MENU_DROP_ERRFRAME
+        MENUITEM "設定",                          ID_MENU_SETTING
+        MENUITEM "情報",                          ID_MENU_INFO
+        MENUITEM "常に手前に表示",                     ID_MENU_TOPWINDOW
+        MENUITEM "エラーフレームを表示しない",               ID_MENU_DROP_ERRFRAME
         MENUITEM SEPARATOR
-        MENUITEM "終了",                        ID_MENU_END
+        MENUITEM "終了(&X)",                          ID_MENU_END
     END
 END
 
 IDR_MENU_MAIN MENU 
 BEGIN
-    POPUP "メニュー"
+    POPUP "メニュー(&F)"
     BEGIN
-        MENUITEM "スクリーンショット",          ID_MENU_SCREENSHOT
-        MENUITEM "録画",                        ID_MENU_REC
+//		POPUP "CUSB2 ID"
+//		BEGIN
+//			MENUITEM "No. 0(デフォルト)",           ID_MENU_CUSB2_ID0
+//			MENUITEM "No. 1",                       ID_MENU_CUSB2_ID1
+//			MENUITEM "No. 2",                       ID_MENU_CUSB2_ID2
+//			MENUITEM "No. 3",                       ID_MENU_CUSB2_ID3
+//			MENUITEM "No. 4",                       ID_MENU_CUSB2_ID4
+//			MENUITEM "No. 5",                       ID_MENU_CUSB2_ID5
+//			MENUITEM "No. 6",                       ID_MENU_CUSB2_ID6
+//			MENUITEM "No. 7",                       ID_MENU_CUSB2_ID7
+//			MENUITEM "No. 8",                       ID_MENU_CUSB2_ID8
+//			MENUITEM "No. 9",                       ID_MENU_CUSB2_ID9
+//		END
+//		MENUITEM SEPARATOR
+        MENUITEM "スクリーンショット",                   ID_MENU_SCREENSHOT
+        MENUITEM "録画",                          ID_MENU_REC
         MENUITEM SEPARATOR
-        MENUITEM "終了",                        ID_MENU_END
+        MENUITEM "終了(&X)",                          ID_MENU_END
     END
     POPUP "設定"
     BEGIN
         POPUP "回転"
         BEGIN
-            MENUITEM "縦方向\tCtrl + 1",            ID_MENU_SRCROT_NORMAL
-            MENUITEM "左回転\tCtrl + 2",            ID_MENU_SRCROT_LEFT
-            MENUITEM "右回転\tCtrl + 3",            ID_MENU_SRCROT_RIGHT
+            MENUITEM "縦方向\tCtrl + 1",               ID_MENU_SRCROT_NORMAL
+            MENUITEM "左回転\tCtrl + 2",               ID_MENU_SRCROT_LEFT
+            MENUITEM "右回転\tCtrl + 3",               ID_MENU_SRCROT_RIGHT
         END
         POPUP "倍率"
         BEGIN
-            MENUITEM "等倍\tCtrl + 4",              ID_MENU_SRCSCAL_X1
-            MENUITEM "２倍\tCtrl + 5",              ID_MENU_SRCSCAL_X2
-            MENUITEM "３倍\tCtrl + 6",              ID_MENU_SRCSCAL_X3
+            MENUITEM "等倍\tCtrl + 4",                ID_MENU_SRCSCAL_X1
+            MENUITEM "２倍\tCtrl + 5",                ID_MENU_SRCSCAL_X2
+            MENUITEM "３倍\tCtrl + 6",                ID_MENU_SRCSCAL_X3
         END
         POPUP "画面の選択"
         BEGIN
-            MENUITEM "上画面\tCtrl + 7",            ID_MENU_SRCSEL_TOP
-            MENUITEM "下画面\tCtrl + 8",            ID_MENU_SRCSEL_BTM
-            MENUITEM "両画面\tCtrl + 9",            ID_MENU_SRCSEL_DSCR
+            MENUITEM "上画面\tCtrl + 7",               ID_MENU_SRCSEL_TOP
+            MENUITEM "下画面\tCtrl + 8",               ID_MENU_SRCSEL_BTM
+            MENUITEM "両画面\tCtrl + 9",               ID_MENU_SRCSEL_DSCR
         END
-        POPUP "画面の隙間"
+        POPUP "更新速度"
+		BEGIN
+			MENUITEM "60FPS",							ID_MENU_60FPS
+			MENUITEM "30FPS",							ID_MENU_30FPS
+			MENUITEM "20FPS",							ID_MENU_20FPS
+			MENUITEM "15FPS",							ID_MENU_15FPS
+		END
+		POPUP "画面の隙間"
         BEGIN
             MENUITEM "  0px",                       ID_MENU_SRCSPACE_000
             MENUITEM " 10px",                       ID_MENU_SRCSPACE_010
@@ -206,10 +244,11 @@ BEGIN
             MENUITEM " 90px",                       ID_MENU_SRCSPACE_090
             MENUITEM "100px",                       ID_MENU_SRCSPACE_100
         END
-        MENUITEM "常に手前に表示",              ID_MENU_TOPWINDOW
-        MENUITEM "エラーフレームを表示しない",  ID_MENU_DROP_ERRFRAME
+        MENUITEM "常に手前に表示",                     ID_MENU_TOPWINDOW
+        MENUITEM "エラーフレームを表示しない",               ID_MENU_DROP_ERRFRAME
         MENUITEM SEPARATOR
-        MENUITEM "設定",                        ID_MENU_SETTING
+        MENUITEM "設定",                          ID_MENU_SETTING
+        MENUITEM "情報",                          ID_MENU_INFO
     END
 END
 
@@ -239,8 +278,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,0,6
- PRODUCTVERSION 0,0,0,6
+ FILEVERSION 0,0,0,7
+ PRODUCTVERSION 0,0,0,7
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x29L
@@ -256,16 +295,16 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "Comments", "偽トロキャプチャ用プレビューソフト"
-            VALUE "CompanyName", "companyname"
+//			VALUE "CompanyName", "companyname"
             VALUE "FileDescription", "偽トロプレビュー(60fps対応)"
-            VALUE "FileVersion", "2010/1/22"
+            VALUE "FileVersion", "2010/2/3"
             VALUE "InternalName", "InternalName"
-            VALUE "LegalCopyright", "copyright"
-            VALUE "LegalTrademarks", "Trademarks"
+//			VALUE "LegalCopyright", "copyright"
+//			VALUE "LegalTrademarks", "Trademarks"
             VALUE "OriginalFilename", "NiseTroPreview*.exe"
             VALUE "PrivateBuild", "privatebuild"
             VALUE "ProductName", "ProductName"
-            VALUE "ProductVersion", "local svn revision:200"
+			VALUE "ProductVersion", "local svn revision:251"
             VALUE "SpecialBuild", "specialbuild"
         END
     END
@@ -290,9 +329,9 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_STRING_ERR_USB_CONNECT 
-                            "カメレオンＵＳＢを接続して、ソフトを再起動してください。"
+    IDS_STRING_ERR_USB_CONNECT "カメレオンＵＳＢを接続して、ソフトを再起動してください。"
     IDS_STRING_ERR_SCREENSHOT "スクリーンショットの保存に失敗しました。"
+    IDS_STRING_ERR_RECORD   "初期化に失敗しました。録画設定を見直してください。"
 END
 
 STRINGTABLE 

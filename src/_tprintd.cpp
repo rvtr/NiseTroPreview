@@ -9,6 +9,7 @@
 	@note	g‚¢•û‚Í_tprintf‚Æ‚Ù‚Úˆê
 */
 void _tprintd( const TCHAR * _Format, ... ){
+#if defined(_DEBUG)
 	va_list	arglist;
 	int		len;
 	TCHAR	*buffer = NULL;
@@ -32,5 +33,6 @@ void _tprintd( const TCHAR * _Format, ... ){
 	}
 	if( buffer )delete [] buffer;
 	va_end(arglist);
+#endif
 }
 

@@ -40,6 +40,10 @@ typedef struct SAPPCONFIG {
 	
 	// カメレオンUSBのＩＤ
 	int				m_iCUSB2_ID;
+	
+	//! 表示する速度
+	ECAPFPS			m_eFrmSkip;
+	
 	//
 } SAPPCONFIG , *PAPPCONFIG , *LPAPPCONFIG;
 
@@ -65,6 +69,8 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename );
 	@param	pFilename	[in] ファイル名
 */
 int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename );
+
+int ConfigIOCheckCmdLine( PAPPCONFIG pConfig , LPTSTR lpszCmdLine );
 
 #endif
 

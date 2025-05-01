@@ -41,9 +41,40 @@ BOOL CALLBACK ConfigDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 				SendMessage(GetDlgItem(hDlgWnd, IDC_SLIDER_SCRSCALE), TBM_SETRANGE, (WPARAM)TRUE, (LPARAM)MAKELPARAM((CSCRSCAL_MIN*CSCRSCAL_SCALE), (CSCRSCAL_MAX*CSCRSCAL_SCALE)));
 				SendMessage(GetDlgItem(hDlgWnd, IDC_SLIDER_SCRSCALE), TBM_SETPOS, (WPARAM)TRUE, (LPARAM)(g_AppConfig.m_fScrScal*CSCRSCAL_SCALE));
 				SendMessage( hDlgWnd , WM_HSCROLL , 0 , (LPARAM)GetDlgItem(hDlgWnd, IDC_SLIDER_SCRSCALE) );
-				//
+				
+				if( g_AppConfig.m_ScrSel == ECAPSCR_TOP )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SCRSEL), CB_SETCURSEL, 0, 0 );
+				if( g_AppConfig.m_ScrSel == ECAPSCR_BTM )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SCRSEL), CB_SETCURSEL, 1, 0 );
+				if( g_AppConfig.m_ScrSel == ECAPSCR_DSCR )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SCRSEL), CB_SETCURSEL, 2, 0 );
+				
+				if( g_AppConfig.m_eFrmSkip == ECAPFPS_60 )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_FPS), CB_SETCURSEL, 0, 0 );
+				if( g_AppConfig.m_eFrmSkip == ECAPFPS_30 )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_FPS), CB_SETCURSEL, 1, 0 );
+				if( g_AppConfig.m_eFrmSkip == ECAPFPS_20 )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_FPS), CB_SETCURSEL, 2, 0 );
+				if( g_AppConfig.m_eFrmSkip == ECAPFPS_15 )	SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_FPS), CB_SETCURSEL, 3, 0 );
+				
+//				SetTimer( hDlgWnd , 1421356 , (1000 / 2) , NULL );
+			//
 			}
 			return TRUE;
+		
+/*		case WM_DESTROY:
+			{
+				KillTimer( hDlgWnd, 1421356 );
+			}
+			break;
+		
+		case WM_TIMER:
+			{
+				TCHAR strBuf[256];
+				TCHAR strTitle[256];
+				LoadString( (HINSTANCE)GetWindowLongPtr(hDlgWnd, GWLP_HINSTANCE) , IDS_STRING_TITLE , strTitle , 256 );
+#if _MSC_VER >= 1400
+				_stprintf_s( strBuf , 256 , TEXT("%s\r\nFPS %2.1f\r\nData %2.1f\r\nErrorFrame:%d") , strTitle , g_thRender.m_dFPS , g_nise.GetFps() , g_nise.GetErrorFrameCount() );
+#else
+				_stprintf( strBuf , TEXT("%s\r\nFPS %2.1f\r\nData %2.1f\r\nErrorFrame:%d") , strTitle , g_thRender.m_dFPS , g_nise.GetFps() , g_nise.GetErrorFrameCount() );
+#endif
+				SetWindowText( GetDlgItem(hDlgWnd, IDC_EDIT_INFO) , strBuf );
+			}
+			break;*/
 		
 		case WM_COMMAND:
 			switch (LOWORD(wp)) {
@@ -64,6 +95,25 @@ BOOL CALLBACK ConfigDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 						}
 					}
 					break;
+				
+				case IDC_COMBO_FPS:
+					{
+						if( HIWORD(wp) == CBN_SELCHANGE ){
+							long fps = 0;
+							long sel = (long)SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_FPS), CB_GETCURSEL, 0,0);
+							if( sel == 0 ){	g_AppConfig.m_eFrmSkip = ECAPFPS_60; fps = 60;}
+							if( sel == 1 ){	g_AppConfig.m_eFrmSkip = ECAPFPS_30; fps = 30;}
+							if( sel == 2 ){	g_AppConfig.m_eFrmSkip = ECAPFPS_20; fps = 20;}
+							if( sel == 3 ){	g_AppConfig.m_eFrmSkip = ECAPFPS_15; fps = 15;}
+							
+							g_thRender.setFps( fps );
+							g_thBuftoTEX.setFps( fps );
+							g_nise.NisetroQuit();
+							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd );
+						}
+					}
+					break;
+				
 				case IDOK:
 					{
 						SendMessage( hDlgWnd , WM_CLOSE , 0 , 0 );

@@ -85,7 +85,28 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
+/*		// <cusb2id>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
+		pDoc->createElement(_T("cusb2id"), &pElement);
+	#if _MSC_VER >= 1400
+		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_iCUSB2_ID );
+	#else
+		_stprintf( strBuf , TEXT("%d") , pConfig->m_iCUSB2_ID );
+	#endif
+		pElement->put_text( strBuf );
+		// <config>に<cusb2id>を追加する
+		pEmtConfig->appendChild(pElement, NULL);
+		pElement = NULL;
+		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;*/
+		
 		// <scrsel>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("scrsel"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_ScrSel );
@@ -100,7 +121,28 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
 		pEmtBLine = NULL;
 		
+		// <frameskip>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
+		pDoc->createElement(_T("frameskip"), &pElement);
+	#if _MSC_VER >= 1400
+		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_eFrmSkip );
+	#else
+		_stprintf( strBuf , TEXT("%d") , pConfig->m_eFrmSkip );
+	#endif
+		pElement->put_text( strBuf );
+		// <config>に<frameskip>を追加する
+		pEmtConfig->appendChild(pElement, NULL);
+		pElement = NULL;
+		pDoc->createTextNode(TEXT("\n") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
+		
 		// <dir>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("dir"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_DirMode );
@@ -116,6 +158,9 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtBLine = NULL;
 		
 		// <space>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("space"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_ScrSpace );
@@ -131,6 +176,9 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtBLine = NULL;
 		
 		// <scale>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("scale"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%f") , pConfig->m_fScrScal );
@@ -146,6 +194,9 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtBLine = NULL;
 		
 		// <topwindow>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("topwindow"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_bTopWindow );
@@ -161,6 +212,9 @@ int ConfigIOSave( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pEmtBLine = NULL;
 		
 		// <dropframe>を作成
+		pDoc->createTextNode(TEXT("\t") , &pEmtBLine );
+		pEmtConfig->appendChild( pEmtBLine , NULL ); // 改行
+		pEmtBLine = NULL;
 		pDoc->createElement(_T("dropframe"), &pElement);
 	#if _MSC_VER >= 1400
 		_stprintf_s( strBuf , 256 , TEXT("%d") , pConfig->m_bDropFrame );
@@ -216,6 +270,17 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 		pDoc->load(_variant_t(pFilename) , &isSuc );
 		pDoc->get_documentElement(&pRoot);
 		
+/*		pRoot->selectSingleNode( TEXT("cusb2id") , &pNodeRet );
+		if( pNodeRet ){
+			BSTR    value;
+			pNodeRet->get_text( &value );
+			long v = _tstol(value);
+			_tprintd( TEXT("cusb2id %d\n") , v );
+			if( v >= 0 && v <= 9 )
+				pConfig->m_iCUSB2_ID = (int)v;
+			pNodeRet = NULL;
+		}*/
+		
 		pRoot->selectSingleNode( TEXT("scrsel") , &pNodeRet );
 		if( pNodeRet ){
 			BSTR    value;
@@ -224,6 +289,17 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 			_tprintd( TEXT("scrsel %d\n") , v );
 			if( v == ECAPSCR_BTM || v == ECAPSCR_TOP || v == ECAPSCR_DSCR )
 				pConfig->m_ScrSel = (ECAPSCR)v;
+			pNodeRet = NULL;
+		}
+		
+		pRoot->selectSingleNode( TEXT("frameskip") , &pNodeRet );
+		if( pNodeRet ){
+			BSTR    value;
+			pNodeRet->get_text( &value );
+			long v = _tstol(value);
+			_tprintd( TEXT("frameskip %d\n") , v );
+			if( v == ECAPFPS_60 || v == ECAPFPS_30 || v == ECAPFPS_20 || v == ECAPFPS_15 )
+				pConfig->m_eFrmSkip = (ECAPFPS)v;
 			pNodeRet = NULL;
 		}
 		
@@ -294,3 +370,133 @@ int ConfigIOLoad( PAPPCONFIG pConfig , TCHAR* pFilename ){
 	
 	return 0;
 }
+
+int ConfigIOCheckCmdLine( PAPPCONFIG pConfig , LPTSTR lpszCmdLine ){
+	if( pConfig == NULL || lpszCmdLine == NULL ) return -1;
+	
+		LPTSTR pStr = NULL;
+		
+#if _MSC_VER >= 1400
+		LPTSTR pStrNext = NULL;
+		pStr = _tcstok_s( lpszCmdLine , TEXT(" ") , &pStrNext );
+#else
+		pStr = _tcstok( lpszCmdLine , TEXT(" "));
+#endif
+		while( pStr ){
+//			MessageBox( NULL , pStr , pStr , MB_OK );
+			
+			// カメレオンusbのＩＤ
+			if( _tcscmp( pStr , TEXT("--cusb2id") ) == 0 ){
+#if _MSC_VER >= 1400
+				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
+#else
+				pStr = _tcstok( NULL , TEXT(" ") );
+#endif
+				pConfig->m_iCUSB2_ID = _tstol(pStr);
+				pConfig->m_iCUSB2_ID = pConfig->m_iCUSB2_ID;	// break point
+			}
+			
+			// 画面の隙間
+			if( _tcscmp( pStr , TEXT("--space") ) == 0 ){
+#if _MSC_VER >= 1400
+				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
+#else
+				pStr = _tcstok( NULL , TEXT(" ") );
+#endif
+				pConfig->m_ScrSpace = (unsigned char)_tstol(pStr);
+				if( pConfig->m_ScrSpace <= CSCRSPACE_MIN ) pConfig->m_ScrSpace = CSCRSPACE_MIN;
+				if( pConfig->m_ScrSpace >= CSCRSPACE_MAX ) pConfig->m_ScrSpace = CSCRSPACE_MAX;
+				pConfig->m_ScrSpace = pConfig->m_ScrSpace;	// break point
+			}
+			
+			// 画面の拡大率
+			if( _tcscmp( pStr , TEXT("--scale") ) == 0 ){
+#if _MSC_VER >= 1400
+				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
+#else
+				pStr = _tcstok( NULL , TEXT(" ") );
+#endif
+				pConfig->m_fScrScal = (float)_tstof(pStr);
+				if( pConfig->m_fScrScal <= CSCRSCAL_MIN ) pConfig->m_fScrScal = CSCRSCAL_MIN;
+				if( pConfig->m_fScrScal >= CSCRSCAL_MAX ) pConfig->m_fScrScal = CSCRSCAL_MAX;
+				pConfig->m_fScrScal = pConfig->m_fScrScal;	// break point
+			}
+			
+			// ドロップフレーム
+			if( _tcscmp( pStr , TEXT("--dropframe") ) == 0 ){
+				pConfig->m_bDropFrame = true;
+				pConfig->m_bDropFrame = pConfig->m_bDropFrame;	// break point
+			}
+			
+			// 常に手前に表示
+			if( _tcscmp( pStr , TEXT("--topwindow") ) == 0 ){
+				pConfig->m_bTopWindow = true;
+				pConfig->m_bTopWindow = pConfig->m_bTopWindow;	// break point
+			}
+			
+			// 左回転
+			if( _tcscmp( pStr , TEXT("--rotation-left") ) == 0 ){
+				pConfig->m_DirMode = 1;
+				pConfig->m_DirMode = pConfig->m_DirMode;	// break point
+			}
+			
+			// 右回転
+			if( _tcscmp( pStr , TEXT("--rotation-right") ) == 0 ){
+				pConfig->m_DirMode = 2;
+				pConfig->m_DirMode = pConfig->m_DirMode;	// break point
+			}
+			
+			// 表示画面(top)
+			if( _tcscmp( pStr , TEXT("--scrsel-top") ) == 0 ){
+				pConfig->m_ScrSel = ECAPSCR_TOP;
+				pConfig->m_ScrSel = pConfig->m_ScrSel;	// break point
+			}
+			
+			// 表示画面(bottom)
+			if( _tcscmp( pStr , TEXT("--scrsel-bottom") ) == 0 ){
+				pConfig->m_ScrSel = ECAPSCR_BTM;
+				pConfig->m_ScrSel = pConfig->m_ScrSel;	// break point
+			}
+			
+			// 表示画面(2 screen)
+			if( _tcscmp( pStr , TEXT("--scrsel-double") ) == 0 ){
+				pConfig->m_ScrSel = ECAPSCR_DSCR;
+				pConfig->m_ScrSel = pConfig->m_ScrSel;	// break point
+			}
+			
+			// フレームスキップ(60fps)
+			if( _tcscmp( pStr , TEXT("--frameskip-60fps") ) == 0 ){
+				pConfig->m_eFrmSkip = ECAPFPS_60;
+				pConfig->m_eFrmSkip = pConfig->m_eFrmSkip;	// break point
+			}
+			
+			// フレームスキップ(30fps)
+			if( _tcscmp( pStr , TEXT("--frameskip-30fps") ) == 0 ){
+				pConfig->m_eFrmSkip = ECAPFPS_30;
+				pConfig->m_eFrmSkip = pConfig->m_eFrmSkip;	// break point
+			}
+			
+			// フレームスキップ(20fps)
+			if( _tcscmp( pStr , TEXT("--frameskip-20fps") ) == 0 ){
+				pConfig->m_eFrmSkip = ECAPFPS_20;
+				pConfig->m_eFrmSkip = pConfig->m_eFrmSkip;	// break point
+			}
+			
+			// フレームスキップ(15fps)
+			if( _tcscmp( pStr , TEXT("--frameskip-15fps") ) == 0 ){
+				pConfig->m_eFrmSkip = ECAPFPS_15;
+				pConfig->m_eFrmSkip = pConfig->m_eFrmSkip;	// break point
+			}
+			
+#if _MSC_VER >= 1400
+				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
+#else
+				pStr = _tcstok( NULL , TEXT(" ") );
+#endif
+		}
+	
+	
+	
+	return 0;
+}
+

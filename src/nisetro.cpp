@@ -52,20 +52,23 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 		if( (30*3) < pNise->m_CapBufCur1 && bVSync ){
 			bool bError = false;
 			if( pNise->m_CapBufCur1 < NDS_SCREEN2BUF_SIZE ){
-				pNise->m_ulErrFrm++;
+				if( pNise->m_ulErrFrm++ == 0xFFFFFFFF )	pNise->m_ulErrFrm = 0;
 				bError = true;
 			}
 			
 			// スクリーンデータに移す
 			if( !(pNise->m_bDropFrame && bError) ){
-				if( pNise->m_mutex.lock(INFINITE) == false){
+				unsigned char lSel = 0;
+				if( pNise->m_lScrBufSel == 0 ) lSel = 1; else lSel = 1;
+				if( pNise->m_mutex_[lSel].lock(INFINITE) == false){
 					m_dFps = checkFPS();
 #if _MSC_VER >= 1400
-					errno_t e = memcpy_s( pNise->m_ScrData , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					errno_t e = memcpy_s( pNise->m_ScrData_[lSel] , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
 #else
-					memcpy( pNise->m_ScrData , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					memcpy( pNise->m_ScrData_[lSel] , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
 #endif
-					pNise->m_mutex.unlock();
+					pNise->m_lScrBufSel = lSel;
+					pNise->m_mutex_[lSel].unlock();
 				}
 			}
 			
@@ -102,20 +105,23 @@ void CNISETRO::func_60fps( u8* buf , u32 len ){
 		if( ((30/2)*3) < pNise->m_CapBufCur1 && bVSync ){
 			bool bError = false;
 			if( pNise->m_CapBufCur1 < NDS_SCREENBUF_SIZE ){
-				pNise->m_ulErrFrm++;
+				if( pNise->m_ulErrFrm++ == 0xFFFFFFFF )	pNise->m_ulErrFrm = 0;
 				bError = true;
 			}
 			
 			// スクリーンデータに移す
 			if( !(pNise->m_bDropFrame && bError) ){
-				if( pNise->m_mutex.lock(INFINITE) == false){
+				unsigned char lSel = 0;
+				if( pNise->m_lScrBufSel == 0 ) lSel = 1; else lSel = 1;
+				if( pNise->m_mutex_[lSel].lock(INFINITE) == false){
 					m_dFps = checkFPS();
 #if _MSC_VER >= 1400
-					errno_t e = memcpy_s( pNise->m_ScrData , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					errno_t e = memcpy_s( pNise->m_ScrData_[lSel] , NDS_SCREEN2BUF_SIZE , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
 #else
-					memcpy( pNise->m_ScrData , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
+					memcpy( pNise->m_ScrData_[lSel] , pNise->m_CaptureBuffer , NDS_SCREEN2BUF_SIZE );
 #endif
-					pNise->m_mutex.unlock();
+					pNise->m_lScrBufSel = lSel;
+					pNise->m_mutex_[lSel].unlock();
 				}
 			}
 			

@@ -23,6 +23,7 @@
 #define IDS_STRING_WAR_EXIT_REC         202
 #define IDS_STRING_ERR_USB_CONNECT      800
 #define IDS_STRING_ERR_SCREENSHOT       801
+#define IDS_STRING_ERR_RECORD           802
 #define IDC_COMBO_SCRSEL                1001
 #define IDC_COMBO_FPS                   1002
 #define IDC_COMBO_SCRDIR                1003
@@ -37,6 +38,20 @@
 #define IDC_BTN_RECORD                  1015
 #define IDC_EDIT_INFO                   1016
 #define IDC_BTN_FILESEL                 1017
+#define IDC_SLIDER_FPS                  1018
+#define IDC_EDIT_FPS                    1019
+#define IDC_COMBO_SAMPLE_RATE           1020
+#define IDC_SLIDER_VBITRATE             1021
+#define IDC_EDIT_VBITRATE               1022
+#define IDC_SLIDER_ABITRATE             1023
+#define IDC_EDIT_ABITRATE               1024
+#define IDC_COMBO_VCODEC                1025
+#define IDC_BTN_VCODEC_UPDATE           1026
+#define IDC_COMBO_ACODEC                1027
+#define IDC_BTN_UPDATE3                 1028
+#define IDC_BTN_ACODEC_UPDATE           1028
+#define IDC_EDIT_FILEINFO               1029
+#define IDC_EDIT1                       1030
 #define ID_MENU_END                     40008
 #define ID_MENU_REC                     40009
 #define ID_MENU_SRCROT_NORMAL           40010
@@ -63,14 +78,29 @@
 #define ID_MENU_SRCSPACE_080            40038
 #define ID_MENU_SRCSPACE_090            40039
 #define ID_MENU_SRCSPACE_100            40040
+#define ID_MENU_CUSB2_ID0               40050
+#define ID_MENU_CUSB2_ID1               40051
+#define ID_MENU_CUSB2_ID2               40052
+#define ID_MENU_CUSB2_ID3               40053
+#define ID_MENU_CUSB2_ID4               40054
+#define ID_MENU_CUSB2_ID5               40055
+#define ID_MENU_CUSB2_ID6               40056
+#define ID_MENU_CUSB2_ID7               40057
+#define ID_MENU_CUSB2_ID8               40058
+#define ID_MENU_CUSB2_ID9               40059
+#define ID_MENU_INFO					40060
+#define ID_MENU_60FPS					40061
+#define ID_MENU_30FPS					40062
+#define ID_MENU_20FPS					40063
+#define ID_MENU_15FPS					40064
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        109
-#define _APS_NEXT_COMMAND_VALUE         40022
-#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_COMMAND_VALUE         40065
+#define _APS_NEXT_CONTROL_VALUE         1031
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

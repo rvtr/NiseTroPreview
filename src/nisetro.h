@@ -88,7 +88,7 @@ const int NDS_SCREENBUF_SIZE = NDS_SCREEN_W * NDS_SCREEN_H * 3;
 const int NDS_SCREEN2_H = NDS_SCREEN_H * 2;
 const int NDS_SCREEN2BUF_SIZE = NDS_SCREENBUF_SIZE * 2;
 
-//! キャプチャー用バッファ(18Bit)
+//! キャプチャー用バッファサイズ
 const int			CCAPBUFSIZE = NDS_SCREEN2BUF_SIZE * 2; // オーバーライトに備えて多めに確保する
 
 /*!
@@ -136,10 +136,12 @@ private:
 	//! キャプチャーバッファ
 	BYTE				m_CaptureBuffer[CCAPBUFSIZE];
 
-	CMUTEX				m_mutex;
+	unsigned char		m_lScrBufSel;
+	
+	CMUTEX				m_mutex_[2];
 	
 	//! 描画用バッファ(18Bit)
-	BYTE				m_ScrData[NDS_SCREEN2BUF_SIZE];
+	BYTE				m_ScrData_[2][NDS_SCREEN2BUF_SIZE];
 	
 	/*!
 		@brief	FPSを取得する
@@ -172,10 +174,12 @@ private:
 		m_ulErrFrm = 0;
 		m_dFps = 0;
 		
+		m_lScrBufSel = 0;
 		m_CapBufCur1 = 0;
 		m_CapBufCur2 = 0;
 		memset( m_CaptureBuffer , 0 , sizeof(BYTE) * CCAPBUFSIZE );
-		memset( m_ScrData , 0xFF , sizeof(BYTE) * NDS_SCREEN2BUF_SIZE );
+		memset( m_ScrData_[0] , 0xFF , sizeof(BYTE) * NDS_SCREEN2BUF_SIZE );
+		memset( m_ScrData_[1] , 0xFF , sizeof(BYTE) * NDS_SCREEN2BUF_SIZE );
 	}
 	
 public:
@@ -183,7 +187,8 @@ public:
 		usb_init = false;
 		usb = NULL;
 		pRecfile = NULL;
-		m_mutex.create();
+		m_mutex_[0].create();
+		m_mutex_[1].create();
 		param_init();
 		//
 	}
@@ -193,7 +198,8 @@ public:
 		if( usb_init ){
 			NisetroQuit();
 		}
-		m_mutex.destroy();
+		m_mutex_[0].destroy();
+		m_mutex_[1].destroy();
 	}
 	
 	/*!
@@ -217,13 +223,13 @@ public:
 		if( !(BufSize >= NDS_SCREEN2BUF_SIZE && pScrData) )
 			return -1;
 		
-		if( m_mutex.lock(dwWaitMS) == false ){
+		if( m_mutex_[m_lScrBufSel].lock(dwWaitMS) == false ){
 #if _MSC_VER >= 1400
-			memcpy_s( pScrData , BufSize , m_ScrData , NDS_SCREEN2BUF_SIZE );
+			memcpy_s( pScrData , BufSize , m_ScrData_[m_lScrBufSel] , NDS_SCREEN2BUF_SIZE );
 #else
-			memcpy( pScrData , m_ScrData , NDS_SCREEN2BUF_SIZE );
+			memcpy( pScrData , m_ScrData_[m_lScrBufSel] , NDS_SCREEN2BUF_SIZE );
 #endif
-			m_mutex.unlock();
+			m_mutex_[m_lScrBufSel].unlock();
 		}else
 			return -1;
 		return 0;

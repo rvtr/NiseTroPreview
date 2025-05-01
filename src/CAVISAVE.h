@@ -48,7 +48,11 @@ typedef struct _ffmpeg_struct{
 	
 }_ffmpeg_struct;
 
-int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag , long width , long height , double fps = 15 ,  int bitrate_scale = 64, int sample_rate = 44100 , int channels = 2 , int audio_bit_rate = 64000 );
+int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , 
+			   CodecID vcodec_id , 
+			   long width , long height , double fps = 15 ,  int bitrate_scale = 64, 
+			   CodecID acodec_id = CODEC_ID_NONE , 
+			   int sample_rate = 44100 , int channels = 2 , int audio_bit_rate = 64000 );
 
 void ffmpegquit( _ffmpeg_struct* pffm );
 
@@ -161,7 +165,7 @@ public:
 	bool IsRec( void ){ return m_bRecord; }
 	bool IsInit( void ){ return m_bInit; }
 	
-	int Init( TCHAR* pFilename , unsigned int codec_tag , int width , int height , double fps = 15 , UINT ID = WAVE_MAPPER , int iChannels = 2 , int iSamplesPerSec = 44100 , int iBitRate = 64000 ){
+	int Init( TCHAR* pFilename , CodecID vcodec_id , int width , int height , double fps = 15 , int iVBitRate = 6 * 1024 * 1024 , UINT ID = WAVE_MAPPER , CodecID acodec_id = CODEC_ID_NONE ,int iChannels = 2 , int iSamplesPerSec = 44100 , int iABitRate = 64000 ){
 		int rc = 0;
 		if( m_bInit ) return 0;
 		
@@ -223,7 +227,7 @@ public:
 		strcpy( strFilename , pFilename );
 	#endif
 #endif
-		if( ffmpeginit( &m_ffm , strFilename , codec_tag , width , height , fps , 64 , m_WFmt.nSamplesPerSec , m_WFmt.nChannels , iBitRate )){
+		if( ffmpeginit( &m_ffm , strFilename , vcodec_id , width , height , fps , iVBitRate , acodec_id , m_WFmt.nSamplesPerSec , m_WFmt.nChannels , iABitRate )){
 			_tprintd( TEXT("ffmpeginit\n") );
 			return -1;
 		}

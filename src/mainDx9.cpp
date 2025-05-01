@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <io.h>
 #include <time.h>
+#include <string>
 #include "dx9render.h"
 
 #include "cthread.h"
@@ -46,12 +47,10 @@ CNISETRO	g_nise;
 
 CMUTEX		g_mutex_Texture;
 
-char g_cFps = 60;
-
-bool		gDone = false;
 HINSTANCE	g_hInst;
 HWND		g_hWnd;		//ウィンドウハンドル
 HWND		g_hConfigDlg = NULL;		//ウィンドウハンドル
+HWND		g_hInfoDlg = NULL;		//ウィンドウハンドル
 HWND		g_hRecordDlg = NULL;		//ウィンドウハンドル
 
 //! app config
@@ -107,18 +106,23 @@ void D3DResQuit( void ){
 class CBUFtoTEX : public CTHREAD{
 public:
 	CBUFtoTEX(){
-		this->setSleepTime( 1000 / g_cFps );
+		this->setSleepTime( 1000 / 60 );
+	}
+	
+	void setFps( long fps ){
+		this->setSleepTime( 1000 / fps );
 	}
 	
 	virtual unsigned int ThreadFunction( void ){
 		if( !g_pTexTop || !g_pTexBtm ) return -1;
 		
+		DWORD dwTime1 = timeGetTime();
 		BYTE ScrData[NDS_SCREEN2BUF_SIZE];
-		if( g_nise.GetScrData( ScrData , NDS_SCREEN2BUF_SIZE , 1000/g_cFps ) )
+		if( g_nise.GetScrData( ScrData , NDS_SCREEN2BUF_SIZE , getSleepTime() ) )
 			return -1;
 		
 		// mutexのロックを取得
-		if( g_mutex_Texture.lock(1000/g_cFps) == false ){
+		if( g_mutex_Texture.lock(getSleepTime()) == false ){
 			D3DLOCKED_RECT LockRc;
 			HRESULT hr;
 			BYTE* pBits = NULL;
@@ -188,6 +192,13 @@ public:
 			g_mutex_Texture.unlock();
 		}
 
+		DWORD dwTime2 = timeGetTime();
+		DWORD dwWTime = this->getSleepTime() - (dwTime2 - dwTime1);
+		if( dwWTime <= 0 ){
+			static int c = 0;
+			_tprintd( TEXT("%d %d 処理落ちの可能性 CBUFtoTEX\n") , c++ , dwWTime );
+			dwWTime = 0;
+		}
 		
 		return 0;
 	}
@@ -256,7 +267,7 @@ public:
 		DWORD dwWTime = m_dwWaitTime_Max - (dwTime2 - dwTime1);
 		if( dwWTime <= 0 ){
 			static int c = 0;
-			_tprintd( TEXT("%d %d やばい\n") , c++ , dwWTime );
+			_tprintd( TEXT("%d %d 処理落ちの可能性\n") , c++ , dwWTime );
 			dwWTime = 0;
 		}
 		this->setSleepTime( dwWTime );
@@ -298,29 +309,39 @@ public:
 	
 	CRENDERTHREAD(){
 		m_dFPS = 0;
-		m_dwMaxTime = 1000 / g_cFps;
+		m_dwMaxTime = 1000 / 60;
+		this->setSleepTime( m_dwMaxTime );
+	}
+	
+	void setFps( long fps ){
+		m_dwMaxTime = 1000 / fps;
 		this->setSleepTime( m_dwMaxTime );
 	}
 	
 	virtual unsigned int ThreadFunction( void ){
-		DWORD dwTime = timeGetTime();
-		if( g_mutex_Texture.lock(1000/g_cFps) == false ){
+		DWORD dwTime1 = timeGetTime();
+		if( g_mutex_Texture.lock(m_dwMaxTime) == false ){
 			ReanderScreen();
 			m_dFPS = GetFPS();
 			g_mutex_Texture.unlock();
 		}
-		dwTime = timeGetTime() - dwTime;
 		
-//		_tprintd( TEXT("wait %d\n") , dwTime );
-		if( dwTime > m_dwMaxTime )
-			dwTime = 0;
-		else
-			dwTime = m_dwMaxTime - dwTime;
-		this->setSleepTime( dwTime );
+		DWORD dwTime2 = timeGetTime();
+		DWORD dwWTime = m_dwMaxTime - (dwTime2 - dwTime1);
+		if( dwWTime <= 0 ){
+			static int c = 0;
+			_tprintd( TEXT("%d %d 処理落ちの可能性 CRENDERTHREAD\n") , c++ , dwWTime );
+			dwWTime = 0;
+		}
+		this->setSleepTime( dwWTime );
 		return 0;
 	}
 };
 
+//! バッファからテクスチャーへ変換するスレッド
+CBUFtoTEX	g_thBuftoTEX;
+
+CAVISAVE	g_thAviSave;
 CRENDERTHREAD g_thRender;
 
 //! 描画関数
@@ -444,9 +465,9 @@ void ReanderScreen( void )
 	g_pD3DDev->Present( NULL , NULL , NULL , NULL );
 }
 
-CAVISAVE	g_thAviSave;
 
 #include "dlgproc_config.h"
+#include "dlgproc_info.h"
 #include "dlgproc_record.h"
 
 //! 描画ウィンドウ用のコールバック
@@ -477,17 +498,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 					g_AppConfig.m_bTopWindow = false;
 					SendMessage( hwnd , WM_COMMAND , MAKEWPARAM(ID_MENU_TOPWINDOW,0) , 0 );
 				}
-				SetTimer( hwnd , 1421356 , (1000 / 2) , NULL );
+//				SetTimer( hwnd , 1421356 , (1000 / 2) , NULL );
 			}
 			break;
 		
 		case WM_DESTROY:
 			{
-				KillTimer( hwnd, 1421356 );
+//				KillTimer( hwnd, 1421356 );
 			}
 			break;
 		
-		case WM_TIMER:
+/*		case WM_TIMER:
 			{
 				TCHAR strBuf[256];
 				TCHAR strTitle[256];
@@ -499,11 +520,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 #endif
 				SetWindowText( g_hWnd , strBuf );
 			}
-			break;
-		
-		case WM_QUIT:
-			gDone = true;
-			break;
+			break;*/
 		
 		case WM_CLOSE:
 			if( g_thAviSave.IsRec() == false ){
@@ -524,11 +541,40 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 		case WM_DEVICECHANGE:
 			{
 				_tprintd( TEXT("WM_DEVICECHANGE\n") );
+				
+				
+				PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR)lParam;
+				lpdb = lpdb;
+				if( wParam == DBT_CONFIGCHANGECANCELED )	_tprintd( TEXT(" DBT_CONFIGCHANGECANCELED\n") );
+				if( wParam == DBT_CONFIGCHANGED )			_tprintd( TEXT(" DBT_CONFIGCHANGED\n") );
+				if( wParam == DBT_CUSTOMEVENT )				_tprintd( TEXT(" DBT_CUSTOMEVENT\n") );
+				if( wParam == DBT_DEVICEARRIVAL )			_tprintd( TEXT(" DBT_DEVICEARRIVAL\n") );
+				if( wParam == DBT_DEVICEQUERYREMOVE )		_tprintd( TEXT(" DBT_DEVICEQUERYREMOVE\n") );
+				if( wParam == DBT_DEVICEQUERYREMOVEFAILED )	_tprintd( TEXT(" DBT_DEVICEQUERYREMOVEFAILED\n") );
+				if( wParam == DBT_DEVICEREMOVECOMPLETE )	_tprintd( TEXT(" DBT_DEVICEREMOVECOMPLETE\n") );
+				if( wParam == DBT_DEVICEREMOVEPENDING )		_tprintd( TEXT(" DBT_DEVICEREMOVEPENDING\n") );
+				if( wParam == DBT_DEVICETYPESPECIFIC )		_tprintd( TEXT(" DBT_DEVICETYPESPECIFIC\n") );
+				if( wParam == DBT_DEVNODES_CHANGED )		_tprintd( TEXT(" DBT_DEVNODES_CHANGED\n") );
+				if( wParam == DBT_QUERYCHANGECONFIG )		_tprintd( TEXT(" DBT_QUERYCHANGECONFIG\n") );
+				if( wParam == DBT_USERDEFINED )				_tprintd( TEXT(" DBT_USERDEFINED\n") );
+				
 				if( g_nise.usb ){
 					if( g_nise.usb->PnpEvent( wParam , lParam) ){
 						_tprintd( TEXT("PnpEvent\n") );
+						
+						HMENU hMenu;
+						hMenu = GetMenu( hwnd );
+						for( int i = 0; i < 4; i++ ){
+							if( hMenu )EnableMenuItem( hMenu , (ID_MENU_CUSB2_ID0+i) , MF_GRAYED );
+						}
 						g_nise.NisetroQuit();
-						g_nise.NisetroInit( ECAPFPS_60 , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
+						g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
+						
+						hMenu = GetMenu( hwnd );
+						for( int i = 0; i < 4; i++ ){
+							if( hMenu )EnableMenuItem( hMenu , (ID_MENU_CUSB2_ID0+i) , MF_ENABLED );
+						}
+						
 					}
 				}
 			}
@@ -554,6 +600,15 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							g_hConfigDlg = CreateDialog( g_hInst , MAKEINTRESOURCE(IDD_DLG_CONFIG) , hwnd , (DLGPROC)ConfigDlgProc );
 							ShowWindow(g_hConfigDlg, SW_SHOW);
 							UpdateWindow(g_hConfigDlg); 
+						}
+						break;
+					
+					case ID_MENU_INFO:
+						{
+							if( g_hInfoDlg )break;
+							g_hInfoDlg = CreateDialog( g_hInst , MAKEINTRESOURCE(IDD_DLG_INFO) , hwnd , (DLGPROC)InfoDlgProc );
+							ShowWindow(g_hInfoDlg, SW_SHOW);
+							UpdateWindow(g_hInfoDlg); 
 						}
 						break;
 					
@@ -631,6 +686,27 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 						}
 						break;
 					
+					case ID_MENU_60FPS:
+					case ID_MENU_30FPS:
+					case ID_MENU_20FPS:
+					case ID_MENU_15FPS:
+						{
+							long fps = 0;
+							if( id == ID_MENU_60FPS ){	g_AppConfig.m_eFrmSkip = ECAPFPS_60; fps = 60;}
+							if( id == ID_MENU_30FPS ){	g_AppConfig.m_eFrmSkip = ECAPFPS_30; fps = 30;}
+							if( id == ID_MENU_20FPS ){	g_AppConfig.m_eFrmSkip = ECAPFPS_20; fps = 20;}
+							if( id == ID_MENU_15FPS ){	g_AppConfig.m_eFrmSkip = ECAPFPS_15; fps = 15;}
+							if( g_hConfigDlg ){
+								WPARAM send = (id-ID_MENU_60FPS);
+								SendMessage( GetDlgItem(g_hConfigDlg, IDC_COMBO_FPS) , CB_SETCURSEL , send , 0 );
+							}
+							g_thRender.setFps( fps );
+							g_thBuftoTEX.setFps( fps );
+							g_nise.NisetroQuit();
+							g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd );
+						}
+						break;
+						
 					// 画面の隙間
 					case ID_MENU_SRCSPACE_000:
 					case ID_MENU_SRCSPACE_010:
@@ -649,6 +725,26 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 							if( g_hConfigDlg ){
 								SendMessage( GetDlgItem(g_hConfigDlg, IDC_SLIDER_SCRSPACE) , TBM_SETPOS, (WPARAM)TRUE, (LPARAM)g_AppConfig.m_ScrSpace);
 								SendMessage( g_hConfigDlg , WM_HSCROLL, (WPARAM)TRUE, (LPARAM)GetDlgItem(g_hConfigDlg, IDC_SLIDER_SCRSPACE));
+							}
+						}
+						break;
+						
+					case ID_MENU_CUSB2_ID0:
+					case ID_MENU_CUSB2_ID1:
+					case ID_MENU_CUSB2_ID2:
+					case ID_MENU_CUSB2_ID3:
+					case ID_MENU_CUSB2_ID4:
+					case ID_MENU_CUSB2_ID5:
+					case ID_MENU_CUSB2_ID6:
+					case ID_MENU_CUSB2_ID7:
+					case ID_MENU_CUSB2_ID8:
+					case ID_MENU_CUSB2_ID9:
+						{
+							int cusb2id = id - ID_MENU_CUSB2_ID0;
+							if( cusb2id >= 0 && cusb2id <= 9 ){
+								g_AppConfig.m_iCUSB2_ID = cusb2id;
+								g_nise.NisetroQuit();
+								g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
 							}
 						}
 						break;
@@ -874,9 +970,6 @@ HWND InitWindow( HINSTANCE hInst , WNDPROC CallBack )
 		NULL );										//作成したウインドウに渡すデータへのポインタ
 }
 
-//! バッファからテクスチャーへ変換するスレッド
-CBUFtoTEX	g_thBuftoTEX;
-
 /*
 	@fn void AppQuit( void )
 	@brief アプリケーションの終了処理
@@ -926,102 +1019,7 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 	
 	// コマンドライン
 	if( _tcslen(lpszCmdLine) ){
-		LPTSTR pStr = NULL;
-		
-#if _MSC_VER >= 1400
-		LPTSTR pStrNext = NULL;
-		pStr = _tcstok_s( lpszCmdLine , TEXT(" ") , &pStrNext );
-#else
-		pStr = _tcstok( lpszCmdLine , TEXT(" "));
-#endif
-		while( pStr ){
-//			MessageBox( NULL , pStr , pStr , MB_OK );
-			
-			// カメレオンusbのＩＤ
-			if( _tcscmp( pStr , TEXT("--cusb2id") ) == 0 ){
-#if _MSC_VER >= 1400
-				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
-#else
-				pStr = _tcstok( NULL , TEXT(" ") );
-#endif
-				g_AppConfig.m_iCUSB2_ID = _tstol(pStr);
-				g_AppConfig.m_iCUSB2_ID = g_AppConfig.m_iCUSB2_ID;	// break point
-			}
-			
-			// 画面の隙間
-			if( _tcscmp( pStr , TEXT("--space") ) == 0 ){
-#if _MSC_VER >= 1400
-				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
-#else
-				pStr = _tcstok( NULL , TEXT(" ") );
-#endif
-				g_AppConfig.m_ScrSpace = (unsigned char)_tstol(pStr);
-				if( g_AppConfig.m_ScrSpace <= CSCRSPACE_MIN ) g_AppConfig.m_ScrSpace = CSCRSPACE_MIN;
-				if( g_AppConfig.m_ScrSpace >= CSCRSPACE_MAX ) g_AppConfig.m_ScrSpace = CSCRSPACE_MAX;
-				g_AppConfig.m_ScrSpace = g_AppConfig.m_ScrSpace;	// break point
-			}
-			
-			// 画面の拡大率
-			if( _tcscmp( pStr , TEXT("--scale") ) == 0 ){
-#if _MSC_VER >= 1400
-				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
-#else
-				pStr = _tcstok( NULL , TEXT(" ") );
-#endif
-				g_AppConfig.m_fScrScal = (float)_tstof(pStr);
-				if( g_AppConfig.m_fScrScal <= CSCRSCAL_MIN ) g_AppConfig.m_fScrScal = CSCRSCAL_MIN;
-				if( g_AppConfig.m_fScrScal >= CSCRSCAL_MAX ) g_AppConfig.m_fScrScal = CSCRSCAL_MAX;
-				g_AppConfig.m_fScrScal = g_AppConfig.m_fScrScal;	// break point
-			}
-			
-			// ドロップフレーム
-			if( _tcscmp( pStr , TEXT("--dropframe") ) == 0 ){
-				g_AppConfig.m_bDropFrame = true;
-				g_AppConfig.m_bDropFrame = g_AppConfig.m_bDropFrame;	// break point
-			}
-			
-			// 常に手前に表示
-			if( _tcscmp( pStr , TEXT("--topwindow") ) == 0 ){
-				g_AppConfig.m_bTopWindow = true;
-				g_AppConfig.m_bTopWindow = g_AppConfig.m_bTopWindow;	// break point
-			}
-			
-			// 左回転
-			if( _tcscmp( pStr , TEXT("--rotation-left") ) == 0 ){
-				g_AppConfig.m_DirMode = 1;
-				g_AppConfig.m_DirMode = g_AppConfig.m_DirMode;	// break point
-			}
-			
-			// 右回転
-			if( _tcscmp( pStr , TEXT("--rotation-right") ) == 0 ){
-				g_AppConfig.m_DirMode = 2;
-				g_AppConfig.m_DirMode = g_AppConfig.m_DirMode;	// break point
-			}
-			
-			// 表示画面(top)
-			if( _tcscmp( pStr , TEXT("--scrsel-top") ) == 0 ){
-				g_AppConfig.m_ScrSel = ECAPSCR_TOP;
-				g_AppConfig.m_ScrSel = g_AppConfig.m_ScrSel;	// break point
-			}
-			
-			// 表示画面(bottom)
-			if( _tcscmp( pStr , TEXT("--scrsel-bottom") ) == 0 ){
-				g_AppConfig.m_ScrSel = ECAPSCR_BTM;
-				g_AppConfig.m_ScrSel = g_AppConfig.m_ScrSel;	// break point
-			}
-			
-			// 表示画面(2 screen)
-			if( _tcscmp( pStr , TEXT("--scrsel-double") ) == 0 ){
-				g_AppConfig.m_ScrSel = ECAPSCR_DSCR;
-				g_AppConfig.m_ScrSel = g_AppConfig.m_ScrSel;	// break point
-			}
-			
-#if _MSC_VER >= 1400
-				pStr = _tcstok_s( NULL , TEXT(" ") , &pStrNext );
-#else
-				pStr = _tcstok( NULL , TEXT(" ") );
-#endif
-		}
+		ConfigIOCheckCmdLine( &g_AppConfig , lpszCmdLine );
 	}
 	int debugcount = 0;
 	RECT rc = { 0 , 0 , NDS_SCREEN_W , NDS_SCREEN2_H };
@@ -1031,11 +1029,21 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 	
 	g_hWnd = InitWindow( hInst , WindowProc );
 	
+	{
+		long fps = 60;
+		if( g_AppConfig.m_eFrmSkip == ECAPFPS_60){ fps = 60;}
+		if( g_AppConfig.m_eFrmSkip == ECAPFPS_30){ fps = 30;}
+		if( g_AppConfig.m_eFrmSkip == ECAPFPS_20){ fps = 20;}
+		if( g_AppConfig.m_eFrmSkip == ECAPFPS_15){ fps = 15;}
+		
+		g_thRender.setFps( fps );
+		g_thBuftoTEX.setFps( fps );
+	}
 	// usb start
 #if defined(NDEBUG) // 安全装置
 //	g_AppConfig.m_iCUSB2_ID = 0;
 #endif
-	if( g_nise.NisetroInit( ECAPFPS_60 , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd ) ){
+	if( g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , g_hWnd ) ){
 //		g_nise.NisetroQuit();
 /*		TCHAR buf[256];
 		LoadString( g_hInst , IDS_STRING_ERR_USB_CONNECT , buf , 256 );
@@ -1060,22 +1068,11 @@ int WINAPI _tWinMain( HINSTANCE hInst , HINSTANCE hPrevInstance , LPTSTR lpszCmd
 	g_thRender.startThread();
 	
 	//ループ開始
-	while( gDone == false ){
-		//コールバック
-		if(PeekMessage( &msg , NULL , 0 , 0 , PM_REMOVE ))
-		{
-			if (!TranslateAccelerator(msg.hwnd, hAccel, &msg)) {
-            if( msg.message == WM_QUIT ){
-				gDone = true;
-			}
-			
+	while (GetMessage(&msg, NULL, 0, 0)) { 
+		if (!TranslateAccelerator(msg.hwnd, hAccel, &msg)) {
 			TranslateMessage(&msg); 
 			DispatchMessage(&msg);
-			}
 		}
-		
-		//
-		
 	}
 	
 	g_thRender.stopThread();

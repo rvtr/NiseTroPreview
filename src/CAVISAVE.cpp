@@ -390,13 +390,12 @@ int icv_av_write_frame_FFMPEG( AVFormatContext * oc, AVStream * video_st, uint8_
 }
 
 
-int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag , long width , long height , double fps , int bitrate_scale, int sample_rate , int channels , int audio_bit_rate ){
+int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , CodecID vcodec_id , long width , long height , double fps , int vbitrate, CodecID acodec_id , int sample_rate , int channels , int audio_bit_rate ){
 	if( !(pffm && pFilename) ) return -1;
 //	unsigned int codec_tag = MKTAG('X', 'V', 'I', 'D');
 //	unsigned int codec_tag = MKTAG('D', 'X', '5', '0');
 	
 	int err, codec_pix_fmt;
-	CodecID vcodec_id = CODEC_ID_NONE;
 	AVCodec			*pACodec;
 
 	pffm->m_pFmt = guess_format(NULL, pFilename, NULL);
@@ -435,7 +434,10 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
 	pffm->m_Audio.m_pDCodecCtx->sample_fmt	= SAMPLE_FMT_S16;
 	
 	// コーディックを取得する
-	pACodec = avcodec_find_encoder( pffm->m_pFmt->audio_codec );
+	if( acodec_id != CODEC_ID_NONE )
+		pACodec = avcodec_find_encoder( (CodecID)acodec_id );
+	else
+		pACodec = avcodec_find_encoder( pffm->m_pFmt->audio_codec );
 	if(pACodec == NULL)
 		return -1; // Codec not found
 	
@@ -447,6 +449,7 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
 	
 	
 	/* Lookup codec_id for given fourcc */
+	/*
 #if LIBAVCODEC_VERSION_INT<((51<<16)+(49<<8)+0)
         if( (vcodec_id = codec_get_bmp_id( codec_tag )) == CODEC_ID_NONE ){
 			// error
@@ -462,7 +465,9 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
 			return -1;
 		}
 	}
-#endif
+#endif*/
+	if( vcodec_id == CODEC_ID_NONE )
+		vcodec_id = pffm->m_pFmt->video_codec;
 	
     switch (vcodec_id) {
 #if LIBAVCODEC_VERSION_INT>((50<<16)+(1<<8)+0)
@@ -477,7 +482,7 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
     case CODEC_ID_MJPEG:
     case CODEC_ID_LJPEG:
       codec_pix_fmt = PIX_FMT_YUVJ420P;
-      bitrate_scale *= 2;
+      vbitrate *= 2;
       break;
     case CODEC_ID_RAWVIDEO:
     default:
@@ -486,7 +491,7 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
         break;
     }
 	
-	pffm->m_pVStream = ffmpeg_addVStream( pffm->m_pOutFmtContext , vcodec_id , width , height , width*height*bitrate_scale , fps , codec_pix_fmt );
+	pffm->m_pVStream = ffmpeg_addVStream( pffm->m_pOutFmtContext , vcodec_id , width , height , vbitrate , fps , codec_pix_fmt );
 	
 	if (av_set_parameters(pffm->m_pOutFmtContext, NULL) < 0) {
 		// error
@@ -509,7 +514,7 @@ int ffmpeginit( _ffmpeg_struct* pffm , char* pFilename , unsigned int codec_tag 
     vc = &(pffm->m_pVStream->codec);
 #endif
 
-    vc->codec_tag = codec_tag;
+//    vc->codec_tag = codec_tag;
     /* find the video encoder */
     vcodec = avcodec_find_encoder(vc->codec_id);
     if (!vcodec) {
@@ -711,10 +716,17 @@ int ffmpeg_addVFrame( _ffmpeg_struct* pffm , unsigned char *pBuf , long width , 
 		             SWS_BICUBIC,
 		             NULL, NULL, NULL);
 
+#if _MSC_VER >= 1400
 		    if ( sws_scale(pffm->m_Video.m_img_convert_ctx, pffm->m_Video.m_pInputPicture->data,
 		             pffm->m_Video.m_pInputPicture->linesize, 0,
 		             height,
 		             pffm->m_Video.m_pPicture->data, pffm->m_Video.m_pPicture->linesize) < 0 )
+#else
+		    if ( sws_scale(pffm->m_Video.m_img_convert_ctx, (const uint8_t**)pffm->m_Video.m_pInputPicture->data,
+		             pffm->m_Video.m_pInputPicture->linesize, 0,
+		             height,
+		             pffm->m_Video.m_pPicture->data, pffm->m_Video.m_pPicture->linesize) < 0 )
+#endif
 		    {
 				// error
 				_tprintd( _T("Error sws_scale\n") );
