@@ -95,6 +95,23 @@ TCHAR *g_pCodecList[] = {
 	NULL
 };
 
+TCHAR *g_pASampleList[] = {
+//	TEXT("8000"),
+//	TEXT("11025"),
+	TEXT("22050"),
+	TEXT("32000"),
+//	TEXT("33075"),
+	TEXT("44100"),
+//	TEXT("47250"),
+	TEXT("48000"),
+/*	TEXT("96000"),
+	TEXT("192000"),
+	TEXT("14112000"),
+	TEXT("28224000"),
+	TEXT("56448000"),*/
+	NULL
+};
+
 //! 録画ダイアログ用のコールバック
 BOOL CALLBACK RecordDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 	static long lFps = 24;
@@ -154,7 +171,9 @@ BOOL CALLBACK RecordDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 				SendMessage(GetDlgItem(hDlgWnd, IDC_SLIDER_ABITRATE), TBM_SETPOS, (WPARAM)TRUE, lAKBitRate );
 				
 				//
-				SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SAMPLE_RATE), CB_ADDSTRING, 0, (LPARAM)TEXT("44100") );
+				for( int i = 0; g_pASampleList[i] != NULL; i++ ){
+					SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SAMPLE_RATE), CB_ADDSTRING, 0, (LPARAM)g_pASampleList[i] );
+				}
 				SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_SAMPLE_RATE), CB_SETCURSEL, 0, 0 );
 				
 				// コーディックリストを更新
@@ -187,6 +206,7 @@ BOOL CALLBACK RecordDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 				}
 				SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_VCODEC), CB_SETCURSEL, 0, 0 );
 				SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_ACODEC), CB_SETCURSEL, 0, 0 );
+				
 				//
 //				SetWindowText( GetDlgItem(hDlgWnd, IDC_EDIT_TIME) , TEXT("00 : 00 : 00 . 00") );
 				SetWindowText( GetDlgItem(hDlgWnd, IDC_EDIT_TIME) , TEXT("time") );
@@ -293,6 +313,16 @@ BOOL CALLBACK RecordDlgProc(HWND hDlgWnd, UINT msg, WPARAM wp, LPARAM lp) {
 							uID = (UINT)SendMessage(GetDlgItem(hDlgWnd, IDC_COMBO_WAVEINDEV), CB_GETCURSEL, 0, 0 );
 							if( uID >= uIDMax )
 								uID = WAVE_MAPPER;
+							
+							// lASamplesPerSec
+							{
+								TCHAR strSamplesPerSec[MAX_PATH];
+								long tASamplesPerSec = 0;
+								GetWindowText( GetDlgItem(hDlgWnd, IDC_COMBO_SAMPLE_RATE) , strSamplesPerSec , 256 );
+								tASamplesPerSec = _ttol( strSamplesPerSec );
+								if( tASamplesPerSec != 0 )
+									lASamplesPerSec = tASamplesPerSec;
+							}
 							
 							g_thAviSave.Init( strMovieName , 
 								CODEC_ID_NONE , NDS_SCREEN_W , NDS_SCREEN2_H , lFps , lVKBitRate * 1024 , 

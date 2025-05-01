@@ -88,7 +88,7 @@ BEGIN
     LTEXT           "描画速度",IDC_STATIC,62,50,121,12
     CONTROL         "",IDC_SLIDER_FPS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,62,62,85,16
     EDITTEXT        IDC_EDIT_FPS,147,62,36,16,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    COMBOBOX        IDC_COMBO_SAMPLE_RATE,62,140,121,50,CBS_DROPDOWNLIST | CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SAMPLE_RATE,62,140,121,50,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "サンプリングレート",IDC_STATIC,62,128,121,12
     LTEXT           "映像ビットレート",IDC_STATIC,194,50,125,12
     CONTROL         "",IDC_SLIDER_VBITRATE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,195,62,85,16
@@ -182,7 +182,7 @@ END
 
 IDR_MENU_MAIN MENU 
 BEGIN
-    POPUP "メニュー(&F)"
+    POPUP "メニュー(&M)"
     BEGIN
 //		POPUP "CUSB2 ID"
 //		BEGIN
@@ -201,7 +201,17 @@ BEGIN
         MENUITEM "スクリーンショット",                   ID_MENU_SCREENSHOT
         MENUITEM "録画",                          ID_MENU_REC
         MENUITEM SEPARATOR
-        MENUITEM "終了(&X)",                          ID_MENU_END
+        POPUP "テスト"
+		BEGIN
+			MENUITEM "D3DTEXF_NONE",				ID_MENU_D3DFILTER_NONE
+			MENUITEM "D3DTEXF_POINT",				ID_MENU_D3DFILTER_POINT
+			MENUITEM "D3DTEXF_LINEAR",				ID_MENU_D3DFILTER_LINEAR
+			MENUITEM "D3DTEXF_ANISOTROPIC",			ID_MENU_D3DFILTER_ANISOTROPIC
+			MENUITEM "D3DTEXF_PYRAMIDALQUAD",		ID_MENU_D3DFILTER_PYRAMIDALQUAD
+			MENUITEM "D3DTEXF_GAUSSIANQUAD",		ID_MENU_D3DFILTER_GAUSSIANQUAD
+		END
+        MENUITEM SEPARATOR
+		MENUITEM "終了(&X)",                          ID_MENU_END
     END
     POPUP "設定"
     BEGIN
@@ -297,14 +307,14 @@ BEGIN
             VALUE "Comments", "偽トロキャプチャ用プレビューソフト"
 //			VALUE "CompanyName", "companyname"
             VALUE "FileDescription", "偽トロプレビュー(60fps対応)"
-            VALUE "FileVersion", "2010/2/3"
+            VALUE "FileVersion", "2010/2/4"
             VALUE "InternalName", "InternalName"
 //			VALUE "LegalCopyright", "copyright"
 //			VALUE "LegalTrademarks", "Trademarks"
             VALUE "OriginalFilename", "NiseTroPreview*.exe"
             VALUE "PrivateBuild", "privatebuild"
             VALUE "ProductName", "ProductName"
-			VALUE "ProductVersion", "local svn revision:251"
+			VALUE "ProductVersion", "local svn revision:252"
             VALUE "SpecialBuild", "specialbuild"
         END
     END

@@ -93,6 +93,7 @@ void CNISETRO::func_first( u8* buf , u32 len ){
 
 void CNISETRO::func_60fps( u8* buf , u32 len ){
 	CNISETRO* pNise = this;
+	unsigned long* pCur = &pNise->m_CapBufCur1;
 	
 	for( u32 i = 0; i < len; i++ ){
 		u32 cur = 0;
@@ -102,9 +103,9 @@ void CNISETRO::func_60fps( u8* buf , u32 len ){
 		bool bVSync = ((d & 0x80) == 0x80);
 		
 		// ‚È‚ñ‚©”÷–­
-		if( ((30/2)*3) < pNise->m_CapBufCur1 && bVSync ){
+		if( ((30/2)*3) < (*pCur) && bVSync ){
 			bool bError = false;
-			if( pNise->m_CapBufCur1 < NDS_SCREENBUF_SIZE ){
+			if( (*pCur) < NDS_SCREENBUF_SIZE ){
 				if( pNise->m_ulErrFrm++ == 0xFFFFFFFF )	pNise->m_ulErrFrm = 0;
 				bError = true;
 			}

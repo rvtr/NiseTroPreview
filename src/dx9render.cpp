@@ -22,6 +22,7 @@ void D3DGetPParameters( D3DPRESENT_PARAMETERS* pD3DPP , HWND hWnd , long w , lon
 	pD3DPP->BackBufferHeight	= h;
 	pD3DPP->BackBufferFormat	= D3DFMT_X8R8G8B8;
 	pD3DPP->hDeviceWindow		= hWnd;
+	pD3DPP->MultiSampleType		= D3DMULTISAMPLE_2_SAMPLES;
 }
 
 /*!

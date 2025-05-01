@@ -67,6 +67,8 @@ LPDIRECT3DTEXTURE9 g_pTexBtm = NULL;
 
 LPD3DXSPRITE g_pD3DXSprite = NULL;
 
+D3DTEXTUREFILTERTYPE g_eFilter = D3DTEXF_NONE;
+
 /*!
 	@brief	Direct3Dのリソースを確保する
 	@param	pD3DDev	[in]Direct3Dデバイス
@@ -405,6 +407,12 @@ void ReanderScreen( void )
 			}
 
 			g_pD3DXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE );
+			
+			g_pD3DDev->SetRenderState( D3DRS_MULTISAMPLEANTIALIAS , TRUE );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MAGFILTER , g_eFilter );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MINFILTER , g_eFilter );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MIPFILTER , g_eFilter );
+			
 			g_pD3DXSprite->Draw( g_pTexTop , &SrcRc , &vecCenter , &vecPos , 0xFFFFFFFF );
 			g_pD3DXSprite->End();
 		}
@@ -457,6 +465,9 @@ void ReanderScreen( void )
 			}
 			
 			g_pD3DXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MAGFILTER , g_eFilter );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MINFILTER , g_eFilter );
+			g_pD3DDev->SetSamplerState( 0 , D3DSAMP_MIPFILTER , g_eFilter );
 			g_pD3DXSprite->Draw( g_pTexBtm , &SrcRc , &vecCenter , &vecPos , 0xFFFFFFFF );
 			g_pD3DXSprite->End();
 		}
@@ -746,6 +757,22 @@ LRESULT CALLBACK WindowProc(HWND hwnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 								g_nise.NisetroQuit();
 								g_nise.NisetroInit( g_AppConfig.m_eFrmSkip , ECAPSCR_DSCR , g_AppConfig.m_iCUSB2_ID , hwnd );
 							}
+						}
+						break;
+						
+					case ID_MENU_D3DFILTER_NONE:
+					case ID_MENU_D3DFILTER_POINT:
+					case ID_MENU_D3DFILTER_LINEAR:
+					case ID_MENU_D3DFILTER_ANISOTROPIC:
+					case ID_MENU_D3DFILTER_PYRAMIDALQUAD:
+					case ID_MENU_D3DFILTER_GAUSSIANQUAD:
+						{
+							if( id == ID_MENU_D3DFILTER_NONE )			g_eFilter = D3DTEXF_NONE;
+							if( id == ID_MENU_D3DFILTER_POINT )			g_eFilter = D3DTEXF_POINT;
+							if( id == ID_MENU_D3DFILTER_LINEAR )		g_eFilter = D3DTEXF_LINEAR;
+							if( id == ID_MENU_D3DFILTER_ANISOTROPIC )	g_eFilter = D3DTEXF_ANISOTROPIC;
+							if( id == ID_MENU_D3DFILTER_PYRAMIDALQUAD )	g_eFilter = D3DTEXF_PYRAMIDALQUAD;
+							if( id == ID_MENU_D3DFILTER_GAUSSIANQUAD )	g_eFilter = D3DTEXF_GAUSSIANQUAD;
 						}
 						break;
 						
